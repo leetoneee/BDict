@@ -8,7 +8,7 @@ namespace MyApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new ResultView();
         }
     }
 }
