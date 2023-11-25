@@ -9,10 +9,12 @@
             android:TabbedPage.IsSwipePagingEnabled="True"
             SelectedTabColor="#3A5A40"
             UnselectedTabColor="#A3B18A"
+            android:TabbedPage.IsSmoothScrollEnabled="True"
+            Shell.NavBarIsVisible="false"
             >
-    <NavigationPage Title="Look up">
+    <NavigationPage Title="Look up" >
         <x:Arguments>
-            <local:MainPage/>
+            <local:MainPage NavigationPage.HasNavigationBar="False"/>
         </x:Arguments>
     </NavigationPage>
     <NavigationPage Title="Translate">

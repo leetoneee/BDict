@@ -9,6 +9,6 @@ public partial class MainPage : ContentPage
 
     private async void Navigation_Clicked(object sender, EventArgs e)
     {
-		await Navigation.PushAsync(new MainPage());
+		await Navigation.PushModalAsync(new MainPage());
     }
 }
