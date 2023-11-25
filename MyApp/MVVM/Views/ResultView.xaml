@@ -8,18 +8,66 @@
     
     <ScrollView>
         <VerticalStackLayout>
-            <Frame>
-                <HorizontalStackLayout Spacing="10">
-                    <Label Text="Hello"/>
-                    <Label Text="həˈləʊ"/>
-                    <Image>
-                        <Image.Source>
-                            <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.Music}" Color="Black"/>
-                        </Image.Source>
-                    </Image>
-                </HorizontalStackLayout>
+            <Grid BackgroundColor="#588157" RowSpacing="5" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width=".4*"/>
+                    <ColumnDefinition Width=".3*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" 
+                       Text="Hello" TextColor="White" FontSize="Large"
+                       VerticalOptions="Center"/>
+
+                <Label Grid.Row="1" Grid.Column="0" 
+                       Text="/heˈləʊ/" TextColor="White" FontSize="Large"
+                       VerticalOptions="Center"/>
+                
+                <ImageButton Grid.Column="0" Grid.Row="2" 
+                             VerticalOptions="Start" HorizontalOptions="Start">
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.VolumeHigh}" Color="Black"/>
+                    </ImageButton.Source>
+                </ImageButton>
+
+
+                <ImageButton Grid.Row="0" Grid.Column="2"
+                             VerticalOptions="Center" HorizontalOptions="End">
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.ArrowLeftLong}" Color="Black"/>
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <ImageButton Grid.Column="2" Grid.Row="2"
+                             HorizontalOptions="End">
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="FAR" Glyph="{x:Static helper:FontAwesomeHelperNotSolid.Heart}" Color="Black"/>
+                    </ImageButton.Source>
+                </ImageButton>
+
+            </Grid>
+
+            <Frame Margin="20" BorderColor="Black">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="(exclaimation) used when meeting or greeting someone:" FontAttributes="Bold"/>
+                    <Label Text="Ex: Hello, Paul. I haven't seen you for ages."/>
+                    <Label Text="(noun) something that is said at the beginning of a phone conversation:" FontAttributes="Bold"/>
+                    <Label Text="Ex: Hello, Paul. I haven't seen you for ages."/>
+                    <Label Text="(exclaimation) used when meeting or greeting someone:" FontAttributes="Bold"/>
+                    <Label Text="Ex: Hello, I'd like some information about flights to the US, please."/>
+                </VerticalStackLayout>
             </Frame>
             
+            <Frame Margin="20" BorderColor="Black">
+                <VerticalStackLayout>
+                    <Label Text="Synonym: hi, greetings, how do you do?, good morning, good evening, good afternoon, welcome."/>
+                    <Label Text="Antonym: goodbye, bye, see you, farewell"/>
+                </VerticalStackLayout>
+            </Frame>
         </VerticalStackLayout>    
     </ScrollView>
 </ContentPage>
