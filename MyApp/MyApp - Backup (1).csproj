@@ -52,6 +52,23 @@
 	  <None Remove="Resources\Fonts\Brands-Regular-400.otf" />
 	  <None Remove="Resources\Fonts\Free-Regular-400.otf" />
 	  <None Remove="Resources\Fonts\Free-Solid-900.otf" />
+	  <None Remove="Resources\Fonts\Roboto-Black.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-BlackItalic.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-Bold.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-BoldItalic.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-Italic.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-Light.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-LightItalic.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-Medium.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-MediumItalic.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
+	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
+	  <None Remove="Resources\Images\Bookmark.svg" />
+	  <None Remove="Resources\Images\Info.svg" />
+	  <None Remove="Resources\Images\logo.svg" />
+	  <None Remove="Resources\Images\look_up.svg" />
+	  <None Remove="Resources\Images\translator.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
