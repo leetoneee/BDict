@@ -65,18 +65,16 @@
 	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
 	  <None Remove="Resources\Images\Bookmark.svg" />
+	  <None Remove="Resources\Images\Forward.svg" />
 	  <None Remove="Resources\Images\Info.svg" />
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\look_up.svg" />
+	  <None Remove="Resources\Images\Refresh.svg" />
 	  <None Remove="Resources\Images\translator.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="MVVM\ViewModels\" />
 	</ItemGroup>
 
 	<ItemGroup>
