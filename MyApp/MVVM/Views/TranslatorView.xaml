@@ -3,10 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyApp.MVVM.Views.TranslatorView"
              Title="TranslatorView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".3*"/>
+            <ColumnDefinition Width=".1*"/>
+            <ColumnDefinition Width=".3*"/>
+        </Grid.ColumnDefinitions>
+        <!--Heading-->
+        <Label Grid.Row="0" Grid.ColumnSpan="3"
+               Text="Translator" 
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               FontSize="30"
+               TextColor="White"
+               Padding="10"
+               BackgroundColor="#588157"/>
+
+        <Label Grid.Row="1" Grid.Column="0"
+               Text="English" FontSize="Large"
+               Padding="10" HorizontalOptions="Start"/>
+        
+        <ImageButton Grid.Row="1" Grid.Column="2"
+                     Source="copy_icon.png"
+                     Clicked="ImageButton_Clicked"
+                     HorizontalOptions="End"/>
+
+        <Entry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+               Margin="20"
+               BackgroundColor="#ECEBE6"
+               FontSize="Large"
+               Placeholder="Input words or sentence"
+               PlaceholderColor="#80000000"
+               />
+        
+        <!--Switch languages-->
+        
+        <Button Grid.Row="3" Grid.Column="0" Text="ENGLISH" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                Margin="5" FontSize="Medium" BackgroundColor="#A3B18A" TextColor="Black"/>
+
+        <ImageButton Grid.Row="3" Grid.Column="1" 
+                    Source="twodirec_arrow.svg"/>
+        
+        <Button Grid.Row="3" Grid.Column="2" Text="VIETNAMESE" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                Margin="5" FontSize="Medium" BackgroundColor="#A3B18A" TextColor="Black"/>
+
+        <Label Grid.Row="4" Grid.Column="0"
+               Text="Vietnamese" FontSize="Large"
+               Padding="10" HorizontalOptions="Start"/>
+        
+        <ImageButton Grid.Row="4" Grid.Column="2"
+                     Source="copy_icon.png"
+                     Clicked="ImageButton_Clicked"
+                     HorizontalOptions="End"/>
+
+        <Entry Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+               Margin="20"
+               BackgroundColor="#ECEBE6"
+               FontSize="Large"
+               Placeholder="Result"
+               PlaceholderColor="#80000000"
+               IsReadOnly="True"/>
+    </Grid>
 </ContentPage>
