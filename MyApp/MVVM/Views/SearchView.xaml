@@ -4,9 +4,40 @@
              x:Class="MyApp.MVVM.Views.SearchView"
              Title="SearchView">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid BackgroundColor="#588157" HeightRequest="163">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".3*"/>
+                <RowDefinition Height=".4*"/>
+                <RowDefinition Height=".3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Row="0" Grid.Column="0" 
+                   VerticalTextAlignment="Center" Margin="20, 10"
+                   Text="BDict" FontSize="20" FontAttributes="Bold" FontFamily="FAB" TextColor="White"/>
+            <Image Grid.Row="0" Grid.Column="1" 
+                   Source="logo.svg"
+                   HorizontalOptions="End"
+                   Margin="0,0,15,0"/>
+
+            <Border Grid.Row="1" Grid.ColumnSpan="2"
+                    VerticalOptions="End"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 90,90,90,90"
+                    WidthRequest="350"
+                    HeightRequest="50"
+                    Padding="2,8"
+                    HorizontalOptions="Center"
+                    >
+
+                <SearchBar Placeholder="Enter your word" TextColor="#1D1D1D" BackgroundColor="White" 
+                           Keyboard="Default" WidthRequest="350" HeightRequest="34"
+                           FontSize="15" FontFamily="RobotoRegular"/>
+
+            </Border>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

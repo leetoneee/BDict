@@ -2,6 +2,7 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            xmlns:helper="clr-namespace:MyApp.Helper"
             x:Class="MyApp.MVVM.Views.TabbedView"
             android:TabbedPage.ToolbarPlacement="Bottom"
             xmlns:local="clr-namespace:MyApp.MVVM.Views"
@@ -12,24 +13,24 @@
             android:TabbedPage.IsSmoothScrollEnabled="True"
             Shell.NavBarIsVisible="false"
             >
-    <NavigationPage Title="Look up" >
+    <NavigationPage Title="Look up" IconImageSource="look_up.svg" >
         <x:Arguments>
             <local:SearchView NavigationPage.HasNavigationBar="False"/>
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="Translate">
+    <NavigationPage Title="Translate" IconImageSource="translator.svg">
         <x:Arguments>
             <ContentPage x:Name="Tab2" BackgroundColor="Pink">
                 <Button Text="navigation" Clicked="Button_Clicked" />
             </ContentPage>
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="Bookmark">
+    <NavigationPage Title="Bookmark" IconImageSource="bookmark.svg">
         <x:Arguments>
             <ContentPage />
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="Help">
+    <NavigationPage Title="Help" IconImageSource="info.svg">
         <x:Arguments>
             <ContentPage />
         </x:Arguments>
