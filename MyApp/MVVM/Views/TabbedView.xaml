@@ -20,9 +20,7 @@
     </NavigationPage>
     <NavigationPage Title="Translate" IconImageSource="translator.svg">
         <x:Arguments>
-            <ContentPage x:Name="Tab2" BackgroundColor="Pink">
-                <Button Text="navigation" Clicked="Button_Clicked" />
-            </ContentPage>
+            <local:TranslatorView NavigationPage.HasNavigationBar="False"/>
         </x:Arguments>
     </NavigationPage>
     <NavigationPage Title="Bookmark" IconImageSource="bookmark.svg">

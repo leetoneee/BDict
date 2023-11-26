@@ -6,14 +6,4 @@ public partial class TabbedView : TabbedPage
 	{
 		InitializeComponent();
 	}
-
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-		await Tab2.Navigation.PushAsync(new MainPage());
-    }
-
-    private async void Button_Clicked_1(object sender, EventArgs e)
-    {
-        await Tab2.Navigation.PushAsync(new MainPage());
-    }
 }
