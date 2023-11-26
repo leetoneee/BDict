@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MyApp.Controls"
              x:Class="MyApp.MVVM.Views.TranslatorView"
              Title="TranslatorView">
     <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
@@ -37,16 +38,24 @@
                      Source="copy_icon.png"
                      Clicked="ImageButton_Clicked"
                      HorizontalOptions="End"/>
-
-        <Entry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
-               Margin="20"
-               BackgroundColor="#ECEBE6"
-               FontSize="Large"
-               Placeholder="Input words or sentence"
-               PlaceholderColor="#80000000"
-               />
+        <controls:CustomEntry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                              BackgroundColor="#ECEBE6"
+                              Placeholder="Enter words, paragraph or text."
+                              CornerRadius="20" 
+                              Padding="10" 
+                              Margin="20"
+                              FontSize="Medium"
+                              ></controls:CustomEntry>
         
-        <!--Switch languages-->
+        <!--<Entry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                Margin="20"
+                BackgroundColor="#ECEBE6"
+                FontSize="Large"
+                Placeholder="Input words or sentence"
+                PlaceholderColor="#80000000"
+                />-->
+        
+            <!--Switch languages-->
         
         <Button Grid.Row="3" Grid.Column="0" Text="ENGLISH" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                 Margin="5" FontSize="Medium" BackgroundColor="#A3B18A" TextColor="Black"/>
@@ -66,12 +75,14 @@
                      Clicked="ImageButton_Clicked"
                      HorizontalOptions="End"/>
 
-        <Entry Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
-               Margin="20"
-               BackgroundColor="#ECEBE6"
-               FontSize="Large"
-               Placeholder="Result"
-               PlaceholderColor="#80000000"
-               IsReadOnly="True"/>
+        <controls:CustomEntry Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+                      BackgroundColor="#ECEBE6"
+                      Placeholder="Result."
+                      CornerRadius="20" 
+                      Padding="10" 
+                      Margin="20"
+                      FontSize="Medium"
+                      IsReadOnly="True"
+                      ></controls:CustomEntry>
     </Grid>
 </ContentPage>
