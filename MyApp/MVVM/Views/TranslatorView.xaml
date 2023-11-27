@@ -52,6 +52,7 @@
                               Padding="10" 
                               Margin="20"
                               FontSize="Medium"
+                              Completed="CustomEntry_Completed"
                               ></controls:CustomEntry>
         
         <!--<Entry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
@@ -90,7 +91,7 @@
                      Padding="10"
                      HeightRequest="100"/>
 
-        <controls:CustomEntry Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+        <controls:CustomEntry x:Name="outputEntry" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
                       BackgroundColor="#ECEBE6"
                       Placeholder="Result."
                       CornerRadius="20" 
