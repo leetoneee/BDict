@@ -33,12 +33,18 @@
         <Label x:Name="upLabel"
                Grid.Row="1" Grid.Column="0"
                Text="English" FontSize="Large"
-               Padding="10" HorizontalOptions="Start"/>
+               Padding="20" 
+               HorizontalOptions="Start"
+               HeightRequest="70"/>
         
         <ImageButton Grid.Row="1" Grid.Column="2"
                      Source="copy_icon.png"
                      Clicked="ImageButton_Clicked"
-                     HorizontalOptions="End"/>
+                     HorizontalOptions="End"
+                     WidthRequest="65"
+                     Padding="10"
+                     HeightRequest="100"/>
+        
         <controls:CustomEntry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                               BackgroundColor="#ECEBE6"
                               Placeholder="Enter words, paragraph or text."
@@ -59,7 +65,8 @@
             <!--Switch languages-->
         
         <Button x:Name="firstBtn" Grid.Row="3" Grid.Column="0" Text="ENGLISH" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                Margin="5" FontSize="Medium" BackgroundColor="#A3B18A" TextColor="Black"/>
+                Margin="20" FontSize="17" BackgroundColor="#A3B18A" TextColor="Black"
+                HeightRequest="50"/>
 
         <ImageButton x:Name="twoArrowBtn"
                      Grid.Row="3" Grid.Column="1" 
@@ -67,18 +74,21 @@
                      Clicked="twoArrowBtn_Clicked"/>
 
         <Button x:Name="secondBtn" Grid.Row="3" Grid.Column="2" Text="VIETNAMESE" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                Margin="5" FontSize="Medium" BackgroundColor="#A3B18A" TextColor="Black"
-                />
+                Margin="20" FontSize="17" BackgroundColor="#A3B18A" TextColor="Black" HeightRequest="50"/>
 
         <Label x:Name="downLabel"
                Grid.Row="4" Grid.Column="0"
                Text="Vietnamese" FontSize="Large"
-               Padding="10" HorizontalOptions="Start"/>
+               Padding="20" HorizontalOptions="Start"
+               HeightRequest="70"/>
         
         <ImageButton Grid.Row="4" Grid.Column="2"
                      Source="copy_icon.png"
                      Clicked="ImageButton_Clicked"
-                     HorizontalOptions="End"/>
+                     HorizontalOptions="End"
+                     WidthRequest="65"
+                     Padding="10"
+                     HeightRequest="100"/>
 
         <controls:CustomEntry Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
                       BackgroundColor="#ECEBE6"
