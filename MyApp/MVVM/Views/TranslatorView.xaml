@@ -30,7 +30,8 @@
                Padding="10"
                BackgroundColor="#588157"/>
 
-        <Label Grid.Row="1" Grid.Column="0"
+        <Label x:Name="upLabel"
+               Grid.Row="1" Grid.Column="0"
                Text="English" FontSize="Large"
                Padding="10" HorizontalOptions="Start"/>
         
@@ -57,16 +58,20 @@
         
             <!--Switch languages-->
         
-        <Button Grid.Row="3" Grid.Column="0" Text="ENGLISH" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+        <Button x:Name="firstBtn" Grid.Row="3" Grid.Column="0" Text="ENGLISH" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                 Margin="5" FontSize="Medium" BackgroundColor="#A3B18A" TextColor="Black"/>
 
-        <ImageButton Grid.Row="3" Grid.Column="1" 
-                    Source="twodirec_arrow.svg"/>
-        
-        <Button Grid.Row="3" Grid.Column="2" Text="VIETNAMESE" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                Margin="5" FontSize="Medium" BackgroundColor="#A3B18A" TextColor="Black"/>
+        <ImageButton x:Name="twoArrowBtn"
+                     Grid.Row="3" Grid.Column="1" 
+                     Source="twodirec_arrow.svg" HeightRequest="30"
+                     Clicked="twoArrowBtn_Clicked"/>
 
-        <Label Grid.Row="4" Grid.Column="0"
+        <Button x:Name="secondBtn" Grid.Row="3" Grid.Column="2" Text="VIETNAMESE" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                Margin="5" FontSize="Medium" BackgroundColor="#A3B18A" TextColor="Black"
+                />
+
+        <Label x:Name="downLabel"
+               Grid.Row="4" Grid.Column="0"
                Text="Vietnamese" FontSize="Large"
                Padding="10" HorizontalOptions="Start"/>
         
