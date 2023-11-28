@@ -44,7 +44,7 @@
                      WidthRequest="65"
                      Padding="10"
                      HeightRequest="100"/>
-        
+
         <controls:CustomEntry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                               BackgroundColor="#ECEBE6"
                               Placeholder="Enter words, paragraph or text."
@@ -52,9 +52,10 @@
                               Padding="10" 
                               Margin="20"
                               FontSize="Medium"
+                              IsTextPredictionEnabled="false"
                               Completed="CustomEntry_Completed"
-                              ></controls:CustomEntry>
-        
+                              />
+
         <!--<Entry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                 Margin="20"
                 BackgroundColor="#ECEBE6"
@@ -99,6 +100,6 @@
                       Margin="20"
                       FontSize="Medium"
                       IsReadOnly="True"
-                      ></controls:CustomEntry>
+                      />
     </Grid>
 </ContentPage>

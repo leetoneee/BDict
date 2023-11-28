@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json.Nodes;
 using Newtonsoft.Json;
+using System.Net;
+using System.Web;
 
 namespace MyApp.MVVM.Views;
 
@@ -19,61 +21,37 @@ public partial class TranslatorView : ContentPage
     public string lang_first = "en";
     public string lang_second = "vi";
     public string inputEntry = "";
-    HttpClient httpClient; 
 
     public TranslatorView()
-	{
-		InitializeComponent();
-        httpClient = new HttpClient();
+    {
+        InitializeComponent();
     }
-
-    //public string TranslateText(string input)
-    //{
-    //    string url = String.Format
-    //    ("https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}",
-    //     lang_first, lang_second, Uri.EscapeUriString(input));
-    //    HttpClient httpClient = new HttpClient();
-    //    string result = httpClient.GetStringAsync(url).Result;
-    //    var jsonData = JsonConvert.DeserializeObject<List<dynamic>>(result); var translationItems = jsonData[0];
-    //    string translation = "";
-    //    foreach (object item in translationItems)
-    //    {
-    //        IEnumerable translationLineObject = item as IEnumerable;
-    //        IEnumerator translationLineString = translationLineObject.GetEnumerator();
-    //        translationLineString.MoveNext();
-    //        translation += string.Format(" {0}", Convert.ToString(translationLineString.Current));
-    //    }
-    //    if (translation.Length > 1) { translation = translation.Substring(1); };
-    //    return translation;
-    //}
 
     public string TranslateText(string input, string lang_first, string lang_second)
     {
-        // tạo link để gọi API
-        string url = String.Format
-        ("https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}",
-         lang_first, lang_second, Uri.EscapeDataString(input));
-        // gọi API và lấy kết quả trả về
-        string result = httpClient.GetStringAsync(url).Result;
-
-        // trích xuất thông tin từ kiểu dữ liệu json được trả về
-        var jsonData = JsonConvert.DeserializeObject<List<dynamic>>(result);
-        var translationItems = jsonData[0];
-        string translation = "";
-        foreach (object item in translationItems)
+        var fromLanguage = lang_first;
+        var toLanguage = lang_second;
+        var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={fromLanguage}&tl={toLanguage}&dt=t&q={HttpUtility.UrlEncode(input)}";
+        var webclient = new WebClient
         {
-            IEnumerable<dynamic> translationLineObject = item as IEnumerable<dynamic>;
-            IEnumerator<dynamic> translationLineString = translationLineObject.GetEnumerator();
-            translationLineString.MoveNext();
-            translation += string.Format(" {0}", Convert.ToString(translationLineString.Current));
+            Encoding = System.Text.Encoding.UTF8
+        };
+        var result = webclient.DownloadString(url);
+        try
+        {
+            result = result.Substring(4, result.IndexOf("\"", 4
+                , StringComparison.Ordinal) - 4);
+            return result;
         }
-        if (translation.Length > 1) { translation = translation.Substring(1); };
-        return translation;
+        catch (Exception e1)
+        {
+            return "error";
+        }
     }
 
     private void ImageButton_Clicked(object sender, EventArgs e)
     {
-		DisplayAlert("Alert", "copy click", "ok");
+        DisplayAlert("Alert", "copy click", "ok");
     }
 
     private void twoArrowBtn_Clicked(object sender, EventArgs e)
@@ -81,7 +59,7 @@ public partial class TranslatorView : ContentPage
         string temp1 = upLabel.Text;
         upLabel.Text = downLabel.Text;
         downLabel.Text = temp1;
-        
+
 
         string temp2 = firstBtn.Text;
         firstBtn.Text = secondBtn.Text;
