@@ -28,9 +28,9 @@
             <ContentPage />
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="Help" IconImageSource="info.svg">
+    <NavigationPage Title="Info" IconImageSource="info.svg">
         <x:Arguments>
-            <ContentPage />
+            <local:InfoView NavigationPage.HasNavigationBar="False"/>
         </x:Arguments>
     </NavigationPage>
 </TabbedPage>
