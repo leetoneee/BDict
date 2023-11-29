@@ -23,8 +23,8 @@ namespace MyApp.MVVM.Models
     {
         public string partOfSpeech { get; set; }
         public List<Definitions> definitions { get; set; }
-        public List<string> synonyms { get; set; }
-        public List<string> antonyms { get; set; }
+        public string[] synonyms { get; set; }
+        public string[] antonyms { get; set; }
     }
 
     public class Definitions

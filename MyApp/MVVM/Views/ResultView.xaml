@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyApp.MVVM.Views.ResultView"
              xmlns:helper="clr-namespace:MyApp.Helper"
+             xmlns:vm="clr-namespace:MyApp.MVVM.ViewModels"
+             x:DataType="vm:ResultViewModel"
              Title="ResultView">
     
     
@@ -54,15 +56,11 @@
             </Grid>
 
             <Frame Margin="20" BorderColor="Black">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="(exclaimation) used when meeting or greeting someone:" FontAttributes="Bold"/>
-                    <Label Text="Ex: Hello, Paul. I haven't seen you for ages."/>
-                    <Label Text="(noun) something that is said at the beginning of a phone conversation:" FontAttributes="Bold"/>
-                    <Label Text="Ex: Hello, Paul. I haven't seen you for ages."/>
-                    <Label Text="(exclaimation) used when meeting or greeting someone:" FontAttributes="Bold"/>
-                    <Label Text="Ex: Hello, I'd like some information about flights to the US, please."/>
-                </VerticalStackLayout>
+                <CollectionView ItemsSource="{Binding Definitions}">
+                </CollectionView>
             </Frame>
+            
+            
             
             <Frame Margin="20" BorderColor="Black">
                 <VerticalStackLayout>

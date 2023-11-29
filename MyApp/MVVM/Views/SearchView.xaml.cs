@@ -39,5 +39,6 @@ public partial class SearchView : ContentPage
     private async void searchBar_SearchButtonPressed(object sender, EventArgs e)
     {
         await Navigation.PushModalAsync(new ResultView());
+        searchBar.Unfocus();
     }
 }
