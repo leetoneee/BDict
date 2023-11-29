@@ -8,7 +8,7 @@ namespace MyApp
         {
             InitializeComponent();
 
-            MainPage = new TabbedView();
+            MainPage = new LoadingView();
         }
     }
 }

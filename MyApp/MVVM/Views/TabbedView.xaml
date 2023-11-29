@@ -2,34 +2,35 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            xmlns:helper="clr-namespace:MyApp.Helper"
             x:Class="MyApp.MVVM.Views.TabbedView"
             android:TabbedPage.ToolbarPlacement="Bottom"
             xmlns:local="clr-namespace:MyApp.MVVM.Views"
             BarBackgroundColor="#DAD7CD"
             android:TabbedPage.IsSwipePagingEnabled="True"
-            SelectedTabColor="#3A5A40"
-            UnselectedTabColor="#A3B18A"
+            SelectedTabColor="#357C3C"
+            UnselectedTabColor="#383838"
             android:TabbedPage.IsSmoothScrollEnabled="True"
             Shell.NavBarIsVisible="false"
             >
-    <NavigationPage Title="Look up" >
+    <NavigationPage Title="Look up" IconImageSource="look_up.svg" >
         <x:Arguments>
-            <local:MainPage NavigationPage.HasNavigationBar="False"/>
+            <local:SearchView NavigationPage.HasNavigationBar="False"/>
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="Translate">
+    <NavigationPage Title="Translate" IconImageSource="translator.svg">
         <x:Arguments>
             <local:TranslatorView NavigationPage.HasNavigationBar="False"/>
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="My Dictionary">
+    <NavigationPage Title="Bookmark" IconImageSource="bookmark.svg">
         <x:Arguments>
             <ContentPage />
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Title="Help">
+    <NavigationPage Title="Info" IconImageSource="info.svg">
         <x:Arguments>
-            <ContentPage />
+            <local:InfoView NavigationPage.HasNavigationBar="False"/>
         </x:Arguments>
     </NavigationPage>
 </TabbedPage>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyApp.MVVM.Views.InfoView"
+             Title="InfoView">
+
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".5*"/>
+        </Grid.RowDefinitions>
+
+        <!--Heading-->
+        <Label Grid.Row="0" 
+               Text="About us" 
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               FontSize="30"
+               TextColor="White"
+               Padding="10"
+               BackgroundColor="#588157"/>
+
+        <Label Grid.Row="1" Grid.RowSpan="2" Text="Scan QR code" FontAttributes="Bold" FontSize="30" HorizontalOptions="Center"/>
+        <Label Grid.Row="2" Grid.RowSpan="2" Text="The app will request access to" FontSize="20" HorizontalOptions="Center"/>
+        <Label Grid.Row="3" Grid.RowSpan="2" Text="the camera for code scanning" FontSize="20" HorizontalOptions="Center"/>
+
+        <Image Grid.Row="4" Source="logo.png" />
+        <StackLayout Grid.Row="5" Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="or visit our" FontSize="20" HorizontalOptions="Center"/>
+            <Label Text=" Homepage" TextColor="Blue" FontSize="20" HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHomepageLabelTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>

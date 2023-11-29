@@ -35,7 +35,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Images\logo.svg" Color="White" BaseSize="120,120" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -64,32 +64,22 @@
 	  <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
-	  <None Remove="Resources\Images\bdict.svg" />
 	  <None Remove="Resources\Images\Bookmark.svg" />
-	  <None Remove="Resources\Images\Forward.svg" />
 	  <None Remove="Resources\Images\Info.svg" />
 	  <None Remove="Resources\Images\logo.svg" />
-	  <None Remove="Resources\Images\logoloading.svg" />
 	  <None Remove="Resources\Images\look_up.svg" />
-	  <None Remove="Resources\Images\polygon_bottom.svg" />
 	  <None Remove="Resources\Images\translator.svg" />
-	  <None Remove="Resources\Images\copy_icon.svg" />
-	  <None Remove="Resources\Images\twodirec_arrow.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="MVVM\Views\InfoView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="MVVM\Views\LoadingView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+	  <Folder Include="MVVM\ViewModels\" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="MVVM\Views\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -103,9 +93,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\ResultView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="MVVM\Views\TranslatorView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
