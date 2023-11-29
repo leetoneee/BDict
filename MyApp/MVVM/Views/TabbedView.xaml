@@ -25,7 +25,7 @@
     </NavigationPage>
     <NavigationPage Title="Bookmark" IconImageSource="bookmark.svg">
         <x:Arguments>
-            <ContentPage />
+            <local:BookmarkView NavigationPage.HasNavigationBar="False"/>
         </x:Arguments>
     </NavigationPage>
     <NavigationPage Title="Info" IconImageSource="info.svg">
