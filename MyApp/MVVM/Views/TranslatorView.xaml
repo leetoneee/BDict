@@ -18,88 +18,123 @@
             <ColumnDefinition Width=".1*"/>
             <ColumnDefinition Width=".3*"/>
         </Grid.ColumnDefinitions>
-        <!--Heading-->
-        <Label Grid.Row="0" Grid.ColumnSpan="3"
-               Text="Translator" 
-               HorizontalOptions="FillAndExpand"
-               VerticalOptions="FillAndExpand"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"
-               FontSize="30"
-               TextColor="White"
-               Padding="10"
-               BackgroundColor="#588157"/>
 
-        <Label x:Name="upLabel"
-               Grid.Row="1" Grid.Column="0"
-               Text="English" FontSize="Large"
-               Padding="20" 
-               HorizontalOptions="Start"
-               HeightRequest="70"/>
+        <Label 
+            Grid.Row="0" 
+            Grid.ColumnSpan="3"
+            Text="Translator" 
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            FontSize="30"
+            TextColor="White"
+            Padding="10"
+            BackgroundColor="#588157"/>
+
+        <Label 
+            x:Name="upLabel"
+            Grid.Row="1" 
+            Grid.Column="0"
+            Text="{Binding LangFirst}" 
+            FontSize="Large"
+            Padding="20" 
+            HorizontalOptions="Start"
+            HeightRequest="70"/>
         
-        <ImageButton Grid.Row="1" Grid.Column="2"
-                     Source="copy_icon.png"
-                     Clicked="ImageButton_Clicked"
-                     HorizontalOptions="End"
-                     WidthRequest="65"
-                     Padding="10"
-                     HeightRequest="100"/>
+        <Button 
+            Grid.Row="1" 
+            Grid.Column="2"
+            Text="Translate"
+            TextColor="Black"
+            FontAttributes="Bold"
+            Command="{Binding CallAPI}"
+            FontSize="17" 
+            BackgroundColor="#A3B18A" 
+            HorizontalOptions="End"
+            Margin="20"
+            HeightRequest="50"/>
 
-        <controls:CustomEntry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
-                              BackgroundColor="#ECEBE6"
-                              Placeholder="Enter words, paragraph or text."
-                              CornerRadius="20" 
-                              Padding="10" 
-                              Margin="20"
-                              FontSize="Medium"
-                              IsTextPredictionEnabled="false"
-                              Completed="CustomEntry_Completed"
-                              />
+        <controls:CustomEntry 
+            Grid.Row="2" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="3"
+            BackgroundColor="#ECEBE6"
+            Placeholder="Enter words, paragraph or text."
+            CornerRadius="20" 
+            Padding="10" 
+            Margin="20"
+            FontSize="Medium"
+            IsTextPredictionEnabled="false"
+            Text="{Binding Input}"/>
 
-        <!--<Entry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
-                Margin="20"
-                BackgroundColor="#ECEBE6"
-                FontSize="Large"
-                Placeholder="Input words or sentence"
-                PlaceholderColor="#80000000"
-                />-->
+        <Button 
+            x:Name="firstBtn" 
+            Grid.Row="3" 
+            Grid.Column="0" 
+            Text="{Binding LangFirst}" 
+            VerticalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand"
+            Margin="20" 
+            FontSize="17" 
+            BackgroundColor="#A3B18A" 
+            TextColor="Black"
+            HeightRequest="50"/>
+
+        <ImageButton 
+            x:Name="twoArrowBtn"
+            Grid.Row="3" 
+            Grid.Column="1" 
+            Source="twodirec_arrow.svg" 
+            HeightRequest="30"
+            Command="{Binding ConvertCommand}"/>
+
+        <Button 
+            x:Name="secondBtn" 
+            Grid.Row="3" 
+            Grid.Column="2" 
+            Text="{Binding LangSecond}" 
+            VerticalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand"
+            Margin="20" 
+            FontSize="17" 
+            BackgroundColor="#A3B18A" 
+            TextColor="Black" 
+            HeightRequest="50"/>
+
+        <Label 
+            x:Name="downLabel"
+            Grid.Row="4" 
+            Grid.Column="0"
+            Text="{Binding LangSecond}" 
+            FontSize="Large"
+            Padding="20" 
+            HorizontalOptions="Start"
+            HeightRequest="70"/>
         
-            <!--Switch languages-->
-        
-        <Button x:Name="firstBtn" Grid.Row="3" Grid.Column="0" Text="ENGLISH" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                Margin="20" FontSize="17" BackgroundColor="#A3B18A" TextColor="Black"
-                HeightRequest="50"/>
+        <ImageButton 
+            Grid.Row="4" 
+            Grid.Column="2"
+            Source="copy_icon.png"
+            Command="{Binding CopyCommand}"
+            HorizontalOptions="End"
+            WidthRequest="65"
+            Padding="10"
+            HeightRequest="100"/>
 
-        <ImageButton x:Name="twoArrowBtn"
-                     Grid.Row="3" Grid.Column="1" 
-                     Source="twodirec_arrow.svg" HeightRequest="30"
-                     Clicked="twoArrowBtn_Clicked"/>
-
-        <Button x:Name="secondBtn" Grid.Row="3" Grid.Column="2" Text="VIETNAMESE" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                Margin="20" FontSize="17" BackgroundColor="#A3B18A" TextColor="Black" HeightRequest="50"/>
-
-        <Label x:Name="downLabel"
-               Grid.Row="4" Grid.Column="0"
-               Text="Vietnamese" FontSize="Large"
-               Padding="20" HorizontalOptions="Start"
-               HeightRequest="70"/>
-        
-        <ImageButton Grid.Row="4" Grid.Column="2"
-                     Source="copy_icon.png"
-                     Clicked="ImageButton_Clicked"
-                     HorizontalOptions="End"
-                     WidthRequest="65"
-                     Padding="10"
-                     HeightRequest="100"/>
-
-        <controls:CustomEntry x:Name="outputEntry" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
-                      BackgroundColor="#ECEBE6"
-                      Placeholder="Result."
-                      CornerRadius="20" 
-                      Padding="10" 
-                      Margin="20"
-                      FontSize="Medium"
-                      IsReadOnly="True"
-                      />
+        <controls:CustomEntry 
+            x:Name="outputEntry" 
+            Grid.Row="5" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="3"
+            BackgroundColor="#ECEBE6"
+            Placeholder="Result."
+            CornerRadius="20" 
+            Padding="10" 
+            Margin="20"
+            FontSize="Medium"
+            IsReadOnly="True"
+            Text="{Binding Output}"
+            />
     </Grid>
 </ContentPage>
