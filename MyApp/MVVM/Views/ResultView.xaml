@@ -35,8 +35,10 @@
                 </ImageButton>
 
 
-                <ImageButton Grid.Row="0" Grid.Column="2"
-                             VerticalOptions="Center" HorizontalOptions="End">
+                <ImageButton x:Name="backIcon"
+                             Grid.Row="0" Grid.Column="2"
+                             VerticalOptions="Center" HorizontalOptions="End"
+                             Clicked="backIcon_Clicked">
                     <ImageButton.Source>
                         <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.ArrowLeftLong}" Color="Black"/>
                     </ImageButton.Source>

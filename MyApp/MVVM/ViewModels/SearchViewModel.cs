@@ -10,22 +10,22 @@ namespace MyApp.MVVM.ViewModels
 {
     public class SearchViewModel
     {
-        public ObservableCollection<Vocabulary> RecentSearches { get; set; }
+        public ObservableCollection<Word> RecentSearches { get; set; }
 
         public SearchViewModel() {
-            RecentSearches = new ObservableCollection<Vocabulary>()
+            RecentSearches = new ObservableCollection<Word>()
             {
-                new Vocabulary{
-                    Word = "Hello"
+                new Word{
+                    word = "Hello"
                 },
-                new Vocabulary{
-                    Word = "Machine"
+                new Word{
+                    word = "Machine"
                 },
-                new Vocabulary{
-                    Word = "Good"
+                new Word{
+                    word = "Good"
                 },
-                new Vocabulary{
-                    Word = "Build"
+                new Word{
+                    word = "Build"
                 },
             };
         }

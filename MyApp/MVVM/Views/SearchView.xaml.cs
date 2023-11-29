@@ -17,10 +17,10 @@ public partial class SearchView : ContentPage
         if(e.CurrentSelection != null && e.CurrentSelection.Count > 0)
     {
             // Xử lý khi một mục được chọn
-            var selectedWord = (Vocabulary)e.CurrentSelection.First();
+            var selectedWord = (Word)e.CurrentSelection.First();
             // Làm bất cứ điều gì bạn muốn với từ đã chọn
             // Ví dụ: Hiển thị thông tin chi tiết, chuyển đến trang chi tiết, vv.
-            await DisplayAlert("Thông báo", $"Bạn đã chọn từ: {selectedWord.Word}", "OK");
+            await DisplayAlert("Thông báo", $"Bạn đã chọn từ: {selectedWord.word}", "OK");
             // Clear selection to enable selecting the same item again
             ((CollectionView)sender).SelectedItem = null;
         }
@@ -36,4 +36,8 @@ public partial class SearchView : ContentPage
         DisplayAlert("Thông báo", "Bạn đã chạm vào ImageButton", "OK");
     }
 
+    private async void searchBar_SearchButtonPressed(object sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new ResultView());
+    }
 }
