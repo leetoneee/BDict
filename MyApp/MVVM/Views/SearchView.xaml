@@ -49,14 +49,13 @@
                     StrokeShape="RoundRectangle 10,10,10,10"
                     HeightRequest="250">
                 <CollectionView ItemsSource="{Binding RecentSearches}"
-                                
                                 SelectionMode="Single" x:Name="ItemsCollectionView"
                                 SelectionChangedCommand="{Binding ClickCommand}" 
                                 SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ItemsCollectionView}}"
                                 >
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <VerticalStackLayout >
+                            <VerticalStackLayout>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
