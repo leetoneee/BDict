@@ -33,9 +33,11 @@
                     HorizontalOptions="Center"
                     >
 
-                <SearchBar Placeholder="Enter your word" TextColor="#1D1D1D" BackgroundColor="White" 
+                <SearchBar x:Name="searchBar"
+                           Placeholder="Enter your word" TextColor="#1D1D1D" BackgroundColor="White" 
                            Keyboard="Default" WidthRequest="350" HeightRequest="34"
-                           FontSize="15" FontFamily="RobotoRegular"/>
+                           FontSize="15" FontFamily="RobotoRegular"
+                           SearchButtonPressed="searchBar_SearchButtonPressed"/>
 
             </Border>
         </Grid>
