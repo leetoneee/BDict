@@ -64,7 +64,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding Word}" FontSize="17" FontFamily="RobotoMedium" Padding="30,20,20,10" HorizontalOptions="Start" />
+                                    <Label Grid.Column="0" Text="{Binding word}" FontSize="17" FontFamily="RobotoMedium" Padding="30,20,20,10" HorizontalOptions="Start" />
                                     <Image Grid.Column="1" Source="forward.svg" Margin="0, 10, 25, 0" HorizontalOptions="End"/>
                                 </Grid>
                                 <BoxView Color="#000000"
