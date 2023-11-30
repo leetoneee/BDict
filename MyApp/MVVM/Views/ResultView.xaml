@@ -22,11 +22,11 @@
                     <ColumnDefinition Width=".3*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" 
-                       Text="Hello" TextColor="White" FontSize="Large"
+                       Text="{Binding Word}" TextColor="White" FontSize="Large"
                        VerticalOptions="Center"/>
 
                 <Label Grid.Row="1" Grid.Column="0" 
-                       Text="/heˈləʊ/" TextColor="White" FontSize="Large"
+                       Text="{Binding Phonetic}" TextColor="White" FontSize="Large"
                        VerticalOptions="Center"/>
                 
                 <ImageButton Grid.Column="0" Grid.Row="2" 
@@ -56,7 +56,7 @@
             </Grid>
 
             <Frame Margin="20" BorderColor="Black">
-                <CollectionView ItemsSource="{Binding Definitions}">
+                <CollectionView ItemsSource="{Binding Definitions}" HorizontalOptions="CenterAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Label x:Name="label" FontSize="Medium" Text="{Binding .}">
@@ -96,6 +96,13 @@
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                         <Setter Property="FontSize" Value="Large"/>
                                     </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Source={x:Reference label},
+                                                 Path=Text}"
+                                                 Value="PREPOSITION:">
+                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
                                 </Label.Triggers>
                             </Label>
                         </DataTemplate>
@@ -103,13 +110,45 @@
                 </CollectionView>
 
             </Frame>
-            
-            
-            
             <Frame Margin="20" BorderColor="Black">
-                <VerticalStackLayout>
-                    <Label Text="Synonym: hi, greetings, how do you do?, good morning, good evening, good afternoon, welcome."/>
-                    <Label Text="Antonym: goodbye, bye, see you, farewell"/>
+                <VerticalStackLayout Spacing="10">
+
+                    <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label x:Name="synLabel" Text="{Binding .}" FontSize="Medium">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference synLabel},
+                                                     Path=Text}"
+                                                     Value="Synonyms: ">
+                                            <Setter Property="FontAttributes" Value="Bold"/>
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label x:Name="antLabel" Text="{Binding .}" FontSize="Medium">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference antLabel},
+                                                     Path=Text}"
+                                                     Value="Antonyms: ">
+                                            <Setter Property="FontAttributes" Value="Bold"/>
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                                
                 </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>    
