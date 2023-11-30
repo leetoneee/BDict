@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MyApp.MVVM.Models;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,28 @@ namespace MyApp.MVVM.ViewModels
     internal partial class ResultViewModel : ObservableObject
     {
         public string inputWord;
+
         [ObservableProperty]        
         public string word;
+
         [ObservableProperty]
         public string phonetic;
+
         [ObservableProperty]
         public string audio;
+
         [ObservableProperty]
         public ObservableCollection<string> partOfSpeechs;
+
         [ObservableProperty]
         public ObservableCollection<string> definitions;
+
         [ObservableProperty]
         public ObservableCollection<string> examples;
+
         [ObservableProperty]
         public string[] synonyms;
+
         [ObservableProperty]
         public string[] antonyms;
 
@@ -39,21 +48,31 @@ namespace MyApp.MVVM.ViewModels
                 var response = await _httpClient.GetStringAsync(url);
                 List<Word> word = JsonSerializer.Deserialize<List<Word>>(response);
                 Console.WriteLine(response);
+                
+                //Các thuộc tính chỉ xuất hiện 1 lần
+
                 Word = word[0].word;
                 Phonetic = word[0].phonetics[0].text;
                 Audio = word[0].phonetics[0].audio;
+
+                //Các thuộc tính cần duyệt nhiều lần
+
                 for(int i = 0; i < word[0].meanings.Count; i++)
                 {
-                    PartOfSpeechs.Add(word[0].meanings[i].partOfSpeech);
+                    Definitions.Add(word[0].meanings[i].partOfSpeech.ToUpper() + ":");
                     for (int j = 0; j < word[0].meanings[i].definitions.Count; j++)
                     {
                         await Console.Out.WriteLineAsync(word[0].meanings[i].definitions[j].definition);
                         Definitions.Add(word[0].meanings[i].definitions[j].definition);
-                        Examples.Add(word[0].meanings[i].definitions[j].example);
+                        if(word[0].meanings[i].definitions[j].example != null)
+                            Definitions.Add("Ex: "+ word[0].meanings[i].definitions[j].example);
+                        else
+                        {
+                            Definitions.Add("?");
+                        }    
                     }
 
                 }
-                
             }
             catch (HttpRequestException er)
             {

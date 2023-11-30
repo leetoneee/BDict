@@ -1,4 +1,3 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using MyApp.MVVM.ViewModels;
 
 namespace MyApp.MVVM.Views;

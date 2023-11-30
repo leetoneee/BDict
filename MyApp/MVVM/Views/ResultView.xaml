@@ -57,7 +57,51 @@
 
             <Frame Margin="20" BorderColor="Black">
                 <CollectionView ItemsSource="{Binding Definitions}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label x:Name="label" FontSize="Medium" Text="{Binding .}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Source={x:Reference label},
+                                                 Path=Text}"
+                                                 Value="NOUN:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Source={x:Reference label},
+                                                 Path=Text}"
+                                                 Value="VERB:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Source={x:Reference label},
+                                                 Path=Text}"
+                                                 Value="INTERJECTION:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Source={x:Reference label},
+                                                 Path=Text}"
+                                                 Value="ADJECTIVE:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Source={x:Reference label},
+                                                 Path=Text}"
+                                                 Value="ADVERB:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
                 </CollectionView>
+
             </Frame>
             
             
