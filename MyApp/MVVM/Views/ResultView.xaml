@@ -17,7 +17,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width=".4*"/>
                     <ColumnDefinition Width=".3*"/>
                 </Grid.ColumnDefinitions>
@@ -25,12 +25,15 @@
                        Text="{Binding Word}" TextColor="White" FontSize="30"
                        VerticalOptions="Center"/>
 
-                <Label Grid.Row="1" Grid.Column="0" 
+                <Label 
+                       Grid.Row="1" Grid.Column="0" 
                        Text="{Binding Phonetic}" TextColor="White" FontSize="Large"
                        VerticalOptions="Center"/>
                 
-                <ImageButton Grid.Column="0" Grid.Row="2" 
-                             VerticalOptions="Start" HorizontalOptions="Start">
+                <ImageButton x:Name="playSound"
+                             Grid.Column="0" Grid.Row="2" 
+                             VerticalOptions="Start" HorizontalOptions="Start"
+                             Command="{Binding PlaySoundCommand}">
                     <ImageButton.Source>
                         <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.VolumeHigh}" Color="Black"/>
                     </ImageButton.Source>
@@ -54,97 +57,84 @@
                 </ImageButton>
 
             </Grid>
-
-            <Frame Margin="20" BorderColor="Black">
+            <ActivityIndicator IsVisible="{Binding IsProcessing}" IsRunning="{Binding IsProcessing}"
+                               Margin="10"/>
+            <Frame Margin="10" BorderColor="Black" IsVisible="{Binding IsVisibleElement}">
                 <CollectionView ItemsSource="{Binding Definitions}" HorizontalOptions="CenterAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Label x:Name="label" FontSize="Medium" Text="{Binding .}" Padding="10">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label"
-                                                 Binding="{Binding Source={x:Reference label},
-                                                 Path=Text}"
-                                                 Value="NOUN:">
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="NOUN:">
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                         <Setter Property="FontSize" Value="Large"/>
                                     </DataTrigger>
                                     <DataTrigger TargetType="Label"
-                                                 Binding="{Binding Source={x:Reference label},
-                                                 Path=Text}"
-                                                 Value="VERB:">
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="VERB:">
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                         <Setter Property="FontSize" Value="Large"/>
                                     </DataTrigger>
                                     <DataTrigger TargetType="Label"
-                                                 Binding="{Binding Source={x:Reference label},
-                                                 Path=Text}"
-                                                 Value="INTERJECTION:">
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="INTERJECTION:">
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                         <Setter Property="FontSize" Value="Large"/>
                                     </DataTrigger>
                                     <DataTrigger TargetType="Label"
-                                                 Binding="{Binding Source={x:Reference label},
-                                                 Path=Text}"
-                                                 Value="ADJECTIVE:">
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="ADJECTIVE:">
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                         <Setter Property="FontSize" Value="Large"/>
                                     </DataTrigger>
                                     <DataTrigger TargetType="Label"
-                                                 Binding="{Binding Source={x:Reference label},
-                                                 Path=Text}"
-                                                 Value="ADVERB:">
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="ADVERB:">
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                         <Setter Property="FontSize" Value="Large"/>
                                     </DataTrigger>
                                     <DataTrigger TargetType="Label"
-                                                 Binding="{Binding Source={x:Reference label},
-                                                 Path=Text}"
-                                                 Value="PREPOSITION:">
-                                                <Setter Property="FontAttributes" Value="Bold"/>
-                                                <Setter Property="FontSize" Value="Large"/>
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="PREPOSITION:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
             </Frame>
-            <Frame Margin="20" BorderColor="Black">
+            <Frame Margin="10" BorderColor="Black" IsVisible="{Binding IsVisibleElement}">
                 <VerticalStackLayout Spacing="10">
 
                     <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single">
+                        <CollectionView.Header>
+                            <Label Text="Synonyms: " FontSize="Large" FontAttributes="Bold"/>
+                        </CollectionView.Header>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Label x:Name="synLabel" Text="{Binding .}" FontSize="Medium">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference synLabel},
-                                                     Path=Text}"
-                                                     Value="Synonyms: ">
-                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                            <Setter Property="IsEnabled" Value="False"/>
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
+                                <Label x:Name="synLabel" Text="{Binding .}" FontSize="Medium"/>
+
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
                     <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single">
+                        <CollectionView.Header>
+                            <Label Text="Antonyms: " FontSize="Large" FontAttributes="Bold"/>
+                        </CollectionView.Header>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Label x:Name="antLabel" Text="{Binding .}" FontSize="Medium">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference antLabel},
-                                                     Path=Text}"
-                                                     Value="Antonyms: ">
-                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                            <Setter Property="IsEnabled" Value="False"/>
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
+                                <Label x:Name="antLabel" Text="{Binding .}" FontSize="Medium"/>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

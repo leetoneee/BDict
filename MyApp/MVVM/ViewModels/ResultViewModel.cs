@@ -33,7 +33,13 @@ namespace MyApp.MVVM.ViewModels
         [ObservableProperty]
         public ObservableCollection<String> antonyms;
         
-       
+        [ObservableProperty]
+        public bool isProcessing;
+        
+        [ObservableProperty]
+        public bool isVisibleElement;
+
+
 
         private static readonly HttpClient _httpClient = new HttpClient();
         public async Task FetchAPI()
@@ -51,51 +57,65 @@ namespace MyApp.MVVM.ViewModels
                 Phonetic = word[0].phonetics[0].text;
                 Audio = word[0].phonetics[0].audio;
 
+                HashSet<String> synonymsHash = new HashSet<String>();
+                HashSet<String> antonymsHash = new HashSet<String>();
+
                 //Các thuộc tính cần duyệt nhiều lần
-                Synonyms.Add("Synonyms: ");
-                Antonyms.Add("Antonyms: ");
                 for (int i = 0; i < word[0].meanings.Count; i++)
                 {
                     Definitions.Add(word[0].meanings[i].partOfSpeech.ToUpper() + ":");
                     for (int j = 0; j < word[0].meanings[i].definitions.Count; j++)
                     {
-                        await Console.Out.WriteLineAsync(word[0].meanings[i].definitions[j].definition);
                         Definitions.Add("● " + word[0].meanings[i].definitions[j].definition);
-                        if(word[0].meanings[i].definitions[j].example != null)
+                        if (word[0].meanings[i].definitions[j].example != null)
                             Definitions.Add("➜ " + word[0].meanings[i].definitions[j].example);
-                        else
-                        {
-                            Definitions.Add("?");
-                        }
+                        //else
+                        //{
+                        //    Definitions.Add("?");
+                        //}
                     }
                     for (int j = 0; j < word[0].meanings[i].synonyms.Length; j++)
-                        Synonyms.Add(word[0].meanings[i].synonyms[j] + ", ");
+                    {
+                        Console.WriteLine(word[0].meanings[i].synonyms[j]);
+                        synonymsHash.Add(word[0].meanings[i].synonyms[j]);
+                    }
                     for (int j = 0; j < word[0].meanings[i].antonyms.Length; j++)
-                        Antonyms.Add(word[0].meanings[i].antonyms[j] + ", ");
+                        synonymsHash.Add(word[0].meanings[i].antonyms[j]);
                 }
-                if (Synonyms.Count == 1)
-                    Synonyms.Add("?");
-                else
-                    Synonyms[Synonyms.Count - 1] = Synonyms[Synonyms.Count - 1].TrimEnd(' ').TrimEnd(',') + ".";
 
-                if (Antonyms.Count ==1) 
+                foreach (string x in synonymsHash)
+                    Synonyms.Add(x);
+
+                foreach (string x in antonymsHash)
+                    Antonyms.Add(x);
+
+
+                if (Synonyms.Count == 0)
+                    Synonyms.Add("?");
+
+                if (Antonyms.Count == 0) 
                     Antonyms.Add ("?");
-                else
-                    Antonyms[Antonyms.Count - 1] = Antonyms[Antonyms.Count - 1].TrimEnd(' ').TrimEnd(',') + ".";
+
+                IsProcessing = false;
+                IsVisibleElement = true;
             }
             catch (HttpRequestException er)
             {
                 Console.WriteLine("Error {0}", er);
             }
+            Console.WriteLine("Xong Xong Xong Xong Xong Xong Xong Xong Xong Xong Xong Xong Xong ");
+        }
+
+
+        //PlaySound commmand
+        [RelayCommand]
+        void PlaySound()
+        {
+            Console.WriteLine("PlaySound click");
         }
         //Constructor mặc định
         public ResultViewModel()
         {
-            inputWord = "hello";
-            Definitions = new ObservableCollection<string>();
-            Synonyms = new ObservableCollection<string>();
-            Antonyms = new ObservableCollection<string>();
-            _ = FetchAPI();
         }
         //Constructor nhận 1 tham số đầu vào
         public ResultViewModel(string input)
@@ -104,7 +124,10 @@ namespace MyApp.MVVM.ViewModels
             Definitions = new ObservableCollection<string>();
             Synonyms = new ObservableCollection<string>();
             Antonyms = new ObservableCollection<string>();
+            IsProcessing = true;
+            IsVisibleElement = false;
             _ = FetchAPI();
+
         }
     }
 }

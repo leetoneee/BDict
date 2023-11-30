@@ -10,8 +10,8 @@ public partial class ResultView : ContentPage
 		BindingContext = new ResultViewModel();
 	}
 
-    private async void backIcon_Clicked(object sender, EventArgs e)
+    private void backIcon_Clicked(object sender, EventArgs e)
     {
-		await Navigation.PopModalAsync();
+		Navigation.PopModalAsync();
     }
 }
