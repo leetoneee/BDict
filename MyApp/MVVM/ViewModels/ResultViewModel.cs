@@ -25,13 +25,7 @@ namespace MyApp.MVVM.ViewModels
         public string audio;
 
         [ObservableProperty]
-        public ObservableCollection<string> partOfSpeechs;
-
-        [ObservableProperty]
         public ObservableCollection<string> definitions;
-
-        [ObservableProperty]
-        public ObservableCollection<string> examples;
 
         [ObservableProperty]
         public ObservableCollection<String> synonyms;
@@ -53,7 +47,7 @@ namespace MyApp.MVVM.ViewModels
                 
                 //Các thuộc tính chỉ xuất hiện 1 lần
 
-                Word = word[0].word;
+                Word = word[0].word.ToUpper();
                 Phonetic = word[0].phonetics[0].text;
                 Audio = word[0].phonetics[0].audio;
 
@@ -79,12 +73,12 @@ namespace MyApp.MVVM.ViewModels
                     for (int j = 0; j < word[0].meanings[i].antonyms.Length; j++)
                         Antonyms.Add(word[0].meanings[i].antonyms[j] + ", ");
                 }
-                if (Synonyms.Count == 0)
+                if (Synonyms.Count == 1)
                     Synonyms.Add("?");
                 else
                     Synonyms[Synonyms.Count - 1] = Synonyms[Synonyms.Count - 1].TrimEnd(' ').TrimEnd(',') + ".";
 
-                if (Antonyms.Count ==0) 
+                if (Antonyms.Count ==1) 
                     Antonyms.Add ("?");
                 else
                     Antonyms[Antonyms.Count - 1] = Antonyms[Antonyms.Count - 1].TrimEnd(' ').TrimEnd(',') + ".";
@@ -94,23 +88,20 @@ namespace MyApp.MVVM.ViewModels
                 Console.WriteLine("Error {0}", er);
             }
         }
-
+        //Constructor mặc định
         public ResultViewModel()
         {
             inputWord = "hello";
-            PartOfSpeechs = new ObservableCollection<string>();
             Definitions = new ObservableCollection<string>();
-            Examples = new ObservableCollection<string>();
             Synonyms = new ObservableCollection<string>();
             Antonyms = new ObservableCollection<string>();
             _ = FetchAPI();
         }
+        //Constructor nhận 1 tham số đầu vào
         public ResultViewModel(string input)
         {
             inputWord = input;
-            PartOfSpeechs = new ObservableCollection<string>();
             Definitions = new ObservableCollection<string>();
-            Examples = new ObservableCollection<string>();
             Synonyms = new ObservableCollection<string>();
             Antonyms = new ObservableCollection<string>();
             _ = FetchAPI();

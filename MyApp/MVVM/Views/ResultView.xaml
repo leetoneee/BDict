@@ -22,7 +22,7 @@
                     <ColumnDefinition Width=".3*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" 
-                       Text="{Binding Word}" TextColor="White" FontSize="Large"
+                       Text="{Binding Word}" TextColor="White" FontSize="30"
                        VerticalOptions="Center"/>
 
                 <Label Grid.Row="1" Grid.Column="0" 
@@ -59,7 +59,7 @@
                 <CollectionView ItemsSource="{Binding Definitions}" HorizontalOptions="CenterAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Label x:Name="label" FontSize="Medium" Text="{Binding .}">
+                            <Label x:Name="label" FontSize="Medium" Text="{Binding .}" Padding="10">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label"
                                                  Binding="{Binding Source={x:Reference label},
