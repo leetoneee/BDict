@@ -69,10 +69,6 @@ namespace MyApp.MVVM.ViewModels
                         Definitions.Add("● " + word[0].meanings[i].definitions[j].definition);
                         if (word[0].meanings[i].definitions[j].example != null)
                             Definitions.Add("➜ " + word[0].meanings[i].definitions[j].example);
-                        //else
-                        //{
-                        //    Definitions.Add("?");
-                        //}
                     }
                     for (int j = 0; j < word[0].meanings[i].synonyms.Length; j++)
                     {
@@ -98,10 +94,14 @@ namespace MyApp.MVVM.ViewModels
 
                 IsProcessing = false;
                 IsVisibleElement = true;
+                return;
             }
             catch (HttpRequestException er)
             {
                 Console.WriteLine("Error {0}", er);
+                IsProcessing = false;
+                Word = "404 NOT FOUND";
+                return;
             }
             Console.WriteLine("Xong Xong Xong Xong Xong Xong Xong Xong Xong Xong Xong Xong Xong ");
         }
