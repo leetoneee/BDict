@@ -29,7 +29,7 @@
                        Grid.Row="1" Grid.Column="0" 
                        Text="{Binding Phonetic}" TextColor="White" FontSize="Large"
                        VerticalOptions="Center"/>
-                
+
                 <ImageButton x:Name="playSound"
                              Grid.Column="0" Grid.Row="2" 
                              VerticalOptions="Start" HorizontalOptions="Start"
@@ -59,8 +59,10 @@
                 </ImageButton>
 
             </Grid>
+
             <ActivityIndicator IsVisible="{Binding IsProcessing}" IsRunning="{Binding IsProcessing}"
-                               Margin="10" HorizontalOptions="Center" VerticalOptions="Center"/>
+                               HeightRequest="600" VerticalOptions="Center" HorizontalOptions="Center"/>
+
             <Frame Margin="10" BorderColor="Black" IsVisible="{Binding IsVisibleElement}">
                 <CollectionView ItemsSource="{Binding Definitions}" HorizontalOptions="CenterAndExpand">
                     <CollectionView.ItemTemplate>
@@ -118,25 +120,24 @@
             <Frame Margin="10" BorderColor="Black" IsVisible="{Binding IsVisibleElement}">
                 <VerticalStackLayout Spacing="10">
 
-                    <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single">
+                    <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
                         <CollectionView.Header>
                             <Label Text="Synonyms: " FontSize="Large" FontAttributes="Bold"/>
                         </CollectionView.Header>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Label x:Name="synLabel" Text="{Binding .}" FontSize="Medium"/>
-
+                                <Label Text="{Binding .}" FontSize="Medium"/>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single">
+                    <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
                         <CollectionView.Header>
                             <Label Text="Antonyms: " FontSize="Large" FontAttributes="Bold"/>
                         </CollectionView.Header>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Label x:Name="antLabel" Text="{Binding .}" FontSize="Medium"/>
+                                <Label Text="{Binding .}" FontSize="Medium"/>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
