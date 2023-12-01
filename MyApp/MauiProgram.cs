@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using MyApp.Controls;
+using MyApp.MVVM.ViewModels;
+using MyApp.MVVM.Views;
 using MyApp.Platforms;
+using Plugin.Maui.Audio;
 
 namespace MyApp
 {
@@ -31,9 +34,12 @@ namespace MyApp
                     fonts.AddFont("Roboto-Thin.ttf", "RobotoThin");
                     fonts.AddFont("Roboto-ThinItalic.ttf", "RobotoThinItalic");
                 });
+            builder.Services.AddSingleton(AudioManager.Current);
+            builder.Services.AddTransient<ResultView>();
+            builder.Services.AddTransient<ResultViewModel>();
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             Microsoft.Maui.Handlers.ElementHandler.ElementMapper.AppendToMapping("Classic", (handler, view) =>
             {

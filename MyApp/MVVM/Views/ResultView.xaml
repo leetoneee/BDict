@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyApp.MVVM.Views.ResultView"
              xmlns:helper="clr-namespace:MyApp.Helper"
+             xmlns:vm="clr-namespace:MyApp.MVVM.ViewModels"
+             x:DataType="vm:ResultViewModel"
              Title="ResultView">
     
     
@@ -15,20 +17,24 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width=".4*"/>
                     <ColumnDefinition Width=".3*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" 
-                       Text="Hello" TextColor="White" FontSize="Large"
+                       Text="{Binding Word}" TextColor="White" FontSize="30"
                        VerticalOptions="Center"/>
 
-                <Label Grid.Row="1" Grid.Column="0" 
-                       Text="/heˈləʊ/" TextColor="White" FontSize="Large"
+                <Label 
+                       Grid.Row="1" Grid.Column="0" 
+                       Text="{Binding Phonetic}" TextColor="White" FontSize="Large"
                        VerticalOptions="Center"/>
-                
-                <ImageButton Grid.Column="0" Grid.Row="2" 
-                             VerticalOptions="Start" HorizontalOptions="Start">
+
+                <ImageButton x:Name="playSound"
+                             Grid.Column="0" Grid.Row="2" 
+                             VerticalOptions="Start" HorizontalOptions="Start"
+                             Command="{Binding PlaySoundCommand}"
+                             IsVisible="{Binding IsVisibleElement}">
                     <ImageButton.Source>
                         <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.VolumeHigh}" Color="Black"/>
                     </ImageButton.Source>
@@ -45,7 +51,8 @@
                 </ImageButton>
 
                 <ImageButton Grid.Column="2" Grid.Row="2"
-                             HorizontalOptions="End">
+                             HorizontalOptions="End"
+                             IsVisible="{Binding IsVisibleElement}">
                     <ImageButton.Source>
                         <FontImageSource FontFamily="FAR" Glyph="{x:Static helper:FontAwesomeHelperNotSolid.Heart}" Color="Black"/>
                     </ImageButton.Source>
@@ -53,21 +60,88 @@
 
             </Grid>
 
-            <Frame Margin="20" BorderColor="Black">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="(exclaimation) used when meeting or greeting someone:" FontAttributes="Bold"/>
-                    <Label Text="Ex: Hello, Paul. I haven't seen you for ages."/>
-                    <Label Text="(noun) something that is said at the beginning of a phone conversation:" FontAttributes="Bold"/>
-                    <Label Text="Ex: Hello, Paul. I haven't seen you for ages."/>
-                    <Label Text="(exclaimation) used when meeting or greeting someone:" FontAttributes="Bold"/>
-                    <Label Text="Ex: Hello, I'd like some information about flights to the US, please."/>
-                </VerticalStackLayout>
+            <ActivityIndicator IsVisible="{Binding IsProcessing}" IsRunning="{Binding IsProcessing}"
+                               HeightRequest="600" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+            <Frame Margin="10" BorderColor="Black" IsVisible="{Binding IsVisibleElement}">
+                <CollectionView ItemsSource="{Binding Definitions}" HorizontalOptions="CenterAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label x:Name="label" FontSize="Medium" Text="{Binding .}" Padding="10">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="NOUN:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="VERB:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="INTERJECTION:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="ADJECTIVE:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="ADVERB:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="PREPOSITION:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Frame>
-            
-            <Frame Margin="20" BorderColor="Black">
-                <VerticalStackLayout>
-                    <Label Text="Synonym: hi, greetings, how do you do?, good morning, good evening, good afternoon, welcome."/>
-                    <Label Text="Antonym: goodbye, bye, see you, farewell"/>
+            <Frame Margin="10" BorderColor="Black" IsVisible="{Binding IsVisibleElement}">
+                <VerticalStackLayout Spacing="10">
+
+                    <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+                        <CollectionView.Header>
+                            <Label Text="Synonyms: " FontSize="Large" FontAttributes="Bold"/>
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding .}" FontSize="Medium"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+                        <CollectionView.Header>
+                            <Label Text="Antonyms: " FontSize="Large" FontAttributes="Bold"/>
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding .}" FontSize="Medium"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                                
                 </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>    

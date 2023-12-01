@@ -36,8 +36,11 @@ public partial class SearchView : ContentPage
         DisplayAlert("Thông báo", "Bạn đã chạm vào ImageButton", "OK");
     }
 
-    private async void searchBar_SearchButtonPressed(object sender, EventArgs e)
+    private void searchBar_SearchButtonPressed(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new ResultView());
+        searchBar.Unfocus();
+        var resultView = new ResultView();
+        resultView.BindingContext = new ResultViewModel(searchBar.Text);
+        Navigation.PushModalAsync(resultView);
     }
 }
