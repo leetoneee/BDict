@@ -94,7 +94,7 @@ namespace MyApp.MVVM.ViewModels
                         synonymsHash.Add(word[0].meanings[i].synonyms[j]);
                     }
                     for (int j = 0; j < word[0].meanings[i].antonyms.Length; j++)
-                        synonymsHash.Add(word[0].meanings[i].antonyms[j]);
+                        antonymsHash.Add(word[0].meanings[i].antonyms[j]);
                 }
 
                 foreach (string x in synonymsHash)
