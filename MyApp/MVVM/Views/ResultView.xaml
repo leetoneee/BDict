@@ -4,6 +4,7 @@
              x:Class="MyApp.MVVM.Views.ResultView"
              xmlns:helper="clr-namespace:MyApp.Helper"
              xmlns:vm="clr-namespace:MyApp.MVVM.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="vm:ResultViewModel"
              Title="ResultView">
     
@@ -33,13 +34,14 @@
                 <ImageButton x:Name="playSound"
                              Grid.Column="0" Grid.Row="2" 
                              VerticalOptions="Start" HorizontalOptions="Start"
-                             Command="{Binding PlaySoundCommand}"
-                             IsVisible="{Binding IsVisibleElement}">
+                             IsVisible="{Binding IsVisibleElement}"
+                             Clicked="playSound_Clicked">
                     <ImageButton.Source>
                         <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.VolumeHigh}" Color="Black"/>
                     </ImageButton.Source>
                 </ImageButton>
 
+                <toolkit:MediaElement x:Name="mediaElement" Source="{Binding Audio}" IsVisible="false" Volume="2"/>
 
                 <ImageButton x:Name="backIcon"
                              Grid.Row="0" Grid.Column="2"
@@ -49,6 +51,8 @@
                         <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.ArrowLeftLong}" Color="Black"/>
                     </ImageButton.Source>
                 </ImageButton>
+                
+                
 
                 <ImageButton Grid.Column="2" Grid.Row="2"
                              HorizontalOptions="End"

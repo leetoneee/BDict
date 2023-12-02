@@ -33,6 +33,12 @@ public partial class ResultView : ContentPage
 
             // Đặt lại chọn để tránh xử lý lặp
             ((CollectionView)sender).SelectedItem = null;
-        }
+        }   
+    }
+
+    private void playSound_Clicked(object sender, EventArgs e)
+    {
+        mediaElement.Play();
+        mediaElement.SeekTo(TimeSpan.Zero);
     }
 }
