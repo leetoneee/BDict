@@ -55,22 +55,25 @@ namespace MyApp.MVVM.ViewModels
 
                 Word = word[0].word.ToUpper();
                 
-                int count = 0;
-                if(word[0].phonetics.Count != 0)
+                int flag = 0;
+                for (int i =0; i < word[0].phonetics.Count; i++)
                 {
-                    while (!(word[0].phonetics[count].audio != "" && word[0].phonetics[count].text != ""
-                    && word[0].phonetics[count].audio != null && word[0].phonetics[count].text != null))
+                    if (!(word[0].phonetics[i].audio != "" && word[0].phonetics[i].text != ""
+                    && word[0].phonetics[i].audio != null && word[0].phonetics[i].text != null))
                     {
-                        count++;
-                        if (count == 5)
-                        {
-                            count = 0;
-                            break;
-                        }
-                    }
-                    Audio = word[0].phonetics[count].audio;
-                    Phonetic = word[0].phonetics[count].text;
+                        Audio = word[0].phonetics[i].audio;
+                        Phonetic = word[0].phonetics[i].text;
+                        flag = 1;
+                        break;
+                    }              
                 }
+
+                if(flag != 1 && word[0].phonetics.Count != 0)
+                {
+                    Audio = word[0].phonetics[0].audio;
+                    Phonetic = word[0].phonetics[0].text;
+                }
+
                 
                 HashSet<String> synonymsHash = new HashSet<String>();
                 HashSet<String> antonymsHash = new HashSet<String>();
