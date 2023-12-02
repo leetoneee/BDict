@@ -56,19 +56,22 @@ namespace MyApp.MVVM.ViewModels
                 Word = word[0].word.ToUpper();
                 
                 int count = 0;
-
-                while (!(word[0].phonetics[count].audio != "" && word[0].phonetics[count].text != ""
-                    && word[0].phonetics[count].audio != null && word[0].phonetics[count].text != null))
+                if(word[0].phonetics.Count != 0)
                 {
-                    count++;
-                    if(count == 5) {
-                        count = 0;
-                        break; 
+                    while (!(word[0].phonetics[count].audio != "" && word[0].phonetics[count].text != ""
+                    && word[0].phonetics[count].audio != null && word[0].phonetics[count].text != null))
+                    {
+                        count++;
+                        if (count == 5)
+                        {
+                            count = 0;
+                            break;
+                        }
                     }
+                    Audio = word[0].phonetics[count].audio;
+                    Phonetic = word[0].phonetics[count].text;
                 }
-                Audio = word[0].phonetics[count].audio;
-                Phonetic = word[0].phonetics[count].text;
-
+                
                 HashSet<String> synonymsHash = new HashSet<String>();
                 HashSet<String> antonymsHash = new HashSet<String>();
 
@@ -108,7 +111,7 @@ namespace MyApp.MVVM.ViewModels
                 IsVisibleElement = true;
                 return;
             }
-            catch (HttpRequestException er)
+            catch (HttpRequestException)
             {
                 IsProcessing = false;
                 Word = "404 NOT FOUND";

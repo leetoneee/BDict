@@ -41,7 +41,7 @@
                     </ImageButton.Source>
                 </ImageButton>
 
-                <toolkit:MediaElement x:Name="mediaElement" Source="{Binding Audio}" IsVisible="false" Volume="2"/>
+                <toolkit:MediaElement x:Name="mediaElement" Source="{Binding Audio}" IsVisible="false"/>
 
                 <ImageButton x:Name="backIcon"
                              Grid.Row="0" Grid.Column="2"
@@ -112,6 +112,13 @@
                                                     Binding="{Binding Source={x:Reference label},
                                                     Path=Text}"
                                                     Value="PREPOSITION:">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Large"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference label},
+                                                    Path=Text}"
+                                                    Value="CONJUNCTION:">
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                         <Setter Property="FontSize" Value="Large"/>
                                     </DataTrigger>
