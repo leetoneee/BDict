@@ -54,8 +54,20 @@ namespace MyApp.MVVM.ViewModels
                 //Các thuộc tính chỉ xuất hiện 1 lần
 
                 Word = word[0].word.ToUpper();
-                Phonetic = word[0].phonetics[0].text;
-                Audio = word[0].phonetics[0].audio;
+                
+                int count = 0;
+
+                while (!(word[0].phonetics[count].audio != "" && word[0].phonetics[count].text != ""
+                    && word[0].phonetics[count].audio != null && word[0].phonetics[count].text != null))
+                {
+                    count++;
+                    if(count == 5) {
+                        count = 0;
+                        break; 
+                    }
+                }
+                Audio = word[0].phonetics[count].audio;
+                Phonetic = word[0].phonetics[count].text;
 
                 HashSet<String> synonymsHash = new HashSet<String>();
                 HashSet<String> antonymsHash = new HashSet<String>();
@@ -104,13 +116,6 @@ namespace MyApp.MVVM.ViewModels
             }
         }
 
-
-        //PlaySound commmand
-        [RelayCommand]
-        void PlaySound()
-        {
-            Console.WriteLine("PlaySound click");
-        }
         //Constructor mặc định
         public ResultViewModel()
         {
