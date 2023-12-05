@@ -46,12 +46,14 @@
 
 
         <Grid Margin="31,0,31,0">
-            <Border StrokeThickness="4"
+            <Border StrokeThickness="0"
                     Stroke="#000000"
                     StrokeShape="RoundRectangle 10,10,10,10"
                     HeightRequest="250">
-                <CollectionView ItemsSource="{Binding RecentSearches}"
-                                
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.7" Offset="0, 15" Radius="25"/>
+                </Border.Shadow>
+                <CollectionView ItemsSource="{Binding RecentSearches}"                                
                                 SelectionMode="Single" x:Name="ItemsCollectionView"
                                 SelectionChangedCommand="{Binding ClickCommand}" 
                                 SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ItemsCollectionView}}"
