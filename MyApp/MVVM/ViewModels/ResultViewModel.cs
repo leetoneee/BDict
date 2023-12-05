@@ -1,13 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MyApp.MVVM.Models;
-using System;
-using System.Collections.Generic;
+using MyApp.MVVM.Views;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MyApp.MVVM.ViewModels
@@ -15,9 +10,12 @@ namespace MyApp.MVVM.ViewModels
     internal partial class ResultViewModel : ObservableObject
     {
         public string inputWord;
-       
+
         [ObservableProperty]
         public string word;
+
+        [ObservableProperty]
+        public string selectedWord;
 
         [ObservableProperty]
         public string phonetic;
@@ -33,10 +31,10 @@ namespace MyApp.MVVM.ViewModels
 
         [ObservableProperty]
         public ObservableCollection<String> antonyms;
-        
+
         [ObservableProperty]
         public bool isProcessing;
-        
+
         [ObservableProperty]
         public bool isVisibleElement;
 
@@ -48,6 +46,8 @@ namespace MyApp.MVVM.ViewModels
 
         private static readonly HttpClient _httpClient = new HttpClient();
         public ICommand FavoriteCommand { get; }
+        public ICommand BackCommand { get; }
+        public ICommand SelectionChangedCommand { get; }
         public async Task FetchAPI()
         {
             string url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + inputWord;
@@ -56,13 +56,13 @@ namespace MyApp.MVVM.ViewModels
                 var response = await _httpClient.GetStringAsync(url);
                 List<Word> word = JsonSerializer.Deserialize<List<Word>>(response);
                 Console.WriteLine(response);
-                
+
                 //Các thuộc tính chỉ xuất hiện 1 lần
 
                 Word = word[0].word.ToUpper();
-                
+
                 int flag = 0;
-                for (int i =0; i < word[0].phonetics.Count; i++)
+                for (int i = 0; i < word[0].phonetics.Count; i++)
                 {
                     if (!(word[0].phonetics[i].audio != "" && word[0].phonetics[i].text != ""
                     && word[0].phonetics[i].audio != null && word[0].phonetics[i].text != null))
@@ -71,16 +71,16 @@ namespace MyApp.MVVM.ViewModels
                         Phonetic = word[0].phonetics[i].text;
                         flag = 1;
                         break;
-                    }              
+                    }
                 }
 
-                if(flag != 1 && word[0].phonetics.Count != 0)
+                if (flag != 1 && word[0].phonetics.Count != 0)
                 {
                     Audio = word[0].phonetics[0].audio;
                     Phonetic = word[0].phonetics[0].text;
                 }
 
-                
+
                 HashSet<String> synonymsHash = new HashSet<String>();
                 HashSet<String> antonymsHash = new HashSet<String>();
 
@@ -113,8 +113,8 @@ namespace MyApp.MVVM.ViewModels
                 if (Synonyms.Count == 0)
                     Synonyms.Add("?");
 
-                if (Antonyms.Count == 0) 
-                    Antonyms.Add ("?");
+                if (Antonyms.Count == 0)
+                    Antonyms.Add("?");
 
                 IsProcessing = false;
                 IsVisibleElement = true;
@@ -147,7 +147,8 @@ namespace MyApp.MVVM.ViewModels
             IsFavorite = false;
             SourceFavorite = "heart_unfill.svg";
             FavoriteCommand = new Command(favoriteCommand);
-
+            BackCommand = new Command(backIcon_Clicked);
+            SelectionChangedCommand = new Command(CollectionView_SelectionChanged);
         }
 
         public void favoriteCommand()
@@ -163,6 +164,29 @@ namespace MyApp.MVVM.ViewModels
                 IsFavorite = true;
             }
 
+        }
+
+        private void backIcon_Clicked()
+        {
+            App.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        private void CollectionView_SelectionChanged()
+        {
+            string temp = SelectedWord;
+            if (temp != null)
+            {
+                // Tạo view model và trang chi tiết
+                var resultViewModel = new ResultViewModel(temp);
+                var resultView = new ResultView();
+                resultView.BindingContext = resultViewModel;
+
+                // Chuyển đến trang chi tiết
+                App.Current.MainPage.Navigation.PushModalAsync(resultView);
+
+                // Đặt lại chọn để tránh xử lý lặp
+                SelectedWord = null;
+            }
         }
     }
 }

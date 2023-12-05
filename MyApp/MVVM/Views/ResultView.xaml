@@ -46,7 +46,7 @@
                 <ImageButton x:Name="backIcon"
                              Grid.Row="0" Grid.Column="2"
                              VerticalOptions="Center" HorizontalOptions="End"
-                             Clicked="backIcon_Clicked">
+                             Command="{Binding BackCommand}">
                     <ImageButton.Source>
                         <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.ArrowLeftLong}" Color="Black"/>
                     </ImageButton.Source>
@@ -130,7 +130,7 @@
             <Frame Margin="10" BorderColor="Black" IsVisible="{Binding IsVisibleElement}">
                 <VerticalStackLayout Spacing="10">
 
-                    <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+                    <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}">
                         <CollectionView.Header>
                             <Label Text="Synonyms: " FontSize="Large" FontAttributes="Bold"/>
                         </CollectionView.Header>
@@ -141,7 +141,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+                    <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}">
                         <CollectionView.Header>
                             <Label Text="Antonyms: " FontSize="Large" FontAttributes="Bold"/>
                         </CollectionView.Header>
