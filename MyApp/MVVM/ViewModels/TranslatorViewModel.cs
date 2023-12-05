@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Windows.Input;
 
@@ -98,18 +99,30 @@ namespace MyApp.MVVM.ViewModels
 
         private void copyBtn_Clicked()
         {
-            Application.Current.MainPage.DisplayAlert("Alert", "Copy click", "OK");
+            try
+            {
+                Clipboard.SetTextAsync(Output);
+
+                Application.Current.MainPage.DisplayAlert("Alert", "Text copied to clipboard", "OK");
+            }
+            catch (Exception ex)
+            {
+                Application.Current.MainPage.DisplayAlert("Error", $"Failed to copy text to clipboard: {ex.Message}", "OK");
+            }
         }
+
 
         public string TranslateText(string input, string lang_first, string lang_second)
         {
             var fromLanguage = lang_first;
             var toLanguage = lang_second;
             var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={fromLanguage}&tl={toLanguage}&dt=t&q={HttpUtility.UrlEncode(input)}";
+#pragma warning disable SYSLIB0014 // Type or member is obsolete
             var webclient = new WebClient
             {
                 Encoding = System.Text.Encoding.UTF8
             };
+#pragma warning restore SYSLIB0014 // Type or member is obsolete
             var result = webclient.DownloadString(url);
             try
             {
@@ -122,23 +135,18 @@ namespace MyApp.MVVM.ViewModels
                 return "error";
             }
         }
-
         private async Task CustomEntry_Completed()
         {
-            // Sử dụng thuật toán thời gian đợi luỹ thừa với hàm RetryWithExponentialBackoff
             bool translationSuccess = await RetryWithExponentialBackoff(async () =>
             {
-                // Thực hiện cuộc gọi API dịch
                 Output = TranslateText(Input, _lang_first, _lang_second);
 
-                // Kiểm tra kết quả và trả về true nếu thành công
                 return !string.IsNullOrEmpty(Output);
             });
 
             if (!translationSuccess)
             {
-                // Xử lý khi không thể dịch sau số lần thử lại tối đa
-                Application.Current.MainPage.DisplayAlert("Translation Error", "Translation failed after multiple retries.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Translation Error", "Translation failed after multiple retries.", "OK");
             }
         }
 
@@ -150,28 +158,22 @@ namespace MyApp.MVVM.ViewModels
             {
                 try
                 {
-                    // Thực hiện hành động
                     bool result = await action();
 
-                    // Nếu hành động thành công, trả về kết quả
                     if (result)
                         return true;
                 }
                 catch (Exception)
                 {
-                    // Xử lý lỗi (có thể log hoặc thực hiện các thao tác khác)
                 }
 
-                // Tính thời gian chờ giữa các lần thử lại
                 int waitTime = (int)Math.Pow(2, retries) * 1000 + new Random().Next(1000);
 
-                // Chờ thời gian xác định trước khi thử lại
                 await Task.Delay(waitTime);
 
                 retries++;
             }
 
-            // Nếu không thành công sau số lần thử lại tối đa, trả về false
             return false;
         }
     }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MyApp.MVVM.ViewModels
 {
@@ -39,9 +40,14 @@ namespace MyApp.MVVM.ViewModels
         [ObservableProperty]
         public bool isVisibleElement;
 
+        [ObservableProperty]
+        public bool isFavorite;
 
+        [ObservableProperty]
+        public string sourceFavorite;
 
         private static readonly HttpClient _httpClient = new HttpClient();
+        public ICommand FavoriteCommand { get; }
         public async Task FetchAPI()
         {
             string url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + inputWord;
@@ -125,6 +131,8 @@ namespace MyApp.MVVM.ViewModels
         //Constructor mặc định
         public ResultViewModel()
         {
+            IsFavorite = false;
+            FavoriteCommand = new Command(favoriteCommand);
         }
         //Constructor nhận 1 tham số đầu vào
         public ResultViewModel(string input)
@@ -136,6 +144,24 @@ namespace MyApp.MVVM.ViewModels
             IsProcessing = true;
             IsVisibleElement = false;
             _ = FetchAPI();
+            IsFavorite = false;
+            SourceFavorite = "heart_unfill.svg";
+            FavoriteCommand = new Command(favoriteCommand);
+
+        }
+
+        public void favoriteCommand()
+        {
+            if (IsFavorite)
+            {
+                SourceFavorite = "heart_unfill.svg";
+                IsFavorite = false;
+            }
+            else
+            {
+                SourceFavorite = "heart_fill.svg";
+                IsFavorite = true;
+            }
 
         }
     }

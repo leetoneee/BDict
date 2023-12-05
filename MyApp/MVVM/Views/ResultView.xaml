@@ -51,15 +51,14 @@
                         <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.ArrowLeftLong}" Color="Black"/>
                     </ImageButton.Source>
                 </ImageButton>
-                
-                
+
+
 
                 <ImageButton Grid.Column="2" Grid.Row="2"
                              HorizontalOptions="End"
-                             IsVisible="{Binding IsVisibleElement}">
-                    <ImageButton.Source>
-                        <FontImageSource FontFamily="FAR" Glyph="{x:Static helper:FontAwesomeHelperNotSolid.Heart}" Color="Black"/>
-                    </ImageButton.Source>
+                             IsVisible="{Binding IsVisibleElement}"
+                             Source="{Binding SourceFavorite}"
+                             Command="{Binding FavoriteCommand}">
                 </ImageButton>
 
             </Grid>

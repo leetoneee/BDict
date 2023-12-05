@@ -67,6 +67,8 @@
 	  <None Remove="Resources\Images\bdict.svg" />
 	  <None Remove="Resources\Images\Bookmark.svg" />
 	  <None Remove="Resources\Images\Forward.svg" />
+	  <None Remove="Resources\Images\heart_fill.svg" />
+	  <None Remove="Resources\Images\heart_unfill.svg" />
 	  <None Remove="Resources\Images\Info.svg" />
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\logoloading.svg" />

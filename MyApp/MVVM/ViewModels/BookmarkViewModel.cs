@@ -12,7 +12,7 @@ namespace MyApp.MVVM.ViewModels
             AddCommand = new Command(AddBtn_Clicked);
         }
 
-        public async void AddBtn_Clicked()
+        public void AddBtn_Clicked()
         {
             // Lấy tham chiếu đến trang hiện tại của TabbedPage
             var tabbedPage = (TabbedPage)Application.Current.MainPage;
