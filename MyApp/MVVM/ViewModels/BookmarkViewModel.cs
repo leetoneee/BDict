@@ -1,27 +1,62 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using MyApp.MVVM.Models;
 using MyApp.MVVM.Views;
 
 namespace MyApp.MVVM.ViewModels
 {
-    public class BookmarkViewModel
+    public partial class BookmarkViewModel : ObservableObject
     {
-        public ICommand AddCommand { get; }
+        [ObservableProperty]
+        public string word;
+
+        [ObservableProperty]
+        public FavoriteWord selectedFavoriteWord;
+
+        [ObservableProperty]
+        public ObservableCollection<FavoriteWord> favoriteWords;
+
+        private readonly BookmarkDbServices _dbService;
 
         public BookmarkViewModel()
         {
-            AddCommand = new Command(AddBtn_Clicked);
+            _dbService = new BookmarkDbServices();
+            FavoriteWords = new ObservableCollection<FavoriteWord>();
+            Task.Run(async () => await LoadFavoriteWords());
         }
 
-        public void AddBtn_Clicked()
+        private async Task LoadFavoriteWords()
         {
-            // Lấy tham chiếu đến trang hiện tại của TabbedPage
+            FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetFavoriteWords());
+        }
+
+        [RelayCommand]
+        void Add()
+        {
             var tabbedPage = (TabbedPage)Application.Current.MainPage;
 
-            // Tạo trang mới
             var searchView = new SearchView();
 
-            // Thiết lập trang mới làm trang hiện tại
             tabbedPage.CurrentPage = new NavigationPage(searchView);
         }
+
+        [RelayCommand]
+        async Task Delete(FavoriteWord s)
+        {
+            if (FavoriteWords.Contains(s))
+            {
+                await _dbService.Delete(s);
+                await LoadFavoriteWords();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Unable to delete", "OK");
+            }
+        }
+
+
     }
 }

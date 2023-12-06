@@ -76,6 +76,7 @@
 	  <None Remove="Resources\Images\polygon_bottom.svg" />
 	  <None Remove="Resources\Images\translator.svg" />
 	  <None Remove="Resources\Images\copy_icon.svg" />
+	  <None Remove="Resources\Images\Trash.svg" />
 	  <None Remove="Resources\Images\twodirec_arrow.svg" />
 	</ItemGroup>
 
@@ -85,6 +86,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="2.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.7" />
 	</ItemGroup>
 
 	<ItemGroup>

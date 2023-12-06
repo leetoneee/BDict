@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helper="clr-namespace:MyApp.Helper"
              x:Class="MyApp.MVVM.Views.BookmarkView"
+             xmlns:viewmodel="clr-namespace:MyApp.MVVM.ViewModels"
+             x:DataType="viewmodel:BookmarkViewModel"
              Title="BookmarkView">
 
     <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
@@ -17,17 +20,72 @@
         </Grid.ColumnDefinitions>
 
         <!--Heading-->
-        <Label Grid.Row="0" 
-               Grid.ColumnSpan="3"
-               Text="Favorites" 
-               HorizontalOptions="FillAndExpand"
-               VerticalOptions="FillAndExpand"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"
-               FontSize="30"
-               TextColor="White"
-               Padding="10"
-               BackgroundColor="#588157"/>
+        <Label 
+            Grid.Row="0" 
+            Grid.ColumnSpan="3"
+            Text="Favorites" 
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            FontSize="30"
+            TextColor="White"
+            Padding="10"
+            BackgroundColor="#588157"/>
+
+        <CollectionView 
+            SelectionMode="None"
+            Grid.Row="1" 
+            Grid.ColumnSpan="3" 
+            ItemsSource="{Binding FavoriteWords}" 
+            Margin="0,40,0,40">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItemView>
+                                    <Frame BackgroundColor="Red">
+                                        <ImageButton 
+                                           Source="trash.svg"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=DeleteCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                    </Frame>
+                                </SwipeItemView>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <Frame 
+                            Background="#DAD7CD" 
+                            Opacity="0.5"
+                            CornerRadius="10" 
+                            HasShadow="True" 
+                            Margin="20,0,20,20">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label 
+                                    Grid.Column="0" 
+                                    Text="{Binding Word}" 
+                                    FontSize="17" 
+                                    FontAttributes="Bold" 
+                                    TextColor="Black"
+                                    Opacity="100"
+                                    FontFamily="RobotoMedium" 
+                                    HorizontalOptions="Start" />
+                                <Image 
+                                    Grid.Column="1" 
+                                    Source="forward.svg" 
+                                    Margin="0, 10, 25, 0" 
+                                    HorizontalOptions="End"/>
+                            </Grid>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <ImageButton 
             Source="addicon.sg" 

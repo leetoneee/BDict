@@ -44,6 +44,12 @@ namespace MyApp.MVVM.ViewModels
         [ObservableProperty]
         public string sourceFavorite;
 
+        [ObservableProperty]
+        public FavoriteWord favoriteWord;
+
+        private readonly BookmarkDbServices _dbService;
+        private int _editWordId;
+
         private static readonly HttpClient _httpClient = new HttpClient();
         public ICommand FavoriteCommand { get; }
         public ICommand BackCommand { get; }
@@ -134,36 +140,52 @@ namespace MyApp.MVVM.ViewModels
             IsFavorite = false;
             FavoriteCommand = new Command(favoriteCommand);
         }
-        //Constructor nhận 1 tham số đầu vào
+        // Constructor nhận 1 tham số đầu vào
         public ResultViewModel(string input)
         {
+            _dbService = new BookmarkDbServices();
             inputWord = input;
             Definitions = new ObservableCollection<string>();
             Synonyms = new ObservableCollection<string>();
             Antonyms = new ObservableCollection<string>();
+
+            // Fetch API data
             IsProcessing = true;
             IsVisibleElement = false;
             _ = FetchAPI();
-            IsFavorite = false;
-            SourceFavorite = "heart_unfill.svg";
+
+            // Check if the word is a favorite
+            _ = CheckIfFavoriteAsync();
+
+            // Set up commands
             FavoriteCommand = new Command(favoriteCommand);
             BackCommand = new Command(backIcon_Clicked);
             SelectionChangedCommand = new Command(CollectionView_SelectionChanged);
         }
+        private async Task CheckIfFavoriteAsync()
+        {
+            FavoriteWord = await _dbService.GetByWord(inputWord); 
+            IsFavorite = FavoriteWord != null;
+            SourceFavorite = IsFavorite ? "heart_fill.svg" : "heart_unfill.svg";
+        }
 
-        public void favoriteCommand()
+        public async void favoriteCommand()
         {
             if (IsFavorite)
             {
                 SourceFavorite = "heart_unfill.svg";
                 IsFavorite = false;
+                await _dbService.DeleteByWordAsync(inputWord);
             }
             else
             {
                 SourceFavorite = "heart_fill.svg";
                 IsFavorite = true;
+                await _dbService.Create(new FavoriteWord
+                {
+                    Word = inputWord
+                });
             }
-
         }
 
         private void backIcon_Clicked()
