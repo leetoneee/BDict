@@ -24,11 +24,13 @@
             Grid.Row="0" 
             Grid.ColumnSpan="3"
             Text="Favorites" 
+            FontFamily="OpenSansRegular"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             HorizontalTextAlignment="Center"
             VerticalTextAlignment="Center"
             FontSize="30"
+            FontAttributes="Bold"
             TextColor="White"
             Padding="10"
             BackgroundColor="#588157"/>
@@ -55,11 +57,14 @@
                             </SwipeItems>
                         </SwipeView.LeftItems>
                         <Frame 
-                            Background="#DAD7CD" 
+                            Background="#ecebe6" 
                             Opacity="0.5"
                             CornerRadius="10" 
                             HasShadow="True" 
                             Margin="20,0,20,20">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -69,7 +74,7 @@
                                 <Label 
                                     Grid.Column="0" 
                                     Text="{Binding Word}" 
-                                    FontSize="17" 
+                                    FontSize="18" 
                                     FontAttributes="Bold" 
                                     TextColor="Black"
                                     Opacity="100"
@@ -78,7 +83,8 @@
                                 <Image 
                                     Grid.Column="1" 
                                     Source="forward.svg" 
-                                    Margin="0, 10, 25, 0" 
+                                    Margin="0, 0, 15, 0" 
+                                    VerticalOptions="Center"
                                     HorizontalOptions="End"/>
                             </Grid>
                         </Frame>
