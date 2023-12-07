@@ -46,6 +46,7 @@
                 HorizontalOptions="Center">
 
                 <SearchBar 
+                    x:Name="searchBar"
                     Placeholder="Enter your word" 
                     Text="{Binding InputWord.Word, Mode=TwoWay}"
                     TextColor="#1D1D1D" 
@@ -55,7 +56,8 @@
                     HeightRequest="34"
                     FontSize="15" 
                     FontFamily="RobotoRegular"
-                    SearchCommand="{Binding SearchCommand}"/>
+                    SearchCommand="{Binding SearchCommand}" 
+                    SearchButtonPressed="searchBar_SearchButtonPressed"/>
 
             </Border>
         </Grid>
