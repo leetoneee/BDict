@@ -7,31 +7,38 @@
     <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
         <Grid.RowDefinitions>
             <RowDefinition Height=".1*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height=".1*"/>
-            <RowDefinition Height=".5*"/>
-            <RowDefinition Height=".1*"/>
-            <RowDefinition Height=".1*"/>
-            <RowDefinition Height=".5*"/>
         </Grid.RowDefinitions>
 
         <!--Heading-->
         <Label Grid.Row="0" 
                Text="About us" 
+               FontFamily="OpenSansRegular"
                HorizontalOptions="FillAndExpand"
                VerticalOptions="FillAndExpand"
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"
                FontSize="30"
+               FontAttributes="Bold"
                TextColor="White"
                Padding="10"
                BackgroundColor="#588157"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".4*"/>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".1*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.RowSpan="2" Text="Scan QR code" FontAttributes="Bold" FontSize="30" HorizontalOptions="Center"/>
+            <Label Grid.Row="1" Grid.RowSpan="2" Text="The app will request access to" FontSize="20" HorizontalOptions="Center"/>
+            <Label Grid.Row="2" Grid.RowSpan="2" Text="the camera for code scanning" FontSize="20" HorizontalOptions="Center"/>
 
-        <Label Grid.Row="1" Grid.RowSpan="2" Text="Scan QR code" FontAttributes="Bold" FontSize="30" HorizontalOptions="Center"/>
-        <Label Grid.Row="2" Grid.RowSpan="2" Text="The app will request access to" FontSize="20" HorizontalOptions="Center"/>
-        <Label Grid.Row="3" Grid.RowSpan="2" Text="the camera for code scanning" FontSize="20" HorizontalOptions="Center"/>
-
-        <Image Grid.Row="4" Source="logo.png" />
-        <StackLayout Grid.Row="5" Orientation="Horizontal" HorizontalOptions="Center">
+            <Image Grid.Row="3" Source="logo.png" />
+        </Grid>
+        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center">
             <Label Text="or visit our" FontSize="20" HorizontalOptions="Center"/>
             <Label Text=" Homepage" TextColor="Blue" FontSize="20" HorizontalOptions="Center">
                 <Label.GestureRecognizers>

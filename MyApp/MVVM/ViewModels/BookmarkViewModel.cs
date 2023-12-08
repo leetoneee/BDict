@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyApp.MVVM.Models;
@@ -16,6 +17,9 @@ namespace MyApp.MVVM.ViewModels
 
         [ObservableProperty]
         public ObservableCollection<FavoriteWord> favoriteWords;
+
+        [ObservableProperty]
+        public bool isRefreshing;
 
         private readonly BookmarkDbServices _dbService;
 
@@ -42,6 +46,21 @@ namespace MyApp.MVVM.ViewModels
         }
 
         [RelayCommand]
+        void Search(FavoriteWord s)
+        {
+            if (FavoriteWords.Contains(s))
+            {
+                var resultView = new ResultView();
+                resultView.BindingContext = new ResultViewModel(s.Word);
+                App.Current.MainPage.Navigation.PushModalAsync(resultView);
+            }
+            else
+            {
+                App.Current.MainPage.DisplayAlert("Error", "Unable to show result", "OK");
+            }
+        }
+
+        [RelayCommand]
         async Task Delete(FavoriteWord s)
         {
             if (FavoriteWords.Contains(s))
@@ -53,6 +72,13 @@ namespace MyApp.MVVM.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Unable to delete", "OK");
             }
+        }
+
+        [RelayCommand]
+        void Refresh()
+        {
+            IsRefreshing = true;
+            IsRefreshing = false;
         }
     }
 }

@@ -6,21 +6,22 @@
              xmlns:viewmodel="clr-namespace:MyApp.MVVM.ViewModels"
              x:DataType="viewmodel:BookmarkViewModel"
              Title="BookmarkView">
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">
+        <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height=".1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".3*"/>
+                <ColumnDefinition Width=".1*"/>
+                <ColumnDefinition Width=".1*"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height=".1*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height=".1*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".3*"/>
-            <ColumnDefinition Width=".1*"/>
-            <ColumnDefinition Width=".1*"/>
-        </Grid.ColumnDefinitions>
-
-        <!--Heading-->
-        <Label 
+            <!--Heading-->
+            <Label 
             Grid.Row="0" 
             Grid.ColumnSpan="3"
             Text="Favorites" 
@@ -35,43 +36,44 @@
             Padding="10"
             BackgroundColor="#588157"/>
 
-        <CollectionView 
+            <CollectionView 
             SelectionMode="None"
             Grid.Row="1" 
             Grid.ColumnSpan="3" 
             ItemsSource="{Binding FavoriteWords}" 
-            Margin="0,40,0,40">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <SwipeView>
-                        <SwipeView.LeftItems>
-                            <SwipeItems>
-                                <SwipeItemView>
-                                    <Frame BackgroundColor="Red">
-                                        <ImageButton 
+            Margin="0,40,0,20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItemView>
+                                        <Frame BackgroundColor="Red">
+                                            <ImageButton 
                                            Source="trash.svg"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=DeleteCommand}"
                                            CommandParameter="{Binding .}"/>
-                                    </Frame>
-                                </SwipeItemView>
-                            </SwipeItems>
-                        </SwipeView.LeftItems>
-                        <Frame 
+                                        </Frame>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <Frame 
                             Background="#ecebe6" 
                             Opacity="0.5"
                             CornerRadius="10" 
                             HasShadow="True" 
                             Margin="20,0,20,20">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                            </Frame.GestureRecognizers>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=SearchCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label 
+                                    <Label 
                                     Grid.Column="0" 
                                     Text="{Binding Word}" 
                                     FontSize="18" 
@@ -80,26 +82,27 @@
                                     Opacity="100"
                                     FontFamily="RobotoMedium" 
                                     HorizontalOptions="Start" />
-                                <Image 
+                                    <Image 
                                     Grid.Column="1" 
                                     Source="forward.svg" 
                                     Margin="0, 0, 15, 0" 
                                     VerticalOptions="Center"
                                     HorizontalOptions="End"/>
-                            </Grid>
-                        </Frame>
-                    </SwipeView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <ImageButton 
+            <ImageButton 
             Source="addicon.sg" 
             Grid.Column="2" 
             Grid.Row="2" 
             HorizontalOptions="Center"
             Command="{Binding AddCommand}"/>
 
-    </Grid>
+        </Grid>
 
+    </RefreshView>
 </ContentPage>

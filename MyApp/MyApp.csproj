@@ -74,6 +74,7 @@
 	  <None Remove="Resources\Images\logoloading.svg" />
 	  <None Remove="Resources\Images\look_up.svg" />
 	  <None Remove="Resources\Images\polygon_bottom.svg" />
+	  <None Remove="Resources\Images\Refresh.svg" />
 	  <None Remove="Resources\Images\translator.svg" />
 	  <None Remove="Resources\Images\copy_icon.svg" />
 	  <None Remove="Resources\Images\Trash.svg" />

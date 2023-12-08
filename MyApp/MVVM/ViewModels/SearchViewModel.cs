@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MyApp.MVVM.Models;
+using MyApp.MVVM.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -38,6 +39,13 @@ namespace MyApp.MVVM.ViewModels
             RecentWords = new ObservableCollection<RecentWord>(await _recentWordService.GetRecentWordsAsync());
         }
 
+        private async Task NavigateToResultView(string inputWord)
+        {
+            var resultView = new ResultView();
+            resultView.BindingContext = new ResultViewModel(inputWord);
+            await App.Current.MainPage.Navigation.PushModalAsync(resultView);
+        }
+
         private async void search_Clicked()
         {
             if (string.IsNullOrEmpty(InputWord.Word))
@@ -60,6 +68,8 @@ namespace MyApp.MVVM.ViewModels
                 });
                 _editWordId = 0;
             }
+            
+            await NavigateToResultView(InputWord.Word);
             InputWord = new RecentWord();
             await LoadRecentWords();
         }
@@ -69,7 +79,7 @@ namespace MyApp.MVVM.ViewModels
             if (word != null)
             {
                 InputWord = word;
-                _editWordId = word.Id;
+                _editWordId = 0;
                 SelectedWord = null;
             }
         }

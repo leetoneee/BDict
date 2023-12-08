@@ -9,12 +9,4 @@ public partial class SearchView : ContentPage
 		InitializeComponent();
 		BindingContext = new SearchViewModel();
 	}
-
-    private void searchBar_SearchButtonPressed(object sender, EventArgs e)
-    {
-        searchBar.Unfocus();
-        var resultView = new ResultView();
-        resultView.BindingContext = new ResultViewModel(searchBar.Text);
-        Navigation.PushModalAsync(resultView);
-    }
 }

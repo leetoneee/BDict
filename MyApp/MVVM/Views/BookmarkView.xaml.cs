@@ -14,22 +14,6 @@ public partial class BookmarkView : ContentPage
 
     private void OnBookmarkViewAppearing(object sender, EventArgs e)
     {
-        InitializeComponent();
         BindingContext = new BookmarkViewModel();
-    }
-
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
-    {
-        if (sender is Frame tappedFrame)
-        {
-            if (tappedFrame.BindingContext is FavoriteWord selectedItem)
-            {
-                string selectedWord = selectedItem.Word;
-                var resultView = new ResultView();
-                resultView.BindingContext = new ResultViewModel(selectedWord);
-                Navigation.PushModalAsync(resultView);
-            }
-
-        }
     }
 }

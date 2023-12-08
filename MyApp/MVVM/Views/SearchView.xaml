@@ -56,8 +56,7 @@
                     HeightRequest="34"
                     FontSize="15" 
                     FontFamily="RobotoRegular"
-                    SearchCommand="{Binding SearchCommand}" 
-                    SearchButtonPressed="searchBar_SearchButtonPressed"/>
+                    SearchCommand="{Binding SearchCommand}" />
 
             </Border>
         </Grid>
