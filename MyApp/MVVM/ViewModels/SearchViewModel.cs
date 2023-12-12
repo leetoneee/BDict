@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Maui.Controls.Shapes;
 using MyApp.MVVM.Models;
 using MyApp.MVVM.Views;
 using System.Collections.ObjectModel;
@@ -19,25 +20,51 @@ namespace MyApp.MVVM.ViewModels
         [ObservableProperty]
         private ObservableCollection<RecentWord> recentWords;
 
+        [ObservableProperty]
+        private string randomWord;
+
+        [ObservableProperty]
+        private ObservableCollection<string> randomWords;
+
         private readonly RecentDbServices _recentWordService;
         private int _editWordId;
 
         public ICommand SearchCommand { get; }
         public ICommand SelectionChangedCommand { get; }
+        public ICommand GetRandomWordCommand { get; }
+        public ICommand SearchRandomWordCommand { get; }
 
         public SearchViewModel()
         {
             _recentWordService = new RecentDbServices();
             InputWord = new RecentWord();
             RecentWords = new ObservableCollection<RecentWord>();
+            RandomWords = new ObservableCollection<string>();
+
             Task.Run(async () => await LoadRecentWords());
+            Task.Run(async () => await LoadRandomWords());
+            RandomWord = "Hello";
+
             SearchCommand = new Command(search_Clicked);
             SelectionChangedCommand = new Command(selectionChanged);
+            GetRandomWordCommand = new Command(getRandomWord);
+            SearchRandomWordCommand = new Command(searchRandomWord);
         }
 
         private async Task LoadRecentWords()
         {
             RecentWords = new ObservableCollection<RecentWord>(await _recentWordService.GetRecentWordsAsync());
+        }
+
+        private async Task LoadRandomWords()
+        {
+            string line;
+            using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("10000words.txt");
+            using StreamReader reader = new StreamReader(fileStream);
+            while ((line = reader.ReadLine()) != null)
+            {
+                RandomWords.Add(line);
+            }
         }
 
         private async Task NavigateToResultView(string inputWord)
@@ -54,7 +81,9 @@ namespace MyApp.MVVM.ViewModels
                 await App.Current.MainPage.DisplayAlert("Error", "Please input a word", "OK");
                 return;
             }
+
             string normalizedWord = NormalizeWord(InputWord.Word);
+
             if (_editWordId == 0)
             {
                 await _recentWordService.Create(new RecentWord
@@ -76,16 +105,33 @@ namespace MyApp.MVVM.ViewModels
             await LoadRecentWords();
         }
 
-        static string NormalizeWord(string inputWord)
+        private async void searchRandomWord()
         {
-            // Loại bỏ khoảng trắng ở đầu và cuối
-            string trimmedWord = inputWord.Trim();
+            if (string.IsNullOrEmpty(RandomWord))
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Please input a word", "OK");
+                return;
+            }
 
-            // Đảm bảo chữ cái đầu viết hoa, các chữ cái sau viết thường
-            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-            string normalizedWord = textInfo.ToTitleCase(trimmedWord.ToLower());
+            if (_editWordId == 0)
+            {
+                await _recentWordService.Create(new RecentWord
+                {
+                    Word = RandomWord
+                });
+            }
+            else
+            {
+                await _recentWordService.Update(new RecentWord
+                {
+                    Word = RandomWord
+                });
+                _editWordId = 0;
+            }
 
-            return normalizedWord;
+            await NavigateToResultView(RandomWord);
+
+            await LoadRecentWords();
         }
 
         private void selectionChanged()
@@ -97,6 +143,38 @@ namespace MyApp.MVVM.ViewModels
                 _editWordId = 0;
                 SelectedWord = null;
             }
+        }
+
+        private void getRandomWord()
+        {
+            string newWord = GetRandomWord(RandomWords);
+            newWord = NormalizeWord(newWord);
+            if (newWord != null)
+            {
+                RandomWord = newWord;
+            }
+        }
+
+        static string NormalizeWord(string inputWord)
+        {
+            string trimmedWord = inputWord.Trim();
+
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            string normalizedWord = textInfo.ToTitleCase(trimmedWord.ToLower());
+
+            return normalizedWord;
+        }
+
+        static string GetRandomWord(ObservableCollection<string> collection)
+        {
+            if (collection.Count == 0)
+            {
+                return null;
+            }
+
+            Random random = new Random();
+            int index = random.Next(collection.Count);
+            return collection[index];
         }
     }
 }
