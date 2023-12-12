@@ -2,6 +2,7 @@
 using MyApp.MVVM.Models;
 using MyApp.MVVM.Views;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
 
 
@@ -53,26 +54,40 @@ namespace MyApp.MVVM.ViewModels
                 await App.Current.MainPage.DisplayAlert("Error", "Please input a word", "OK");
                 return;
             }
+            string normalizedWord = NormalizeWord(InputWord.Word);
             if (_editWordId == 0)
             {
                 await _recentWordService.Create(new RecentWord
                 {
-                    Word = InputWord.Word
+                    Word = normalizedWord
                 });
             }
             else
             {
                 await _recentWordService.Update(new RecentWord
                 {
-                    Word = InputWord.Word
+                    Word = normalizedWord
                 });
                 _editWordId = 0;
             }
             
-            await NavigateToResultView(InputWord.Word);
+            await NavigateToResultView(normalizedWord);
             InputWord = new RecentWord();
             await LoadRecentWords();
         }
+
+        static string NormalizeWord(string inputWord)
+        {
+            // Loại bỏ khoảng trắng ở đầu và cuối
+            string trimmedWord = inputWord.Trim();
+
+            // Đảm bảo chữ cái đầu viết hoa, các chữ cái sau viết thường
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            string normalizedWord = textInfo.ToTitleCase(trimmedWord.ToLower());
+
+            return normalizedWord;
+        }
+
         private void selectionChanged()
         {
             RecentWord word = SelectedWord;
