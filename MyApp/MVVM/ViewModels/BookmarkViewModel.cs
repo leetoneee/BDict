@@ -21,18 +21,34 @@ namespace MyApp.MVVM.ViewModels
         [ObservableProperty]
         public bool isRefreshing;
 
+        public bool IsSortA2Z, IsSortZ2A;
+
+        [ObservableProperty]
+        public string sourceSorting;
+
         private readonly BookmarkDbServices _dbService;
 
         public BookmarkViewModel()
         {
             _dbService = new BookmarkDbServices();
             FavoriteWords = new ObservableCollection<FavoriteWord>();
+            SourceSorting = "sorta2z.svg";
+            IsSortA2Z = false;
+            IsSortZ2A = false;
             Task.Run(async () => await LoadFavoriteWords());
         }
 
         private async Task LoadFavoriteWords()
         {
             FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetFavoriteWords());
+        }
+        private async Task LoadFavoriteWordsA2Z()
+        {
+            FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetFavoriteWordsA2Z());
+        }
+        private async Task LoadFavoriteWordsZ2A()
+        {
+            FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetFavoriteWordsZ2A());
         }
 
         [RelayCommand]
@@ -78,9 +94,37 @@ namespace MyApp.MVVM.ViewModels
         void Refresh()
         {
             IsRefreshing = true;
+            IsSortA2Z = false;
+            IsSortZ2A = false;
+            SourceSorting = "sorta2z.svg";
             Task.Delay(3000);
             Task.Run(async () => await LoadFavoriteWords());
             IsRefreshing = false;
+        }
+
+        [RelayCommand]
+        async void Sorting()
+        {
+            if ((!IsSortA2Z && !IsSortZ2A) || IsSortZ2A)
+            {
+                IsRefreshing = true;
+                IsSortA2Z = true;
+                IsSortZ2A = false;
+                SourceSorting = "sortz2a.svg";
+                await LoadFavoriteWordsA2Z();
+                await Task.Delay(3000);
+                IsRefreshing = false;
+            }
+            else
+            {
+                IsRefreshing = true;
+                IsSortZ2A = true;
+                IsSortA2Z = false;
+                SourceSorting = "sorta2z.svg";
+                await LoadFavoriteWordsZ2A();
+                await Task.Delay(3000);
+                IsRefreshing = false;
+            }
         }
     }
 }

@@ -18,7 +18,18 @@ namespace MyApp.MVVM.ViewModels
         {
             return await _connection.Table<FavoriteWord>().ToListAsync();
         }
-
+        public async Task<List<FavoriteWord>> GetFavoriteWordsA2Z()
+        {
+            return await _connection.Table<FavoriteWord>()
+                                    .OrderBy(x => x.Word)
+                                    .ToListAsync();
+        }
+        public async Task<List<FavoriteWord>> GetFavoriteWordsZ2A()
+        {
+            return await _connection.Table<FavoriteWord>()
+                                    .OrderByDescending(x => x.Word)
+                                    .ToListAsync();
+        }
         public async Task<FavoriteWord> GetById(int Id)
         {
             return await _connection.Table<FavoriteWord>().Where(x => x.Id == Id).FirstOrDefaultAsync();

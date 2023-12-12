@@ -43,7 +43,8 @@
                     />
                 
                 <ImageButton Grid.Column="1"
-                             Source="sort.svg"
+                             Source="{Binding SourceSorting}"
+                             Command="{Binding SortingCommand}"
                              HeightRequest="50"
                              HorizontalOptions="End"
                              Margin="0, 0, 10, 0">
@@ -74,8 +75,7 @@
                                 </SwipeItems>
                             </SwipeView.LeftItems>
                             <Frame 
-                            Background="#ecebe6" 
-                            Opacity="0.5"
+                            Background="#ecebe6"
                             CornerRadius="10" 
                             HasShadow="True" 
                             Margin="20,0,20,20">
