@@ -9,11 +9,11 @@ public partial class BookmarkView : ContentPage
     {
         InitializeComponent();
         BindingContext = new BookmarkViewModel();
-        this.Appearing += OnBookmarkViewAppearing;
+        //this.Appearing += OnBookmarkViewAppearing;
     }
 
-    private void OnBookmarkViewAppearing(object sender, EventArgs e)
-    {
-        BindingContext = new BookmarkViewModel();
-    }
+    //private void OnBookmarkViewAppearing(object sender, EventArgs e)
+    //{
+    //    BindingContext = new BookmarkViewModel();
+    //}
 }

@@ -78,6 +78,8 @@ namespace MyApp.MVVM.ViewModels
         void Refresh()
         {
             IsRefreshing = true;
+            Task.Delay(3000);
+            Task.Run(async () => await LoadFavoriteWords());
             IsRefreshing = false;
         }
     }
