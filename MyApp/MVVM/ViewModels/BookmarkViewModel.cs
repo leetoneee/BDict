@@ -103,7 +103,7 @@ namespace MyApp.MVVM.ViewModels
         }
 
         [RelayCommand]
-        async void Sorting()
+        async Task Sorting()
         {
             if ((!IsSortA2Z && !IsSortZ2A) || IsSortZ2A)
             {
