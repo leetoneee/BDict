@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MyApp.Controls"
              x:Class="MyApp.MVVM.Views.TranslatorView"
              Title="TranslatorView">
     <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
@@ -43,7 +42,7 @@
             Padding="20" 
             HorizontalOptions="Start"
             HeightRequest="70"/>
-        
+
         <Button 
             Grid.Row="1" 
             Grid.Column="2"
@@ -56,15 +55,12 @@
             HorizontalOptions="End"
             Margin="20"
             HeightRequest="50"/>
-
-        <controls:CustomEntry 
+        <Entry 
             Grid.Row="2" 
             Grid.Column="0" 
             Grid.ColumnSpan="3"
             BackgroundColor="#ECEBE6"
             Placeholder="Enter words, paragraph or text."
-            CornerRadius="20" 
-            Padding="10" 
             Margin="20"
             FontSize="Medium"
             IsTextPredictionEnabled="false"
@@ -124,15 +120,13 @@
             Padding="10"
             HeightRequest="100"/>
 
-        <controls:CustomEntry 
+        <Entry 
             x:Name="outputEntry" 
             Grid.Row="5" 
             Grid.Column="0" 
             Grid.ColumnSpan="3"
             BackgroundColor="#ECEBE6"
             Placeholder="Result."
-            CornerRadius="20" 
-            Padding="10" 
             Margin="20"
             FontSize="Medium"
             IsReadOnly="True"
