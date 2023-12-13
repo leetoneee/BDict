@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using MyApp.Controls;
 using MyApp.MVVM.ViewModels;
 using MyApp.MVVM.Views;
-using MyApp.Platforms;
 using Plugin.Maui.Audio;
 
 namespace MyApp
@@ -43,13 +41,6 @@ namespace MyApp
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-            Microsoft.Maui.Handlers.ElementHandler.ElementMapper.AppendToMapping("Classic", (handler, view) =>
-            {
-                if (view is CustomEntry)
-                {
-                    CustomEntryMapper.Map(handler, view);
-                }
-            });
             return builder.Build();
         }
     }
