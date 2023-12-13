@@ -55,16 +55,30 @@
             HorizontalOptions="End"
             Margin="20"
             HeightRequest="50"/>
-        <Entry 
-            Grid.Row="2" 
-            Grid.Column="0" 
-            Grid.ColumnSpan="3"
-            BackgroundColor="#ECEBE6"
-            Placeholder="Enter words, paragraph or text."
-            Margin="20"
-            FontSize="Medium"
-            IsTextPredictionEnabled="false"
-            Text="{Binding Input}"/>
+        
+        <Border Grid.Row="2" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="3"
+                Margin="20"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                BackgroundColor="#ECEBE6"
+                Padding="10">
+                    <Border.Shadow>
+                        <Shadow Brush="Black"
+                        Radius="20"
+                        Opacity="0.5"
+                        Offset="0, 10"/>
+                    </Border.Shadow>
+                    <Editor
+                            Margin="0, 0, 0, -18"
+                            AutoSize="TextChanges"
+                            BackgroundColor="#ECEBE6"
+                            Placeholder="Enter words, paragraph or text." 
+                            FontSize="Medium"
+                            IsTextPredictionEnabled="false"
+                            Text="{Binding Input}"/>
+        </Border>
 
         <Button 
             x:Name="firstBtn" 
@@ -120,17 +134,19 @@
             Padding="10"
             HeightRequest="100"/>
 
-        <Entry 
-            x:Name="outputEntry" 
-            Grid.Row="5" 
-            Grid.Column="0" 
-            Grid.ColumnSpan="3"
-            BackgroundColor="#ECEBE6"
-            Placeholder="Result."
-            Margin="20"
-            FontSize="Medium"
-            IsReadOnly="True"
-            Text="{Binding Output}"
-            />
+        <Border Grid.Row="5" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="3"
+                Margin="20"
+                Stroke="Black"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10,10,10,10">
+               <Label 
+                     x:Name="outputEntry" 
+                     BackgroundColor="#ECEBE6"
+                     Padding="10"
+                     FontSize="Medium"
+                     Text="{Binding Output}"/>
+        </Border>
     </Grid>
 </ContentPage>
