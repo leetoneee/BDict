@@ -70,6 +70,8 @@
 	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
 	  <None Remove="Resources\Images\bdict.svg" />
 	  <None Remove="Resources\Images\Bookmark.svg" />
+	  <None Remove="Resources\Images\clearicon.svg" />
+	  <None Remove="Resources\Images\converticon.svg" />
 	  <None Remove="Resources\Images\Forward.svg" />
 	  <None Remove="Resources\Images\heart_fill.svg" />
 	  <None Remove="Resources\Images\heart_unfill.svg" />
@@ -85,7 +87,6 @@
 	  <None Remove="Resources\Images\translator.svg" />
 	  <None Remove="Resources\Images\copy_icon.svg" />
 	  <None Remove="Resources\Images\Trash.svg" />
-	  <None Remove="Resources\Images\twodirec_arrow.svg" />
 	  <None Remove="Resources\Raw\10000words.txt" />
 	</ItemGroup>
 

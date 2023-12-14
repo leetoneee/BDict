@@ -5,147 +5,170 @@
              Title="TranslatorView">
     <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height=".12*"/>
-            <RowDefinition Height=".1*"/>
-            <RowDefinition Height=".5*"/>
-            <RowDefinition Height=".1*"/>
-            <RowDefinition Height=".1*"/>
-            <RowDefinition Height=".5*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".3*"/>
-            <ColumnDefinition Width=".1*"/>
-            <ColumnDefinition Width=".3*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label 
-            Grid.Row="0" 
-            Grid.ColumnSpan="3"
-            Text="Translator" 
-            FontFamily="OpenSansRegular"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-            FontSize="30"
-            FontAttributes="Bold"
-            TextColor="White"
-            Padding="10"
-            BackgroundColor="#588157"/>
+
+        <StackLayout 
+            Orientation="Horizontal"
+            BackgroundColor="#588157"
+            Grid.Row="0"
+            Grid.ColumnSpan="3">
+                    
+            <Button 
+                Grid.Row="3" 
+                Grid.Column="0" 
+                Text="{Binding LangFirst}" 
+                VerticalOptions="FillAndExpand" 
+                HorizontalOptions="FillAndExpand"
+                Margin="20" 
+                FontSize="18" 
+                BackgroundColor="#A3B18A" 
+                TextColor="Black"
+                FontFamily="OpenSansRegular"
+                CornerRadius="30"/>
+
+            <ImageButton 
+                Grid.Row="3" 
+                Grid.Column="1" 
+                Source="converticon.svg" 
+                Padding="2"
+                Command="{Binding ConvertCommand}"/>
+
+            <Button 
+                Grid.Row="3" 
+                Grid.Column="2" 
+                Text="{Binding LangSecond}" 
+                VerticalOptions="FillAndExpand" 
+                HorizontalOptions="FillAndExpand"
+                Margin="20" 
+                FontSize="18" 
+                BackgroundColor="#A3B18A" 
+                TextColor="Black" 
+                CornerRadius="30"/>
+
+        </StackLayout>
+
 
         <Label 
-            x:Name="upLabel"
             Grid.Row="1" 
             Grid.Column="0"
             Text="{Binding LangFirst}" 
-            FontSize="Large"
-            Padding="20" 
+            FontSize="18"
+            Margin="30,10,0,0" 
             HorizontalOptions="Start"
-            HeightRequest="70"/>
+            FontFamily="OpenSansRegular"/>
 
-        <Button 
+        <ImageButton 
             Grid.Row="1" 
             Grid.Column="2"
+            Source="copy_icon.png"
+            Command="{Binding CopyCommand1}"
+            HorizontalOptions="End"
+            Margin="0,10,30,0"/>
+        
+        <Border 
+            Grid.Row="2" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="3"
+            Margin="20,10,20,20"
+            Stroke="Transparent"
+            StrokeShape="RoundRectangle 10,10,10,10"
+            BackgroundColor="#ECEBE6"
+            Padding="10">
+            <Border.Shadow>
+                <Shadow Brush="Black"
+                Radius="20"
+                Opacity="0.5"
+                Offset="0, 10"/>
+            </Border.Shadow>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Editor 
+                    Grid.Row="0"
+                    AutoSize="TextChanges"
+                    BackgroundColor="#ECEBE6"
+                    Placeholder="Enter words, paragraph or text." 
+                    FontSize="18"
+                    IsTextPredictionEnabled="false"
+                    Text="{Binding Input}"
+                    >
+                </Editor>
+                
+
+                <Label 
+                    Grid.Row="1"
+                    Text="{Binding WordCount}"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"/>
+                
+                <ImageButton 
+                    Grid.Row="1"
+                    Source="clearicon.svg"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="End"
+                    HeightRequest="20"
+                    Command="{Binding ClearCommand}"/>
+
+            </Grid>
+
+        </Border>
+
+        <Button 
+            Grid.Row="3" 
+            Grid.Column="1"
             Text="Translate"
             TextColor="Black"
             FontAttributes="Bold"
             Command="{Binding CallAPI}"
             FontSize="17" 
-            BackgroundColor="#A3B18A" 
-            HorizontalOptions="End"
-            Margin="20"
-            HeightRequest="50"/>
-        
-        <Border Grid.Row="2" 
-                Grid.Column="0" 
-                Grid.ColumnSpan="3"
-                Margin="20"
-                Stroke="Transparent"
-                StrokeShape="RoundRectangle 10,10,10,10"
-                BackgroundColor="#ECEBE6"
-                Padding="10">
-                    <Border.Shadow>
-                        <Shadow Brush="Black"
-                        Radius="20"
-                        Opacity="0.5"
-                        Offset="0, 10"/>
-                    </Border.Shadow>
-                    <Editor
-                            Margin="0, 0, 0, -18"
-                            AutoSize="TextChanges"
-                            BackgroundColor="#ECEBE6"
-                            Placeholder="Enter words, paragraph or text." 
-                            FontSize="Medium"
-                            IsTextPredictionEnabled="false"
-                            Text="{Binding Input}"/>
-        </Border>
-
-        <Button 
-            x:Name="firstBtn" 
-            Grid.Row="3" 
-            Grid.Column="0" 
-            Text="{Binding LangFirst}" 
-            VerticalOptions="FillAndExpand" 
+            BackgroundColor="#588157" 
             HorizontalOptions="FillAndExpand"
-            Margin="20" 
-            FontSize="17" 
-            BackgroundColor="#A3B18A" 
-            TextColor="Black"
-            HeightRequest="50"/>
-
-        <ImageButton 
-            x:Name="twoArrowBtn"
-            Grid.Row="3" 
-            Grid.Column="1" 
-            Source="twodirec_arrow.svg" 
-            HeightRequest="30"
-            Command="{Binding ConvertCommand}"/>
-
-        <Button 
-            x:Name="secondBtn" 
-            Grid.Row="3" 
-            Grid.Column="2" 
-            Text="{Binding LangSecond}" 
-            VerticalOptions="FillAndExpand" 
-            HorizontalOptions="FillAndExpand"
-            Margin="20" 
-            FontSize="17" 
-            BackgroundColor="#A3B18A" 
-            TextColor="Black" 
-            HeightRequest="50"/>
+            Padding="20"
+            CornerRadius="30"/>
 
         <Label 
-            x:Name="downLabel"
             Grid.Row="4" 
             Grid.Column="0"
             Text="{Binding LangSecond}" 
-            FontSize="Large"
-            Padding="20" 
+            FontSize="18"
+            Margin="30,10,0,0" 
             HorizontalOptions="Start"
-            HeightRequest="70"/>
+            FontFamily="OpenSansRegular"/>
         
         <ImageButton 
             Grid.Row="4" 
             Grid.Column="2"
             Source="copy_icon.png"
-            Command="{Binding CopyCommand}"
+            Command="{Binding CopyCommand2}"
             HorizontalOptions="End"
-            WidthRequest="65"
-            Padding="10"
-            HeightRequest="100"/>
+            Margin="0,10,30,0"/>
 
         <Border Grid.Row="5" 
                 Grid.Column="0" 
                 Grid.ColumnSpan="3"
-                Margin="20"
+                Margin="20,10,20,10"
                 Stroke="Black"
                 StrokeThickness="2"
                 StrokeShape="RoundRectangle 10,10,10,10">
                <Label 
-                     x:Name="outputEntry" 
                      BackgroundColor="#ECEBE6"
                      Padding="10"
-                     FontSize="Medium"
+                     FontSize="18"
                      Text="{Binding Output}"/>
         </Border>
     </Grid>
