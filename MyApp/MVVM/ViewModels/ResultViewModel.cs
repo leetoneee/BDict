@@ -48,7 +48,6 @@ namespace MyApp.MVVM.ViewModels
         public FavoriteWord favoriteWord;
 
         private readonly BookmarkDbServices _dbService;
-        private int _editWordId;
 
         private static readonly HttpClient _httpClient = new HttpClient();
         public ICommand FavoriteCommand { get; }
