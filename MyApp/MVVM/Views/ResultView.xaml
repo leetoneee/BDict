@@ -65,7 +65,8 @@
                         <FontImageSource FontFamily="FAS" Glyph="{x:Static helper:FontAwesomeHelper.VolumeHigh}" Color="Black" />
                     </ImageButton.Source>-->
                     </ImageButton>
-                    
+                    <toolkit:MediaElement x:Name="mediaElement" Source="{Binding Audio}" IsVisible="false"/>
+
                     <!--<FavoriteButton>-->
                     <ImageButton Grid.Column="1" 
                              HorizontalOptions="Start"
@@ -81,12 +82,7 @@
                                  Command="{Binding CopyCommand}"
                                  />
                 </Grid>
-                <!--SoundButton-->
-
-
-                <toolkit:MediaElement x:Name="mediaElement" Source="{Binding Audio}" IsVisible="false"/>
-                
-
+                <!--SoundButton-->       
 
             </Grid>
 

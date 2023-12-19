@@ -112,7 +112,7 @@ namespace MyApp.MVVM.ViewModels
                 IsSortZ2A = false;
                 SourceSorting = "sortz2a.svg";
                 await LoadFavoriteWordsA2Z();
-                await Task.Delay(1500);
+                await Task.Delay(1000);
                 IsRefreshing = false;
             }
             else
@@ -122,7 +122,7 @@ namespace MyApp.MVVM.ViewModels
                 IsSortA2Z = false;
                 SourceSorting = "sorta2z.svg";
                 await LoadFavoriteWordsZ2A();
-                await Task.Delay(1500);
+                await Task.Delay(1000);
                 IsRefreshing = false;
             }
         }
