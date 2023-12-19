@@ -56,6 +56,8 @@
 	  <None Remove="Resources\Fonts\Brands-Regular-400.otf" />
 	  <None Remove="Resources\Fonts\Free-Regular-400.otf" />
 	  <None Remove="Resources\Fonts\Free-Solid-900.otf" />
+	  <None Remove="Resources\Fonts\OpenSans-Bold.ttf" />
+	  <None Remove="Resources\Fonts\OpenSans-ExtraBold.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Black.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-BlackItalic.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Bold.ttf" />
@@ -68,8 +70,10 @@
 	  <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
+	  <None Remove="Resources\Images\arrow_back.svg" />
 	  <None Remove="Resources\Images\bdict.svg" />
 	  <None Remove="Resources\Images\Bookmark.svg" />
+	  <None Remove="Resources\Images\copy_outline_black.svg" />
 	  <None Remove="Resources\Images\clearicon.svg" />
 	  <None Remove="Resources\Images\converticon.svg" />
 	  <None Remove="Resources\Images\Forward.svg" />
@@ -79,6 +83,7 @@
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\logoloading.svg" />
 	  <None Remove="Resources\Images\look_up.svg" />
+	  <None Remove="Resources\Images\play_sound.svg" />
 	  <None Remove="Resources\Images\polygon_bottom.svg" />
 	  <None Remove="Resources\Images\Refresh.svg" />
 	  <None Remove="Resources\Images\sort.svg" />

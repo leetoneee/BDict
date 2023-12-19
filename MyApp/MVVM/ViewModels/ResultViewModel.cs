@@ -52,6 +52,8 @@ namespace MyApp.MVVM.ViewModels
         private static readonly HttpClient _httpClient = new HttpClient();
         public ICommand FavoriteCommand { get; }
         public ICommand BackCommand { get; }
+        public ICommand CopyCommand { get; }
+
         public ICommand SelectionChangedCommand { get; }
         public async Task FetchAPI()
         {
@@ -138,6 +140,7 @@ namespace MyApp.MVVM.ViewModels
         {
             IsFavorite = false;
             FavoriteCommand = new Command(favoriteCommand);
+            CopyCommand = new Command(copyBtn_Clicked);
         }
         // Constructor nhận 1 tham số đầu vào
         public ResultViewModel(string input)
@@ -159,6 +162,7 @@ namespace MyApp.MVVM.ViewModels
             // Set up commands
             FavoriteCommand = new Command(favoriteCommand);
             BackCommand = new Command(backIcon_Clicked);
+            CopyCommand = new Command(copyBtn_Clicked);
             SelectionChangedCommand = new Command(CollectionView_SelectionChanged);
         }
         private async Task CheckIfFavoriteAsync()
@@ -190,6 +194,20 @@ namespace MyApp.MVVM.ViewModels
         private void backIcon_Clicked()
         {
             App.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+        private void copyBtn_Clicked()
+        {
+            try
+            {
+                Clipboard.SetTextAsync(inputWord);
+
+                Application.Current.MainPage.DisplayAlert("Alert", "Word copied to clipboard", "OK");
+            }
+            catch (Exception ex)
+            {
+                Application.Current.MainPage.DisplayAlert("Error", $"Failed to copy text to clipboard: {ex.Message}", "OK");
+            }
         }
 
         private void CollectionView_SelectionChanged()
