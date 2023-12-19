@@ -73,19 +73,50 @@ namespace MyApp.MVVM.ViewModels
         private string _lang_first = "en";
         private string _lang_second = "vi";
 
+        //private string wordCount;
+        //public string WordCount
+        //{
+        //    get
+        //    {
+        //        return wordCount;
+        //    }
+        //    set
+        //    {
+        //        wordCount = value;
+        //        OnPropertyChanged(WordCount);
+        //    }
+        //}
+
+
         public ICommand ConvertCommand { get; }
-        public ICommand CopyCommand { get; }
+        public ICommand CopyCommand1 { get; }
+        public ICommand CopyCommand2 { get; }
         public ICommand CallAPI { get; }
+        public ICommand ClearCommand { get; }
+
+        //public ICommand TextChangedCommand { get; }
 
         public TranslatorViewModel()
         {
             LangFirst = "English";
             LangSecond = "Vietnamese";
             ConvertCommand = new Command(twoArrowBtn_Clicked);
-            CopyCommand = new Command(copyBtn_Clicked);
+            CopyCommand1 = new Command(copyBtn1_Clicked);
+            CopyCommand2 = new Command(copyBtn2_Clicked);
             CallAPI = new Command(async () => await CustomEntry_Completed());
+            ClearCommand = new Command(clearBtn_Clicked);
+            //TextChangedCommand = new Command(OnTextChanged);
         }
 
+        //private void OnTextChanged()
+        //{
+        //    OnPropertyChanged(nameof(WordCount));
+        //}
+        private string CountWords(string text)
+        {
+            var words = text.Split(new char[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            return words.Length.ToString();
+        }
         private void twoArrowBtn_Clicked()
         {
             string temp = LangFirst;
@@ -97,7 +128,20 @@ namespace MyApp.MVVM.ViewModels
             _lang_second = temp1;
         }
 
-        private void copyBtn_Clicked()
+        private void copyBtn1_Clicked()
+        {
+            try
+            {
+                Clipboard.SetTextAsync(Input);
+
+                Application.Current.MainPage.DisplayAlert("Alert", "Text copied to clipboard", "OK");
+            }
+            catch (Exception ex)
+            {
+                Application.Current.MainPage.DisplayAlert("Error", $"Failed to copy text to clipboard: {ex.Message}", "OK");
+            }
+        }
+        private void copyBtn2_Clicked()
         {
             try
             {
@@ -111,6 +155,10 @@ namespace MyApp.MVVM.ViewModels
             }
         }
 
+        private void clearBtn_Clicked()
+        {
+            Input = string.Empty;
+        }
 
         public string TranslateText(string input, string lang_first, string lang_second)
         {
