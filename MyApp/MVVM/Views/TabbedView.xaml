@@ -11,7 +11,6 @@
             SelectedTabColor="#357C3C"
             UnselectedTabColor="#383838"
             android:TabbedPage.IsSmoothScrollEnabled="True"
-            Shell.NavBarIsVisible="false"
             >
     <NavigationPage Title="Look up" IconImageSource="look_up.svg" >
         <x:Arguments>
