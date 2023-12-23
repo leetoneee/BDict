@@ -169,20 +169,20 @@ namespace MyApp.MVVM.ViewModels
         {
             FavoriteWord = await _dbService.GetByWord(inputWord); 
             IsFavorite = FavoriteWord != null;
-            SourceFavorite = IsFavorite ? "heart_fill.svg" : "heart_unfill.svg";
+            SourceFavorite = IsFavorite ? "heart_fill.png" : "heart_unfill.png";
         }
 
         public async void favoriteCommand()
         {
             if (IsFavorite)
             {
-                SourceFavorite = "heart_unfill.svg";
+                SourceFavorite = "heart_unfill.png";
                 IsFavorite = false;
                 await _dbService.DeleteByWordAsync(inputWord);
             }
             else
             {
-                SourceFavorite = "heart_fill.svg";
+                SourceFavorite = "heart_fill.png";
                 IsFavorite = true;
                 await _dbService.Create(new FavoriteWord
                 {
