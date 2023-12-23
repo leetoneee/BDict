@@ -3,21 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyApp.MVVM.Views.SearchView"
              Title="SearchView">
-    
-    <VerticalStackLayout>
-        
-        <Grid BackgroundColor="#588157" HeightRequest="163">
-            <Grid.RowDefinitions>
-                <RowDefinition Height=".3*"/>
-                <RowDefinition Height=".4*"/>
-                <RowDefinition Height=".3*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            
-            <Label 
+    <OnPlatform x:TypeArguments="VerticalStackLayout">
+        <On Platform="Android">
+            <VerticalStackLayout>
+
+                <Grid BackgroundColor="#588157" HeightRequest="163">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".3*"/>
+                        <RowDefinition Height=".4*"/>
+                        <RowDefinition Height=".3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label 
                 Grid.Row="0" 
                 Grid.Column="0" 
                 VerticalTextAlignment="Center" 
@@ -26,15 +27,15 @@
                 FontAttributes="Bold" 
                 FontFamily="FAB" 
                 TextColor="White"/>
-            
-            <Image 
+
+                    <Image 
                 Grid.Row="0" 
                 Grid.Column="1" 
                 Source="logo.svg"
                 HorizontalOptions="End"
                 Margin="0,0,15,0"/>
 
-            <Border 
+                    <Border 
                 Grid.Row="1" 
                 Grid.ColumnSpan="2"
                 VerticalOptions="End"
@@ -45,7 +46,7 @@
                 Padding="2,8"
                 HorizontalOptions="Center">
 
-                <SearchBar 
+                        <SearchBar 
                     x:Name="searchBar"
                     Placeholder="Enter your word" 
                     Text="{Binding InputWord.Word, Mode=TwoWay}"
@@ -58,42 +59,42 @@
                     FontFamily="RobotoRegular"
                     SearchCommand="{Binding SearchCommand}" />
 
-            </Border>
-        </Grid>
+                    </Border>
+                </Grid>
 
-        <Label 
+                <Label 
             Text="Recent" 
             FontSize="20" 
             FontFamily="RobotoBold" 
             Margin="31, 20, 0, 10"/>
 
 
-        <Grid Margin="31,0,31,0">
-            <Border 
+                <Grid Margin="31,0,31,0">
+                    <Border 
                 StrokeThickness="0"
                 Stroke="#000000"
                 StrokeShape="RoundRectangle 10,10,10,10"
                 HeightRequest="250">
-                <Border.Shadow>
-                    <Shadow 
+                        <Border.Shadow>
+                            <Shadow 
                         Brush="Black" 
                         Opacity="0.7" 
                         Offset="0, 15" Radius="25"/>
-                </Border.Shadow>
-                <CollectionView 
+                        </Border.Shadow>
+                        <CollectionView 
                     ItemsSource="{Binding RecentWords}" 
                     SelectedItem="{Binding SelectedWord}"
                     SelectionChangedCommand="{Binding SelectionChangedCommand}"
                     SelectionMode="Single">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <VerticalStackLayout >
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label 
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout >
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label 
                                         Grid.Column="0" 
                                         Text="{Binding Word}" 
                                         FontSize="17" 
@@ -101,50 +102,50 @@
                                         FontFamily="RobotoMedium" 
                                         Padding="30,20,20,10" 
                                         HorizontalOptions="Start" />
-                                    <Image 
+                                            <Image 
                                         Grid.Column="1" 
                                         Source="forward.svg" 
                                         Margin="0, 10, 25, 0" 
                                         HorizontalOptions="End"/>
-                                </Grid>
-                                <BoxView 
+                                        </Grid>
+                                        <BoxView 
                                     Color="#000000"
                                     HeightRequest="2"
                                     HorizontalOptions="Fill" 
                                     Margin="20,0,20,0"/>
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Border>
-        </Grid>
-        
-        <Label 
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Border>
+                </Grid>
+
+                <Label 
             Text="Word of the Day" 
             FontSize="20" 
             FontFamily="RobotoBold" 
             Margin="31, 20, 0, 10"/>
-        
-        <Grid Margin="31,0,31,0">
-            <Border 
+
+                <Grid Margin="31,0,31,0">
+                    <Border 
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 10,10,10,10"
                 HeightRequest="200"
                 BackgroundColor="#b7cbae">
-                <Grid>
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SearchRandomWordCommand}"/>
-                    </Grid.GestureRecognizers>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height=".5*" />
-                        <RowDefinition Height=".2*" />
-                        <RowDefinition Height=".3*" />
-                    </Grid.RowDefinitions>
-                    <Label 
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SearchRandomWordCommand}"/>
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".5*" />
+                                <RowDefinition Height=".2*" />
+                                <RowDefinition Height=".3*" />
+                            </Grid.RowDefinitions>
+                            <Label 
                         Grid.Row="0" 
                         Grid.Column="0" 
                         Text="{Binding RandomWord}" 
@@ -153,7 +154,7 @@
                         FontFamily="RobotoBold" 
                         Padding="30,20,20,10" 
                         HorizontalOptions="Start" />
-                    <ImageButton 
+                            <ImageButton 
                         Grid.Row="0" 
                         Grid.Column="1" 
                         VerticalOptions="Start"
@@ -162,8 +163,8 @@
                         HorizontalOptions="End" 
                         Command="{Binding GetRandomWordCommand}"
                         />
-                    
-                    <!--<Label 
+
+                            <!--<Label 
                         Grid.Row="1" 
                         Grid.ColumnSpan="2" 
                         Text="(n) /həˈləʊ/" 
@@ -171,8 +172,8 @@
                         FontFamily="RobotoMedium"
                         Margin="30, 10, 20, 10" 
                         VerticalOptions="FillAndExpand"/>-->
-                    
-                    <Label 
+
+                            <Label 
                         Grid.Row="2"
                         Grid.ColumnSpan="2" 
                         Text="LEARN MORE" 
@@ -182,10 +183,198 @@
                         Margin="30, 10, 20, 10" 
                         VerticalOptions="End"/>
 
+                        </Grid>
+                    </Border>
                 </Grid>
-            </Border>
-        </Grid>
-        
-    </VerticalStackLayout>
-    
+
+            </VerticalStackLayout>
+        </On>
+        <On Platform="WinUI">
+            <VerticalStackLayout>
+                <Grid BackgroundColor="#588157" HeightRequest="80">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image 
+                        Grid.Column="0" 
+                        Source="logo.png"
+                        MaximumHeightRequest="63"
+                        HorizontalOptions="End"
+                        Margin="15,0,15,0"/>
+                    
+                    <Label 
+                        Grid.Column="1" 
+                        VerticalTextAlignment="Center" 
+                        Margin="20, 10"
+                        Text="BDict" FontSize="25" 
+                        FontAttributes="Bold" 
+                        FontFamily="FAB" 
+                        TextColor="White"/>
+
+                    <SearchBar 
+                        Grid.Column="2"
+                        Placeholder="Search BDICT's Dictionary"
+                        ToolTipProperties.Text="Enter your word" 
+                        Text="{Binding InputWord.Word, Mode=TwoWay}"
+                        TextColor="#1D1D1D" 
+                        BackgroundColor="White" 
+                        Keyboard="Default" 
+                        WidthRequest="500"
+                        HeightRequest="34"
+                        FontSize="15" 
+                        FontFamily="RobotoRegular"
+                        SearchCommand="{Binding SearchCommand}" />
+
+                </Grid>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".2*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Recent Word-->
+                    <Grid Grid.Column="1" RowSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"
+                               Text="Recent" 
+                               FontSize="20" 
+                               FontFamily="RobotoBold" 
+                               Margin="31, 20, 0, 10"/>
+
+                        <Grid Grid.Row="1"
+                            Margin="31,0,31,0">
+                            <Border 
+                        StrokeThickness="0"
+                        Stroke="#000000"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        HeightRequest="300">
+                                <Border.Shadow>
+                                    <Shadow 
+                        Brush="Black" 
+                        Opacity="0.7" 
+                        Offset="0, 15" Radius="25"/>
+                                </Border.Shadow>
+                                <CollectionView 
+                                ItemsSource="{Binding RecentWords}" 
+                                SelectedItem="{Binding SelectedWord}"
+                                SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                                SelectionMode="Single">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <VerticalStackLayout >
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label 
+                                        Grid.Column="0" 
+                                        Text="{Binding Word}" 
+                                        FontSize="17" 
+                                        TextColor="Black"
+                                        FontFamily="RobotoMedium" 
+                                        Padding="30,20,20,10" 
+                                        HorizontalOptions="Start" />
+                                                    <Image 
+                                        Grid.Column="1" 
+                                        Source="forward.svg" 
+                                        Margin="0, 10, 25, 0" 
+                                        HorizontalOptions="End"/>
+                                                </Grid>
+                                                <BoxView 
+                                    Color="#000000"
+                                    HeightRequest="2"
+                                    HorizontalOptions="Fill" 
+                                    Margin="20,0,20,0"/>
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    
+                    <Grid Grid.Column="0"
+                          BackgroundColor="Brown"/>
+                </Grid>
+
+
+                <!--Word of the day--><!--
+                <Label 
+                    Text="Word of the Day" 
+                    FontSize="20" 
+                    FontFamily="RobotoBold" 
+                    Margin="31, 20, 0, 10"/>
+
+                <Grid Margin="31,0,31,0">
+                    <Border 
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        HeightRequest="200"
+                        BackgroundColor="#b7cbae">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SearchRandomWordCommand}"/>
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".5*" />
+                                <RowDefinition Height=".2*" />
+                                <RowDefinition Height=".3*" />
+                            </Grid.RowDefinitions>
+                            <Label 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Text="{Binding RandomWord}" 
+                        TextColor="Black" 
+                        FontSize="36" 
+                        FontFamily="RobotoBold" 
+                        Padding="30,20,20,10" 
+                        HorizontalOptions="Start" />
+                            <ImageButton 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        VerticalOptions="Start"
+                        Source="refresh.svg" 
+                        Margin="0, 20, 25, 0" 
+                        HorizontalOptions="End" 
+                        Command="{Binding GetRandomWordCommand}"
+                        />
+
+                            --><!--<Label 
+                        Grid.Row="1" 
+                        Grid.ColumnSpan="2" 
+                        Text="(n) /həˈləʊ/" 
+                        FontSize="18" 
+                        FontFamily="RobotoMedium"
+                        Margin="30, 10, 20, 10" 
+                        VerticalOptions="FillAndExpand"/>--><!--
+
+                            <Label 
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2" 
+                        Text="LEARN MORE" 
+                        FontSize="22"
+                        TextColor="#036D19" 
+                        FontFamily="RobotoBold" 
+                        Margin="30, 10, 20, 10" 
+                        VerticalOptions="End"/>
+
+                        </Grid>
+                    </Border>
+                </Grid>-->
+                
+            </VerticalStackLayout>
+        </On>
+    </OnPlatform>
 </ContentPage>

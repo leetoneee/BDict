@@ -9,11 +9,6 @@ public partial class BookmarkView : ContentPage
     {
         InitializeComponent();
         BindingContext = new BookmarkViewModel();
-        //this.Appearing += OnBookmarkViewAppearing;
+        NavigationPage.SetHasNavigationBar(this, false);
     }
-
-    //private void OnBookmarkViewAppearing(object sender, EventArgs e)
-    //{
-    //    BindingContext = new BookmarkViewModel();
-    //}
 }

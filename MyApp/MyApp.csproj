@@ -84,6 +84,7 @@
 	  <None Remove="Resources\Images\heart_fill.svg" />
 	  <None Remove="Resources\Images\heart_unfill.svg" />
 	  <None Remove="Resources\Images\Info.svg" />
+	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\logoloading.svg" />
 	  <None Remove="Resources\Images\look_up.svg" />
@@ -111,6 +112,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="MVVM\Views\BookmarkView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\FlyoutMenuPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\FlyoutView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\InfoView.xaml">

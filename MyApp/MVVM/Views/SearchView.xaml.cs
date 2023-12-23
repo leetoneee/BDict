@@ -8,7 +8,8 @@ public partial class SearchView : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = new SearchViewModel();
-	}
+        NavigationPage.SetHasNavigationBar(this, false);
+    }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
