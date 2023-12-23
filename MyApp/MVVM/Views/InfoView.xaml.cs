@@ -60,11 +60,8 @@ public partial class InfoView : ContentPage
         }
         catch (HttpRequestException)
         {
-<<<<<<< Updated upstream
             await DisplayAlert("Update Information", "Network or server have problems", "OK");
-=======
             await DisplayAlert("Update Information", "Server have problems", "OK");
->>>>>>> Stashed changes
             return;
         }
     }
