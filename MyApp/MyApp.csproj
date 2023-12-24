@@ -62,6 +62,7 @@
 	  <None Remove="Resources\Fonts\Free-Solid-900.otf" />
 	  <None Remove="Resources\Fonts\OpenSans-Bold.ttf" />
 	  <None Remove="Resources\Fonts\OpenSans-ExtraBold.ttf" />
+	  <None Remove="Resources\Fonts\Ovo-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Black.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-BlackItalic.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Bold.ttf" />
@@ -81,7 +82,9 @@
 	  <None Remove="Resources\Images\clearicon.svg" />
 	  <None Remove="Resources\Images\converticon.svg" />
 	  <None Remove="Resources\Images\Forward.svg" />
+	  <None Remove="Resources\Images\heart_fill.png" />
 	  <None Remove="Resources\Images\heart_fill.svg" />
+	  <None Remove="Resources\Images\heart_unfill.png" />
 	  <None Remove="Resources\Images\heart_unfill.svg" />
 	  <None Remove="Resources\Images\Info.svg" />
 	  <None Remove="Resources\Images\logo.png" />
@@ -90,7 +93,9 @@
 	  <None Remove="Resources\Images\look_up.svg" />
 	  <None Remove="Resources\Images\play_sound.svg" />
 	  <None Remove="Resources\Images\polygon_bottom.svg" />
+	  <None Remove="Resources\Images\refresh.png" />
 	  <None Remove="Resources\Images\Refresh.svg" />
+	  <None Remove="Resources\Images\search.png" />
 	  <None Remove="Resources\Images\sort.svg" />
 	  <None Remove="Resources\Images\sortA2Z.svg" />
 	  <None Remove="Resources\Images\sortz2a.svg" />

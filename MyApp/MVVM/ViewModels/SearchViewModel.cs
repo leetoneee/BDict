@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿//using Android.App.Job;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Maui.Controls.Shapes;
 using MyApp.MVVM.Models;
 using MyApp.MVVM.Views;
@@ -29,13 +30,26 @@ namespace MyApp.MVVM.ViewModels
         private readonly RecentDbServices _recentWordService;
         private int _editWordId;
 
+        [ObservableProperty]
+        public bool isFavorite;
+
+        [ObservableProperty]
+        public string sourceFavorite;
+
+        [ObservableProperty]
+        public FavoriteWord favoriteWord;
+
+        private readonly BookmarkDbServices _bookmarkService;
+
         public ICommand SearchCommand { get; }
         public ICommand SelectionChangedCommand { get; }
         public ICommand GetRandomWordCommand { get; }
+        public ICommand FavoriteCommand { get; }
         public ICommand SearchRandomWordCommand { get; }
 
         public SearchViewModel()
         {
+            _bookmarkService = new BookmarkDbServices();
             _recentWordService = new RecentDbServices();
             InputWord = new RecentWord();
             RecentWords = new ObservableCollection<RecentWord>();
@@ -45,10 +59,39 @@ namespace MyApp.MVVM.ViewModels
             Task.Run(async () => await LoadRandomWords());
             RandomWord = "Hello";
 
+            _ = CheckIfFavoriteAsync();
+
             SearchCommand = new Command(search_Clicked);
             SelectionChangedCommand = new Command(selectionChanged);
             GetRandomWordCommand = new Command(getRandomWord);
+            FavoriteCommand = new Command(favoriteCommand);
             SearchRandomWordCommand = new Command(searchRandomWord);
+        }
+
+        private async Task CheckIfFavoriteAsync()
+        {
+            FavoriteWord = await _bookmarkService.GetByWord(RandomWord);
+            IsFavorite = FavoriteWord != null;
+            SourceFavorite = IsFavorite ? "heart_fill.png" : "heart_unfill.png";
+        }
+
+        public async void favoriteCommand()
+        {
+            if (IsFavorite)
+            {
+                SourceFavorite = "heart_unfill.png";
+                IsFavorite = false;
+                await _bookmarkService.DeleteByWordAsync(RandomWord);
+            }
+            else
+            {
+                SourceFavorite = "heart_fill.png";
+                IsFavorite = true;
+                await _bookmarkService.Create(new FavoriteWord
+                {
+                    Word = RandomWord
+                });
+            }
         }
 
         private async Task LoadRecentWords()
@@ -153,6 +196,7 @@ namespace MyApp.MVVM.ViewModels
             {
                 RandomWord = newWord;
             }
+            _ = CheckIfFavoriteAsync();
         }
 
         static string NormalizeWord(string inputWord)
