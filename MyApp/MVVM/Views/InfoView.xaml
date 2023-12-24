@@ -60,7 +60,7 @@
                 FontSize="20" 
                 HorizontalOptions="Center">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnHomepageLabelTapped" />
+                    <TapGestureRecognizer Command="{Binding HomepageCommand}"/>
                 </Label.GestureRecognizers>
             </Label>
         </StackLayout>
@@ -71,7 +71,7 @@
                     Margin="10"
                     Padding="10"
                     BackgroundColor="#588157"
-                    Clicked="updateBtn_Clicked"/>
+                    Command="{Binding UpdateCommand}"/>
         </StackLayout>
 
     </Grid>
