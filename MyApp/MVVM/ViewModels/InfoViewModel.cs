@@ -1,10 +1,7 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Collections.ObjectModel;
+﻿using System.Text.Json;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using Version = MyApp.MVVM.Models.Version;
+
 namespace MyApp.MVVM.ViewModels
 {
     public partial class InfoViewModel
@@ -40,21 +37,22 @@ namespace MyApp.MVVM.ViewModels
 
         public async Task FetchAPI()
         {
-            string url = "https://gist.githubusercontent.com/lehuudoUIT/2f01b66c39aba9dc61d158a302f6be4f/raw";
+            string url = "https://asia-south1.gcp.data.mongodb-api.com/app/application-0-srjva/endpoint/GetVersion";
 
             try
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue { NoCache = true, NoStore = true };
 
                     string response = await httpClient.GetStringAsync(url);
-                    await Console.Out.WriteLineAsync(response);
 
                     string currentVersion = AppInfo.VersionString;
                     await Console.Out.WriteLineAsync(currentVersion);
 
-                    if (response == currentVersion)
+                    List<Version> version = JsonSerializer.Deserialize<List<Version>>(response);
+                    Console.WriteLine(version[0].version);
+
+                    if (version[0].version == currentVersion)
                     {
                         await App.Current.MainPage.DisplayAlert("Update Information", "Your app is the latest version", "OK");
                     }
