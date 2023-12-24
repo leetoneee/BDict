@@ -214,15 +214,18 @@
                             HeightRequest="100"
                             HorizontalOptions="Center"
                             Margin="0,10,0,10"/>
-                        <ImageButton
+                        <Image
                             Grid.Row="0"
                             Grid.Column="2"
                             HorizontalOptions="End"
                             VerticalOptions="Start"
                             Source="arrow_back.png"
-                            HeightRequest="10"
-                            Margin="0,10,0,10"
-                            Command="{Binding BackCommand}"/>
+                            HeightRequest="50"
+                            Margin="0,10,0,10">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
 
                         <ActivityIndicator 
                                        Grid.Row="1" Grid.Column="1" IsVisible="{Binding IsProcessing}" IsRunning="{Binding IsProcessing}"
