@@ -3,173 +3,326 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyApp.MVVM.Views.TranslatorView"
              Title="TranslatorView">
-    <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <OnPlatform x:TypeArguments="Grid">
+        <On Platform="Android">
+            <Grid 
+                    HorizontalOptions="Fill" 
+                    VerticalOptions="Fill" 
+                    ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout 
+                        Orientation="Horizontal"
+                        BackgroundColor="#588157"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="3">
+
+                        <Button 
+                            Grid.Row="3" 
+                            Grid.Column="0" 
+                            Text="{Binding LangFirst}" 
+                            VerticalOptions="FillAndExpand" 
+                            HorizontalOptions="FillAndExpand"
+                            Margin="20" 
+                            FontSize="18" 
+                            BackgroundColor="#A3B18A" 
+                            TextColor="Black"
+                            FontFamily="OpenSansRegular"
+                            CornerRadius="30"/>
+
+                        <ImageButton 
+                            Grid.Row="3" 
+                            Grid.Column="1" 
+                            Source="converticon.svg" 
+                            Padding="2"
+                            Command="{Binding ConvertCommand}"/>
+
+                        <Button 
+                            Grid.Row="3" 
+                            Grid.Column="2" 
+                            Text="{Binding LangSecond}" 
+                            VerticalOptions="FillAndExpand" 
+                            HorizontalOptions="FillAndExpand"
+                            Margin="20" 
+                            FontSize="18" 
+                            BackgroundColor="#A3B18A" 
+                            TextColor="Black" 
+                            CornerRadius="30"/>
+
+                    </StackLayout>
 
 
-        <StackLayout 
-            Orientation="Horizontal"
-            BackgroundColor="#588157"
-            Grid.Row="0"
-            Grid.ColumnSpan="3">
-                    
-            <Button 
-                Grid.Row="3" 
-                Grid.Column="0" 
-                Text="{Binding LangFirst}" 
-                VerticalOptions="FillAndExpand" 
-                HorizontalOptions="FillAndExpand"
-                Margin="20" 
-                FontSize="18" 
-                BackgroundColor="#A3B18A" 
-                TextColor="Black"
-                FontFamily="OpenSansRegular"
-                CornerRadius="30"/>
+                    <Label 
+                        Grid.Row="1" 
+                        Grid.Column="0"
+                        Text="{Binding LangFirst}" 
+                        FontSize="18"
+                        Margin="30,10,0,0" 
+                        HorizontalOptions="Start"
+                        FontFamily="OpenSansRegular"/>
 
-            <ImageButton 
-                Grid.Row="3" 
-                Grid.Column="1" 
-                Source="converticon.svg" 
-                Padding="2"
-                Command="{Binding ConvertCommand}"/>
+                    <ImageButton 
+                        Grid.Row="1" 
+                        Grid.Column="2"
+                        Source="copy_icon.png"
+                        Command="{Binding CopyCommand1}"
+                        HorizontalOptions="End"
+                        Margin="0,10,30,0"/>
 
-            <Button 
-                Grid.Row="3" 
-                Grid.Column="2" 
-                Text="{Binding LangSecond}" 
-                VerticalOptions="FillAndExpand" 
-                HorizontalOptions="FillAndExpand"
-                Margin="20" 
-                FontSize="18" 
-                BackgroundColor="#A3B18A" 
-                TextColor="Black" 
-                CornerRadius="30"/>
+                    <Border 
+                        Grid.Row="2" 
+                        Grid.Column="0" 
+                        Grid.ColumnSpan="3"
+                        Margin="20,10,20,20"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        BackgroundColor="#ECEBE6"
+                        Padding="10">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Radius="20"
+                                    Opacity="0.5"
+                                    Offset="0, 10"/>
+                        </Border.Shadow>
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Editor 
+                                Grid.Row="0"
+                                AutoSize="TextChanges"
+                                BackgroundColor="#ECEBE6"
+                                Placeholder="Enter words, paragraph or text." 
+                                FontSize="18"
+                                IsTextPredictionEnabled="false"
+                                Text="{Binding Input}"
+                                >
+                            </Editor>
 
-        </StackLayout>
+                            <Label 
+                                Grid.Row="1"
+                                Text="{Binding WordCount}"
+                                HorizontalOptions="End"
+                                VerticalOptions="End"/>
 
+                            <ImageButton 
+                                Grid.Row="1"
+                                Source="clearicon.svg"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="End"
+                                HeightRequest="20"
+                                Command="{Binding ClearCommand}"/>
 
-        <Label 
-            Grid.Row="1" 
-            Grid.Column="0"
-            Text="{Binding LangFirst}" 
-            FontSize="18"
-            Margin="30,10,0,0" 
-            HorizontalOptions="Start"
-            FontFamily="OpenSansRegular"/>
+                        </Grid>
 
-        <ImageButton 
-            Grid.Row="1" 
-            Grid.Column="2"
-            Source="copy_icon.png"
-            Command="{Binding CopyCommand1}"
-            HorizontalOptions="End"
-            Margin="0,10,30,0"/>
-        
-        <Border 
-            Grid.Row="2" 
-            Grid.Column="0" 
-            Grid.ColumnSpan="3"
-            Margin="20,10,20,20"
-            Stroke="Transparent"
-            StrokeShape="RoundRectangle 10,10,10,10"
-            BackgroundColor="#ECEBE6"
-            Padding="10">
-            <Border.Shadow>
-                <Shadow Brush="Black"
-                Radius="20"
-                Opacity="0.5"
-                Offset="0, 10"/>
-            </Border.Shadow>
-            <Grid RowSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                    </Border>
 
-                <Editor 
-                    Grid.Row="0"
-                    AutoSize="TextChanges"
-                    BackgroundColor="#ECEBE6"
-                    Placeholder="Enter words, paragraph or text." 
-                    FontSize="18"
-                    IsTextPredictionEnabled="false"
-                    Text="{Binding Input}"
-                    >
-                </Editor>
-                
+                    <Button 
+                        Grid.Row="3" 
+                        Grid.Column="1"
+                        Text="Translate"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        Command="{Binding CallAPI}"
+                        FontSize="17" 
+                        BackgroundColor="#588157" 
+                        HorizontalOptions="FillAndExpand"
+                        Padding="20"
+                        CornerRadius="30"/>
 
-                <Label 
-                    Grid.Row="1"
-                    Text="{Binding WordCount}"
-                    HorizontalOptions="End"
-                    VerticalOptions="End"/>
-                
-                <ImageButton 
-                    Grid.Row="1"
-                    Source="clearicon.svg"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="End"
-                    HeightRequest="20"
-                    Command="{Binding ClearCommand}"/>
+                    <Label 
+                        Grid.Row="4" 
+                        Grid.Column="0"
+                        Text="{Binding LangSecond}" 
+                        FontSize="18"
+                        Margin="30,10,0,0" 
+                        HorizontalOptions="Start"
+                        FontFamily="OpenSansRegular"/>
 
+                    <ImageButton 
+                        Grid.Row="4" 
+                        Grid.Column="2"
+                        Source="copy_icon.png"
+                        Command="{Binding CopyCommand2}"
+                        HorizontalOptions="End"
+                        Margin="0,10,30,0"/>
+
+                    <Border 
+                        Grid.Row="5" 
+                        Grid.Column="0" 
+                        Grid.ColumnSpan="3"
+                        Margin="20,10,20,10"
+                        Stroke="Black"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 10,10,10,10">
+                        <Label 
+                             BackgroundColor="#ECEBE6"
+                             Padding="10"
+                             FontSize="18"
+                             Text="{Binding Output}"/>
+                    </Border>
+                </Grid>
+        </On>
+
+        <On Platform="WinUI" >
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#A6D2A5"
+                                      Offset="0.0"/>
+                        <GradientStop Color="White"
+                                      Offset="0.5"/>
+                        <GradientStop Color="#B7CBAE"
+                                      Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid 
+                  HorizontalOptions="Fill" 
+                  VerticalOptions="Fill" 
+                  ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image 
+                        Grid.Row="0" 
+                        Source="logo.png"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        Margin="0,10,0,10"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label 
+                            Grid.Row="0" 
+                            Grid.Column="0"
+                            Text="{Binding LangFirst}" 
+                            FontSize="Medium"
+                            Margin="50,10,0,0" 
+                            HorizontalOptions="Start"
+                            FontFamily="OpenSans-Bold"/>
+
+                        <ImageButton 
+                            Grid.Row="0" 
+                            Grid.Column="0"
+                            Source="copy_icon.png"
+                            Command="{Binding CopyCommand1}"
+                            HorizontalOptions="End"
+                            Margin="0,10,0,0"
+                            HeightRequest="20"
+                            BackgroundColor="Transparent"/>
+
+                        <Label 
+                            Grid.Row="0" 
+                            Grid.Column="2"
+                            Text="{Binding LangSecond}" 
+                            FontSize="Medium"
+                            Margin="0,10,0,0" 
+                            HorizontalOptions="Start"
+                            FontFamily="OpenSans-Bold"/>
+
+                        <ImageButton 
+                            Grid.Row="0" 
+                            Grid.Column="2"
+                            Source="copy_icon.png"
+                            Command="{Binding CopyCommand2}"
+                            HorizontalOptions="End"
+                            Margin="0,10,50,0"
+                            HeightRequest="20"
+                            BackgroundColor="Transparent"/>
+
+                        <Border 
+                            Grid.Row="1" 
+                            Grid.Column="0" 
+                            Margin="50,10,0,80" 
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 10,10,10,10"
+                            BackgroundColor="#ECEBE6">
+                            <Border.Shadow>
+                                <Shadow Brush="Black"
+                                  Radius="20"
+                                  Opacity="0.5"
+                                  Offset="0, 10"/>
+                            </Border.Shadow>
+                            <Editor 
+                                Grid.Row="0"
+                                AutoSize="TextChanges"
+                                BackgroundColor="#ECEBE6"
+                                Placeholder="Enter words, paragraph or text." 
+                                FontSize="18"
+                                IsTextPredictionEnabled="false"
+                                Text="{Binding Input}"
+                                    />
+                        </Border>
+
+                        <VerticalStackLayout                                 
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center">
+                            <ImageButton 
+                                BackgroundColor="#588157"
+                                Source="converticon.png" 
+                                Margin="35,0,35,40"
+                                Command="{Binding ConvertCommand}"
+                                CornerRadius="15"/>
+
+                            <Button 
+                                Text="Translate"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                Command="{Binding CallAPI}"
+                                FontSize="Medium" 
+                                BackgroundColor="#A3B18A" 
+                                HorizontalOptions="FillAndExpand"
+                                Padding="20"
+                                Margin="15,0,15,0"
+                                CornerRadius="15"/>
+                        </VerticalStackLayout>
+
+                        <Border 
+                            Grid.Row="1" 
+                            Grid.Column="2" 
+                            Margin="0,10,50,80"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 10,10,10,10"
+                            BackgroundColor="#F5F5F2">
+                            <Editor 
+                                IsReadOnly="True"
+                                AutoSize="TextChanges"
+                                BackgroundColor="#F5F5F2"
+                                Placeholder="Output." 
+                                FontSize="18"
+                                IsTextPredictionEnabled="false"
+                                Text="{Binding Output}"
+                                />
+                        </Border>
+
+                    </Grid>
+                </Grid>
             </Grid>
-
-        </Border>
-
-        <Button 
-            Grid.Row="3" 
-            Grid.Column="1"
-            Text="Translate"
-            TextColor="Black"
-            FontAttributes="Bold"
-            Command="{Binding CallAPI}"
-            FontSize="17" 
-            BackgroundColor="#588157" 
-            HorizontalOptions="FillAndExpand"
-            Padding="20"
-            CornerRadius="30"/>
-
-        <Label 
-            Grid.Row="4" 
-            Grid.Column="0"
-            Text="{Binding LangSecond}" 
-            FontSize="18"
-            Margin="30,10,0,0" 
-            HorizontalOptions="Start"
-            FontFamily="OpenSansRegular"/>
-        
-        <ImageButton 
-            Grid.Row="4" 
-            Grid.Column="2"
-            Source="copy_icon.png"
-            Command="{Binding CopyCommand2}"
-            HorizontalOptions="End"
-            Margin="0,10,30,0"/>
-
-        <Border Grid.Row="5" 
-                Grid.Column="0" 
-                Grid.ColumnSpan="3"
-                Margin="20,10,20,10"
-                Stroke="Black"
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 10,10,10,10">
-               <Label 
-                     BackgroundColor="#ECEBE6"
-                     Padding="10"
-                     FontSize="18"
-                     Text="{Binding Output}"/>
-        </Border>
-    </Grid>
+        </On>
+    </OnPlatform>
 </ContentPage>

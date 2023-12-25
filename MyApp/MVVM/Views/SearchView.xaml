@@ -6,7 +6,6 @@
     <OnPlatform x:TypeArguments="VerticalStackLayout">
         <On Platform="Android">
             <VerticalStackLayout>
-
                 <Grid BackgroundColor="#588157" HeightRequest="163">
                     <Grid.RowDefinitions>
                         <RowDefinition Height=".3*"/>

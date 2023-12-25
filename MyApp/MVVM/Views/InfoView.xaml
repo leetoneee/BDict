@@ -3,69 +3,224 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyApp.MVVM.Views.InfoView"
              Title="InfoView">
+    <OnPlatform x:TypeArguments="VerticalStackLayout">
+        <On Platform="Android">
+            <VerticalStackLayout>
+                <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-    <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0" 
+                        Text="About us" 
+                        FontFamily="OpenSansRegular"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontSize="30"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        BackgroundColor="#588157"
+                        Padding="20"/>
 
-        <Label
-            Grid.Row="0" 
-            Text="About us" 
-            FontFamily="OpenSansRegular"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-            FontSize="30"
-            FontAttributes="Bold"
-            TextColor="White"
-            BackgroundColor="#588157"
-            Padding="20"/>
+                    <StackLayout 
+                        Grid.Row="1"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Spacing="5">
+                        <Label 
+                            Text="Scan QR code" 
+                            FontAttributes="Bold" 
+                            FontSize="30" 
+                            HorizontalOptions="Center"/>
 
-        <StackLayout 
-            Grid.Row="1"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Spacing="5">
-            <Label 
-                Text="Scan QR code" 
-                FontAttributes="Bold" 
-                FontSize="30" 
-                HorizontalOptions="Center"/>
-            
-            <Label 
-                Text="The app will request access to" 
-                FontSize="20" 
-                HorizontalOptions="Center"/>
-            
-            <Label 
-                Text="the camera for code scanning" 
-                FontSize="20" 
-                HorizontalOptions="Center"/>
+                        <Label 
+                            Text="The app will request access to" 
+                            FontSize="20" 
+                            HorizontalOptions="Center"/>
 
-            <Image 
-                Source="logo.png" />
-        <StackLayout  
-            Orientation="Horizontal" 
-            HorizontalOptions="Center">
-            <Label 
-                Text="or visit our" 
-                FontSize="20" 
-                HorizontalOptions="Center"/>
-            <Label 
-                Text=" Homepage" 
-                TextColor="Blue" 
-                FontSize="20" 
-                HorizontalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnHomepageLabelTapped" />
-                </Label.GestureRecognizers>
-            </Label>
-        </StackLayout>
-    </StackLayout>
+                        <Label 
+                            Text="the camera for code scanning" 
+                            FontSize="20" 
+                            HorizontalOptions="Center"/>
 
-    </Grid>
+                        <Image 
+                            Source="logo.png" />
+                        <StackLayout  
+                            Orientation="Horizontal" 
+                            HorizontalOptions="Center">
+                            <Label 
+                            Text="or visit our" 
+                            FontSize="20" 
+                            HorizontalOptions="Center"/>
+                            <Label 
+                                Text=" Homepage" 
+                                TextColor="Blue" 
+                                FontSize="20" 
+                                HorizontalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnHomepageLabelTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
 
+                </Grid>
+            </VerticalStackLayout>
+        </On>
+        
+        <On Platform="WinUI">
+            <VerticalStackLayout>
+                <VerticalStackLayout.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#A6D2A5"
+                                      Offset="0.0"/>
+                        <GradientStop Color="White"
+                                      Offset="0.5"/>
+                        <GradientStop Color="#B7CBAE"
+                                      Offset="1.0"/>
+                    </LinearGradientBrush>
+                </VerticalStackLayout.Background>
+                
+                <Grid 
+                    HorizontalOptions="Fill" 
+                    VerticalOptions="Fill" 
+                    ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Image 
+                        Grid.Row="0" 
+                        Grid.ColumnSpan="2"
+                        Source="logo.png"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        Margin="0,10,0,10"/>
+
+                    <VerticalStackLayout 
+                        Grid.Row="1"
+                        Grid.Column="0" 
+                        Margin="40,20,20,20">
+                        <Label                                     
+                            FontSize="Small" 
+                            FontFamily="OpenSans"  
+                            LineBreakMode="WordWrap" 
+                            Text="Feedback Welcome!"/>
+                        <Label Text=""/>
+                        <Label
+                            FontSize="Small" 
+                            FontFamily="OpenSans"  
+                            LineBreakMode="WordWrap" 
+                            Text="We value your input and would love to hear from you. 
+                            Your feedback is crucial in helping us improve and enhance your experience with our dictionary app. Whether you have suggestions for new features, spot a bug, or simply want to share your thoughts, we're all ears!"/>
+                        <Label Text=""/>
+                        <Label 
+                            FontSize="Small" 
+                            FontFamily="OpenSans"  
+                            LineBreakMode="WordWrap" 
+                            Text="Please take a moment to let us know how we can make our app better for you. Your insights are incredibly important to us, and we appreciate your time and effort in helping us shape the future of our dictionary application."/>
+                        <Label Text=""/>
+                        <Label 
+                            FontSize="Small" 
+                            FontFamily="OpenSans"  
+                            LineBreakMode="WordWrap" 
+                            Text="Thank you for being a part of our journey!"/>
+                        <HorizontalStackLayout    
+                            Margin="30"
+                            Spacing="40"
+                            HorizontalOptions="Center">
+                            <Button
+                                Text="Homepage" 
+                                FontSize="Small"
+                                BackgroundColor="#588157"
+                                CornerRadius="10"
+                                Clicked="OnHomepageLabelTapped"/>
+                            <Button 
+                                Text="Check for update"
+                                FontSize="Small"
+                                BackgroundColor="#588157"
+                                CornerRadius="10"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <Border 
+                        Grid.Row="1"
+                        Grid.Column="1"  
+                        StrokeThickness="0"
+                        BackgroundColor="#A3B18A"
+                        VerticalOptions="Fill"
+                        HorizontalOptions="Fill"
+                        Margin="20,20,40,20">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5,5,5,5" />
+                        </Border.StrokeShape>
+                        <VerticalStackLayout >
+                            <Label 
+                                Text="FEEDBACK FORM" 
+                                FontSize="Large" 
+                                TextColor="Black" 
+                                FontFamily="OpenSans-Bold" 
+                                HorizontalOptions="Center" 
+                                Margin="20"/>
+                            <Label 
+                                Text="Email" 
+                                TextColor="Black" 
+                                FontSize="Small" 
+                                FontAttributes="Bold" 
+                                FontFamily="OpenSans" 
+                                Margin="20,0,20,10"/>
+                            <Entry 
+                                x:Name="emailEntry"
+                                Placeholder="Enter your email" 
+                                BackgroundColor="White" 
+                                Margin="20,0,20,10"/>
+                            <Label 
+                                Text="Title" 
+                                TextColor="Black" 
+                                FontSize="Small" 
+                                FontAttributes="Bold" 
+                                FontFamily="OpenSans" 
+                                Margin="20,0,20,10"/>
+                            <Entry 
+                                x:Name="titleEntry"
+                                Placeholder="Enter your title"
+                                BackgroundColor="White" 
+                                Margin="20,0,20,10"/>
+                            <Label 
+                                Text="Feedback" 
+                                TextColor="Black" 
+                                FontSize="Small" 
+                                FontAttributes="Bold" 
+                                FontFamily="OpenSans" 
+                                Margin="20,0,20,10"/>
+                            <Editor 
+                                x:Name="feedbackEditor"
+                                Placeholder="Enter your feedback" 
+                                BackgroundColor="White" 
+                                Margin="20,0,20,10"
+                                HeightRequest="80"/>
+                            <Button 
+                                Text="Send"
+                                HorizontalOptions="End"
+                                BackgroundColor="#588157"
+                                Margin="20"
+                                FontSize="Small"
+                                Padding="10"
+                                Clicked="OnSendButtonClicked"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+            </VerticalStackLayout>
+        </On>
+
+    </OnPlatform>
 </ContentPage>
