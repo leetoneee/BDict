@@ -392,17 +392,17 @@
                                         <Grid Grid.Column="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition />
-                                                <RowDefinition />
+                                                <!--<RowDefinition />-->
                                             </Grid.RowDefinitions>
                                             <ImageButton Grid.Row="0" 
                                                          MaximumHeightRequest="50"
                                                          Source="refresh.png" 
                                                          Margin="0, 0, 0, 0" 
                                                          Command="{Binding GetRandomWordCommand}"/>
-                                            <ImageButton Grid.Row="1" 
+                                            <!--<ImageButton Grid.Row="1" 
                                                          MaximumHeightRequest="50"
                                                          Source="{Binding SourceFavorite}"
-                                                         Command="{Binding FavoriteCommand}"/>
+                                                         Command="{Binding FavoriteCommand}"/>-->
                                         </Grid>
                                     </Grid>
                                 </Border>

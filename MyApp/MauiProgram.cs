@@ -3,6 +3,7 @@ using Microsoft.Maui.LifecycleEvents;
 using Microsoft.Extensions.Logging;
 using MyApp.MVVM.ViewModels;
 using MyApp.MVVM.Views;
+
 using Plugin.Maui.Audio;
 
 namespace MyApp
