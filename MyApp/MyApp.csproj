@@ -79,9 +79,9 @@
 	  <None Remove="Resources\Images\arrow_back.svg" />
 	  <None Remove="Resources\Images\bdict.svg" />
 	  <None Remove="Resources\Images\Bookmark.svg" />
+	  <None Remove="Resources\Images\clearicon.png" />
+	  <None Remove="Resources\Images\converticon.png" />
 	  <None Remove="Resources\Images\copy_outline_black.svg" />
-	  <None Remove="Resources\Images\clearicon.svg" />
-	  <None Remove="Resources\Images\converticon.svg" />
 	  <None Remove="Resources\Images\Forward.svg" />
 	  <None Remove="Resources\Images\heart_fill.png" />
 	  <None Remove="Resources\Images\heart_fill.svg" />
@@ -110,6 +110,7 @@
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="2.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="MimeKit" Version="4.3.0" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="2.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />

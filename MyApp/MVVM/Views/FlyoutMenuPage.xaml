@@ -21,6 +21,9 @@
                 <model:FlyoutPageItem Title="Bookmark"
                                       IconSource="reminders.png"
                                       TargetType="{x:Type view:BookmarkView}" />
+                <model:FlyoutPageItem Title="Info"
+                                      IconSource="reminders.png"
+                                      TargetType="{x:Type view:InfoView}" />
             </x:Array>
         </CollectionView.ItemsSource>
         <CollectionView.ItemTemplate>
