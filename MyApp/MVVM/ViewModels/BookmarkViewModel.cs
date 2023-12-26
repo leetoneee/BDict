@@ -117,6 +117,7 @@ namespace MyApp.MVVM.ViewModels
         [RelayCommand]
         async Task Delete(FavoriteWord s)
         {
+            await App.Current.MainPage.DisplayAlert("OK", "OK", "OK");
             if (FavoriteWords.Contains(s))
             {
                 await _dbService.Delete(s);
