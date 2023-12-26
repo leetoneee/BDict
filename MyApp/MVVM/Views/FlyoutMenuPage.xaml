@@ -4,42 +4,64 @@
              x:Class="MyApp.MVVM.Views.FlyoutMenuPage"
              xmlns:model="clr-namespace:MyApp.MVVM.Models"
              xmlns:view="clr-namespace:MyApp.MVVM.Views"
-             Padding="0,40,0,0"
-             IconImageSource="arrow_back.svg"
-             Title="Personal Organiser">
+             Padding="0,50,0,0"
+             IconImageSource="logo.png" 
+             Title="BDict">
+
     <CollectionView x:Name="collectionView"
                     x:FieldModifier="public"
                     SelectionMode="Single">
         <CollectionView.ItemsSource>
             <x:Array Type="{x:Type model:FlyoutPageItem}">
                 <model:FlyoutPageItem Title="Search"
-                                      IconSource="contacts.png"
+                                      IconSource="look_up.png"
                                       TargetType="{x:Type view:SearchView}" />
                 <model:FlyoutPageItem Title="Translator"
-                                      IconSource="todo.png"
+                                      IconSource="translator.png"
                                       TargetType="{x:Type view:TranslatorView}" />
                 <model:FlyoutPageItem Title="Bookmark"
-                                      IconSource="reminders.png"
+                                      IconSource="bookmark.png"
                                       TargetType="{x:Type view:BookmarkView}" />
-                <model:FlyoutPageItem Title="Info"
-                                      IconSource="reminders.png"
+                <model:FlyoutPageItem Title="About us"
+                                      IconSource="info.png"
                                       TargetType="{x:Type view:InfoView}" />
             </x:Array>
         </CollectionView.ItemsSource>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid Padding="5,10">
+                <Grid x:Name="grid">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".6*" />
                     </Grid.ColumnDefinitions>
-                    <Image Source="{Binding IconSource}" />
-                    <Label Grid.Column="1"
-                           Margin="20,0"
-                           Text="{Binding Title}"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           VerticalOptions="Center" />
+
+                    <Image 
+                        Source="{Binding IconSource}"
+                        Margin="50,10,20,10"
+                        HeightRequest="30"/>
+                    <Label 
+                        Grid.Column="1"
+                        Text="{Binding Title}"
+                        FontSize="Small"
+                        FontFamily="OpenSans-Bold"
+                        VerticalOptions="Center" />
+
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="White" TargetName="grid" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="LightGreen" TargetName="grid" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
