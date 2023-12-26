@@ -101,6 +101,7 @@ namespace MyApp.MVVM.ViewModels
         [RelayCommand]
         void Search(FavoriteWord s)
         {
+            Console.WriteLine(s.Word);
             if (FavoriteWords.Contains(s))
             {
                 var resultView = new ResultView();

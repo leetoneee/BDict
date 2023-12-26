@@ -201,7 +201,7 @@
                                                     <MenuFlyout>
                                                         <MenuFlyoutItem Text="Search"
                                                                         Command="{Binding SearchCommand}"
-                                                                        CommandParameter="Hello"/>
+                                                                        CommandParameter="{Binding .}"/>
                                                         <MenuFlyoutItem Text="Delete"
                                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=DeleteCommand}"
                                                                         CommandParameter="Hello"/>
