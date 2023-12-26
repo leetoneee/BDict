@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:MyApp.MVVM.Models"
              xmlns:view="clr-namespace:MyApp.MVVM.Views"
              Padding="0,50,0,0"
-             IconImageSource="logo.png"
+             IconImageSource="logo.png" 
              Title="BDict">
 
     <CollectionView x:Name="collectionView"
