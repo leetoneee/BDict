@@ -78,6 +78,7 @@
 	  <None Remove="Resources\Images\arrow_back.png" />
 	  <None Remove="Resources\Images\arrow_back.svg" />
 	  <None Remove="Resources\Images\bdict.svg" />
+	  <None Remove="Resources\Images\bookmark.png" />
 	  <None Remove="Resources\Images\Bookmark.svg" />
 	  <None Remove="Resources\Images\clearicon.png" />
 	  <None Remove="Resources\Images\converticon.png" />
@@ -87,10 +88,12 @@
 	  <None Remove="Resources\Images\heart_fill.svg" />
 	  <None Remove="Resources\Images\heart_unfill.png" />
 	  <None Remove="Resources\Images\heart_unfill.svg" />
+	  <None Remove="Resources\Images\info.png" />
 	  <None Remove="Resources\Images\Info.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\logoloading.svg" />
+	  <None Remove="Resources\Images\look_up.png" />
 	  <None Remove="Resources\Images\look_up.svg" />
 	  <None Remove="Resources\Images\play_sound.svg" />
 	  <None Remove="Resources\Images\polygon_bottom.svg" />
@@ -100,6 +103,7 @@
 	  <None Remove="Resources\Images\sort.svg" />
 	  <None Remove="Resources\Images\sortA2Z.svg" />
 	  <None Remove="Resources\Images\sortz2a.svg" />
+	  <None Remove="Resources\Images\translator.png" />
 	  <None Remove="Resources\Images\translator.svg" />
 	  <None Remove="Resources\Images\copy_icon.svg" />
 	  <None Remove="Resources\Images\Trash.svg" />

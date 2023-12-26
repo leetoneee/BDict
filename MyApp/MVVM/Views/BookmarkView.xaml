@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:helper="clr-namespace:MyApp.Helper"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui" 
              x:Class="MyApp.MVVM.Views.BookmarkView" 
              xmlns:viewmodel="clr-namespace:MyApp.MVVM.ViewModels"
+             xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
              Title="BookmarkView">
     <OnPlatform x:TypeArguments="RefreshView">
         <On Platform="Android">
@@ -117,116 +119,128 @@
                             Command="{Binding AddCommand}"/>
                 </Grid>
             </RefreshView>
+
         </On>
         <On Platform="WinUI">
-            <RefreshView>
-                <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height=".130*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height=".1*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".3*"/>
-                        <ColumnDefinition Width=".1*"/>
-                        <ColumnDefinition Width=".1*"/>
-                    </Grid.ColumnDefinitions>
+            <RefreshView windows:RefreshView.RefreshPullDirection="LeftToRight"
+                         IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshCommand}">
+                <VerticalStackLayout>
+                    <VerticalStackLayout.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="#A6D2A5"
+                                               Offset="0.0"/>
+                            <GradientStop Color="White"
+                                              Offset="0.5"/>
+                            <GradientStop Color="#B7CBAE"
+                                              Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </VerticalStackLayout.Background>
 
-                    <!--Heading-->
-                    <Grid Grid.Row="0"
-                  Grid.ColumnSpan="3"
-                  BackgroundColor="#588157"
-                  />
-                    <Label  Grid.Row="0"
-                    Grid.ColumnSpan="3"
-                    Text="Favorites" 
-                    FontFamily="OpenSansRegular"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    HorizontalTextAlignment="End"
-                    VerticalTextAlignment="Center"
-                    FontSize="30"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    
-                    />
-                    <ImageButton Grid.Row="0"
-                             Grid.ColumnSpan="3"
-                             Source="{Binding SourceSorting}"
-                             Command="{Binding SortingCommand}"
-                             HeightRequest="50"
-                             HorizontalOptions="End"
-                             Margin="0, 0, 10, 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                    </ImageButton>
+                        <Image 
+                                Grid.Row="0" 
+                                Source="logo.png"
+                                HeightRequest="100"
+                                HorizontalOptions="Center"
+                                Margin="0,10,0,10"/>
 
-
-                    <CollectionView 
-            SelectionMode="None"
-            Grid.Row="1" 
-            Grid.ColumnSpan="3" 
-            ItemsSource="{Binding FavoriteWords}" 
-            Margin="0,40,0,20">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <SwipeView>
-                                    <SwipeView.LeftItems>
-                                        <SwipeItems>
-                                            <SwipeItemView>
-                                                <Frame BackgroundColor="Red">
-                                                    <ImageButton 
-                                           Source="trash.svg"
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=DeleteCommand}"
-                                           CommandParameter="{Binding .}"/>
-                                                </Frame>
-                                            </SwipeItemView>
-                                        </SwipeItems>
-                                    </SwipeView.LeftItems>
-                                    <Frame 
-                            Background="#ecebe6"
-                            CornerRadius="10" 
-                            HasShadow="True" 
-                            Margin="20,0,20,20">
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=SearchCommand}"
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".15*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width=".15*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!--Sort by Alphabet-->
+                            <CollectionView Grid.Column="0" 
+                                            HorizontalOptions="End"
+                                            ItemsSource="{Binding Alphabet}"
+                                            SelectedItem="{Binding SelectedSortByWord}"
+                                            SelectionChangedCommand="{Binding SortByWordCommand}"
+                                            SelectionMode="Single">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding .}" HorizontalOptions="End" />
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            
+                            <Border Grid.Column="1"                                 
+                                    StrokeThickness="0"
+                                    BackgroundColor="#ffffff"
+                                    HorizontalOptions="Fill"
+                                    MaximumHeightRequest="550">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5,5,5,5" />
+                                </Border.StrokeShape>
+                                <CollectionView SelectionMode="None"
+                                                ItemsSource="{Binding FavoriteWords}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Vertical"
+                                                         Span="4"
+                                                         VerticalItemSpacing="20"
+                                                         HorizontalItemSpacing="30"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Stroke="#C49B33"
+                                                    StrokeThickness="4"
+                                                    Background="#2B0B98"
+                                                    HorizontalOptions="Center">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="0,40,40,0" />
+                                                </Border.StrokeShape>
+                                                <!--Right Click have bug-->
+                                                <FlyoutBase.ContextFlyout>
+                                                    <MenuFlyout>
+                                                        <MenuFlyoutItem Text="Search"
+                                                                        Command="{Binding SearchCommand}"
+                                                                        CommandParameter="{Binding .}"/>
+                                                        <MenuFlyoutItem Text="Delete"
+                                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=DeleteCommand}"
+                                                                        CommandParameter="Hello"/>
+                                                    </MenuFlyout>
+                                                </FlyoutBase.ContextFlyout>
+                                                <!--End Right Click-->
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=SearchCommand}"
                                                       CommandParameter="{Binding .}"/>
-                                        </Frame.GestureRecognizers>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Label 
-                                    Grid.Column="0" 
-                                    Text="{Binding Word}" 
-                                    FontSize="18" 
-                                    FontAttributes="Bold" 
-                                    TextColor="Black"
-                                    Opacity="100"
-                                    FontFamily="OpenSansRegular" 
-                                    HorizontalOptions="Start" />
-                                            <Image 
-                                    Grid.Column="1" 
-                                    Source="forward.svg" 
-                                    Margin="0, 0, 15, 0" 
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="End"/>
-                                        </Grid>
-                                    </Frame>
-                                </SwipeView>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <ImageButton 
-                            Source="addicon.sg" 
-                            Grid.Column="2" 
-                            Grid.Row="2" 
-                            HorizontalOptions="Center"
-                            Command="{Binding AddCommand}"/>
-                </Grid>
-
+                                                </Border.GestureRecognizers>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Grid.Column="0"
+                                                            HorizontalOptions="Start"
+                                                            VerticalOptions="Start"
+                                                            Stroke="White"
+                                                            Background="White"  
+                                                            StrokeShape="RoundRectangle 90,90,90,90"
+                                                            HeightRequest="12"
+                                                            WidthRequest="12"
+                                                            Margin="8,5"/>
+                                                    <Label Grid.Column="1"
+                                                           Text="{Binding Word}"
+                                                           TextColor="White"
+                                                           FontSize="18"
+                                                           FontAttributes="Bold" 
+                                                           Margin="8,8"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </VerticalStackLayout>
             </RefreshView>
         </On>
     </OnPlatform>

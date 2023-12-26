@@ -19,6 +19,12 @@ namespace MyApp.MVVM.ViewModels
         public ObservableCollection<FavoriteWord> favoriteWords;
 
         [ObservableProperty]
+        public ObservableCollection<char> _alphabet;
+
+        [ObservableProperty]
+        private char selectedSortByWord;
+
+        [ObservableProperty]
         public bool isRefreshing;
 
         public bool IsSortA2Z, IsSortZ2A;
@@ -36,6 +42,14 @@ namespace MyApp.MVVM.ViewModels
             IsSortA2Z = false;
             IsSortZ2A = false;
             Task.Run(async () => await LoadFavoriteWords());
+            InitializeAlphabet();
+        }
+
+        private void InitializeAlphabet()
+        {
+            var alphabetList = Enumerable.Range('A', 26).Select(c => (char)c).ToList();
+            alphabetList.Insert(0, '#'); 
+            Alphabet = new ObservableCollection<char>(alphabetList);
         }
 
         private async Task LoadFavoriteWords()
@@ -51,6 +65,11 @@ namespace MyApp.MVVM.ViewModels
             FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetFavoriteWordsZ2A());
         }
 
+        private async Task LoadFavoriteWordsSortedByWord(string s)
+        {
+            FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetWordsStartingWithAsync(s));
+        }
+
         [RelayCommand]
         void Add()
         {
@@ -62,8 +81,27 @@ namespace MyApp.MVVM.ViewModels
         }
 
         [RelayCommand]
+        async Task SortByWord()
+        {
+            IsRefreshing = true;
+            char c = SelectedSortByWord;
+            if (Alphabet.Contains(c))
+            {
+                if (c == '#')
+                {
+                    await LoadFavoriteWords();
+                    return;
+                }
+                string startingChar = c.ToString();
+                await LoadFavoriteWordsSortedByWord(startingChar);
+            }
+            IsRefreshing = false;
+        }
+
+        [RelayCommand]
         void Search(FavoriteWord s)
         {
+            Console.WriteLine(s.Word);
             if (FavoriteWords.Contains(s))
             {
                 var resultView = new ResultView();

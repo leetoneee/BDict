@@ -9,26 +9,26 @@
                     HorizontalOptions="Fill" 
                     VerticalOptions="Fill" 
                     ColumnSpacing="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout 
                         Orientation="Horizontal"
                         BackgroundColor="#588157"
                         Grid.Row="0"
                         Grid.ColumnSpan="3">
 
-                        <Button 
+                    <Button 
                             Grid.Row="3" 
                             Grid.Column="0" 
                             Text="{Binding LangFirst}" 
@@ -41,14 +41,14 @@
                             FontFamily="OpenSansRegular"
                             CornerRadius="30"/>
 
-                        <ImageButton 
+                    <ImageButton 
                             Grid.Row="3" 
                             Grid.Column="1" 
                             Source="converticon.svg" 
                             Padding="2"
                             Command="{Binding ConvertCommand}"/>
 
-                        <Button 
+                    <Button 
                             Grid.Row="3" 
                             Grid.Column="2" 
                             Text="{Binding LangSecond}" 
@@ -60,10 +60,10 @@
                             TextColor="Black" 
                             CornerRadius="30"/>
 
-                    </StackLayout>
+                </StackLayout>
 
 
-                    <Label 
+                <Label 
                         Grid.Row="1" 
                         Grid.Column="0"
                         Text="{Binding LangFirst}" 
@@ -72,7 +72,7 @@
                         HorizontalOptions="Start"
                         FontFamily="OpenSansRegular"/>
 
-                    <ImageButton 
+                <ImageButton 
                         Grid.Row="1" 
                         Grid.Column="2"
                         Source="copy_icon.png"
@@ -80,7 +80,7 @@
                         HorizontalOptions="End"
                         Margin="0,10,30,0"/>
 
-                    <Border 
+                <Border 
                         Grid.Row="2" 
                         Grid.Column="0" 
                         Grid.ColumnSpan="3"
@@ -89,18 +89,18 @@
                         StrokeShape="RoundRectangle 10,10,10,10"
                         BackgroundColor="#ECEBE6"
                         Padding="10">
-                        <Border.Shadow>
-                            <Shadow Brush="Black"
+                    <Border.Shadow>
+                        <Shadow Brush="Black"
                                     Radius="20"
                                     Opacity="0.5"
                                     Offset="0, 10"/>
-                        </Border.Shadow>
-                        <Grid RowSpacing="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Editor 
+                    </Border.Shadow>
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Editor 
                                 Grid.Row="0"
                                 AutoSize="TextChanges"
                                 BackgroundColor="#ECEBE6"
@@ -109,15 +109,15 @@
                                 IsTextPredictionEnabled="false"
                                 Text="{Binding Input}"
                                 >
-                            </Editor>
+                        </Editor>
 
-                            <Label 
+                        <Label 
                                 Grid.Row="1"
                                 Text="{Binding WordCount}"
                                 HorizontalOptions="End"
                                 VerticalOptions="End"/>
 
-                            <ImageButton 
+                        <ImageButton 
                                 Grid.Row="1"
                                 Source="clearicon.svg"
                                 BackgroundColor="Transparent"
@@ -125,11 +125,11 @@
                                 HeightRequest="20"
                                 Command="{Binding ClearCommand}"/>
 
-                        </Grid>
+                    </Grid>
 
-                    </Border>
+                </Border>
 
-                    <Button 
+                <Button 
                         Grid.Row="3" 
                         Grid.Column="1"
                         Text="Translate"
@@ -142,7 +142,7 @@
                         Padding="20"
                         CornerRadius="30"/>
 
-                    <Label 
+                <Label 
                         Grid.Row="4" 
                         Grid.Column="0"
                         Text="{Binding LangSecond}" 
@@ -151,7 +151,7 @@
                         HorizontalOptions="Start"
                         FontFamily="OpenSansRegular"/>
 
-                    <ImageButton 
+                <ImageButton 
                         Grid.Row="4" 
                         Grid.Column="2"
                         Source="copy_icon.png"
@@ -159,7 +159,7 @@
                         HorizontalOptions="End"
                         Margin="0,10,30,0"/>
 
-                    <Border 
+                <Border 
                         Grid.Row="5" 
                         Grid.Column="0" 
                         Grid.ColumnSpan="3"
@@ -167,15 +167,14 @@
                         Stroke="Black"
                         StrokeThickness="2"
                         StrokeShape="RoundRectangle 10,10,10,10">
-                        <Label 
+                    <Label 
                              BackgroundColor="#ECEBE6"
                              Padding="10"
                              FontSize="18"
                              Text="{Binding Output}"/>
-                    </Border>
-                </Grid>
+                </Border>
+            </Grid>
         </On>
-
         <On Platform="WinUI" >
             <Grid>
                 <Grid.Background>
