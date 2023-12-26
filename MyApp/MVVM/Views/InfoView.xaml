@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyApp.MVVM.Views.InfoView"
              Title="InfoView">
-    <OnPlatform x:TypeArguments="VerticalStackLayout">
+    <OnPlatform x:TypeArguments="Grid">
         <On Platform="Android">
-            <VerticalStackLayout>
-                <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
+            <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -69,12 +68,11 @@
                     </StackLayout>
 
                 </Grid>
-            </VerticalStackLayout>
         </On>
         
         <On Platform="WinUI">
-            <VerticalStackLayout>
-                <VerticalStackLayout.Background>
+            <Grid>
+                <Grid.Background>
                     <LinearGradientBrush EndPoint="0,1">
                         <GradientStop Color="#A6D2A5"
                                       Offset="0.0"/>
@@ -83,7 +81,7 @@
                         <GradientStop Color="#B7CBAE"
                                       Offset="1.0"/>
                     </LinearGradientBrush>
-                </VerticalStackLayout.Background>
+                </Grid.Background>
                 
                 <Grid 
                     HorizontalOptions="Fill" 
@@ -110,47 +108,53 @@
                         Grid.Row="1"
                         Grid.Column="0" 
                         Margin="40,20,20,20">
-                        <Label                                     
+                        <Label
+                            FontAttributes="Italic"
                             FontSize="Small" 
                             FontFamily="OpenSans"  
                             LineBreakMode="WordWrap" 
                             Text="Feedback Welcome!"/>
                         <Label Text=""/>
                         <Label
+                            FontAttributes="Italic"
                             FontSize="Small" 
                             FontFamily="OpenSans"  
                             LineBreakMode="WordWrap" 
-                            Text="We value your input and would love to hear from you. 
-                            Your feedback is crucial in helping us improve and enhance your experience with our dictionary app. Whether you have suggestions for new features, spot a bug, or simply want to share your thoughts, we're all ears!"/>
+                            Text="We value your input and would love to hear from you. Your feedback is crucial in helping us improve and enhance your experience with our dictionary app. Whether you have suggestions for new features, spot a bug, or simply want to share your thoughts, we're all ears!"/>
                         <Label Text=""/>
                         <Label 
+                            FontAttributes="Italic"
                             FontSize="Small" 
                             FontFamily="OpenSans"  
                             LineBreakMode="WordWrap" 
                             Text="Please take a moment to let us know how we can make our app better for you. Your insights are incredibly important to us, and we appreciate your time and effort in helping us shape the future of our dictionary application."/>
                         <Label Text=""/>
-                        <Label 
+                        <Label
+                            FontAttributes="Italic"
                             FontSize="Small" 
                             FontFamily="OpenSans"  
                             LineBreakMode="WordWrap" 
                             Text="Thank you for being a part of our journey!"/>
-                        <HorizontalStackLayout    
-                            Margin="30"
-                            Spacing="40"
-                            HorizontalOptions="Center">
-                            <Button
-                                Text="Homepage" 
-                                FontSize="Small"
-                                BackgroundColor="#588157"
-                                CornerRadius="10"
-                                Clicked="OnHomepageLabelTapped"/>
-                            <Button 
-                                Text="Check for update"
-                                FontSize="Small"
-                                BackgroundColor="#588157"
-                                CornerRadius="10"/>
-                        </HorizontalStackLayout>
                     </VerticalStackLayout>
+                    <HorizontalStackLayout    
+                        Margin="30"
+                        Spacing="40"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        VerticalOptions="End">
+                        <Button
+                            Text="Homepage" 
+                            FontSize="Small"
+                            BackgroundColor="#588157"
+                            CornerRadius="10"
+                            Clicked="OnHomepageLabelTapped"/>
+                        <Button 
+                            Text="Check for update"
+                            FontSize="Small"
+                            BackgroundColor="#588157"
+                            CornerRadius="10"/>
+                    </HorizontalStackLayout>
 
                     <Border 
                         Grid.Row="1"
@@ -219,7 +223,7 @@
                         </VerticalStackLayout>
                     </Border>
                 </Grid>
-            </VerticalStackLayout>
+            </Grid>
         </On>
 
     </OnPlatform>
