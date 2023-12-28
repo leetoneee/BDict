@@ -13,7 +13,12 @@ namespace MyApp.MVVM.ViewModels
         public string word;
 
         [ObservableProperty]
+        public int rowCount;
+
+        [ObservableProperty]
         public FavoriteWord selectedFavoriteWord;
+
+        private FavoriteWord _draggedItem;
 
         [ObservableProperty]
         public ObservableCollection<FavoriteWord> favoriteWords;
@@ -25,13 +30,16 @@ namespace MyApp.MVVM.ViewModels
         private char selectedSortByWord;
 
         [ObservableProperty]
+        public bool isDragged;
+
+        [ObservableProperty]
         public bool isRefreshing;
 
         public bool IsSortA2Z, IsSortZ2A;
 
         [ObservableProperty]
         public string sourceSorting;
-
+        
         private readonly BookmarkDbServices _dbService;
 
         public BookmarkViewModel()
@@ -39,35 +47,58 @@ namespace MyApp.MVVM.ViewModels
             _dbService = new BookmarkDbServices();
             FavoriteWords = new ObservableCollection<FavoriteWord>();
             SourceSorting = "sorta2z.svg";
+            IsDragged = false;
             IsSortA2Z = false;
             IsSortZ2A = false;
             Task.Run(async () => await LoadFavoriteWords());
+            Task.Run(async () => await GetTheNumberOfWord());
             InitializeAlphabet();
+            SelectedSortByWord = Alphabet.FirstOrDefault();
         }
 
+        [RelayCommand]
+        public void DragStarted(FavoriteWord FW)
+        {
+            _draggedItem = FW;
+            IsDragged = true;
+        }
+
+        [RelayCommand]
+        public void DragCompleted()
+        {
+            _draggedItem = null;
+            IsDragged = false;
+        }
         private void InitializeAlphabet()
         {
             var alphabetList = Enumerable.Range('A', 26).Select(c => (char)c).ToList();
             alphabetList.Insert(0, '#'); 
             Alphabet = new ObservableCollection<char>(alphabetList);
         }
-
+        private async Task GetTheNumberOfWord()
+        {
+            RowCount = await _dbService.GetRowCountAsync();
+        }
         private async Task LoadFavoriteWords()
         {
             FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetFavoriteWords());
+            await GetTheNumberOfWord();
         }
         private async Task LoadFavoriteWordsA2Z()
         {
             FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetFavoriteWordsA2Z());
+            await GetTheNumberOfWord();
         }
         private async Task LoadFavoriteWordsZ2A()
         {
             FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetFavoriteWordsZ2A());
+            await GetTheNumberOfWord();
         }
 
         private async Task LoadFavoriteWordsSortedByWord(string s)
         {
             FavoriteWords = new ObservableCollection<FavoriteWord>(await _dbService.GetWordsStartingWithAsync(s));
+            await GetTheNumberOfWord();
         }
 
         [RelayCommand]
@@ -120,7 +151,23 @@ namespace MyApp.MVVM.ViewModels
             if (FavoriteWords.Contains(s))
             {
                 await _dbService.Delete(s);
+                SelectedSortByWord = Alphabet.FirstOrDefault();
                 await LoadFavoriteWords();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Unable to delete", "OK");
+            }
+        }
+
+        [RelayCommand]
+        public async Task TaskDropped()
+        {
+            IsDragged = false;
+            if (FavoriteWords.Contains(_draggedItem))
+            {
+                await _dbService.Delete(_draggedItem);
+                await SortByWord();
             }
             else
             {

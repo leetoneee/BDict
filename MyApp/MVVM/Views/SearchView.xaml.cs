@@ -13,6 +13,6 @@ public partial class SearchView : ContentPage
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-
+        
     }
 }
