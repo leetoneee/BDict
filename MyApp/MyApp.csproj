@@ -109,7 +109,6 @@
 	  <None Remove="Resources\Images\copy_icon.svg" />
 	  <None Remove="Resources\Images\Trash.svg" />
 	  <None Remove="Resources\Images\waste.png" />
-	  <None Remove="Resources\Raw\10000words.txt" />
 	</ItemGroup>
 
 	<ItemGroup>

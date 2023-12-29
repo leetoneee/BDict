@@ -7,6 +7,7 @@
              xmlns:viewmodel="clr-namespace:MyApp.MVVM.ViewModels"
              xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
              Title="BookmarkView">
+
     <OnPlatform x:TypeArguments="RefreshView">
         <On Platform="Android">
             <RefreshView IsRefreshing="{Binding IsRefreshing}"
@@ -151,27 +152,347 @@
                                 Margin="0,10,0,10"/>
 
                         <Grid Grid.Row="1"
-                              Margin="0,0,0,30">
+                              Margin="0,0,0,30"
+                              windows:Page.ToolbarPlacement="Default">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width=".15*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width=".15*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <!--Sort by Alphabet-->
                             <CollectionView Grid.Column="0" 
-                                            HorizontalOptions="End"
+                                            x:Name="collectionView"
                                             ItemsSource="{Binding Alphabet}"
                                             SelectedItem="{Binding SelectedSortByWord}"
                                             SelectionChangedCommand="{Binding SortByWordCommand}"
-                                            SelectionMode="Single">
+                                            SelectionMode="Single"
+                                            VerticalScrollBarVisibility="Never"
+                                            Margin="10, 0, 10, 0">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical"
+                                                         Span="4"
+                                                         VerticalItemSpacing="0"
+                                                         HorizontalItemSpacing="0"/>
+                                </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Label Text="{Binding .}" HorizontalOptions="End" />
+                                        <Grid  HorizontalOptions="Center"
+                                               VerticalOptions="Center">
+                                            <Border x:Name="border" 
+                                                Stroke="Black"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                StrokeShape="RoundRectangle 80,80,80,80">
+                                                <Border.Triggers>
+                                                    <!--#-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="#"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="#"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--A-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="A"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="A"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--B-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="B"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="B"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--C-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="C"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="C"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--D-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="D"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="D"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--E-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="E"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="E"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--F-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="F"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="F"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--G-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="G"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="G"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--H-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="H"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="H"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--I-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="I"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="I"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--J-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="J"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="J"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--K-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="K"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="K"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--L-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="L"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="L"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--M-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="M"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="M"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--N-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="N"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="N"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--O-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="O"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="O"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--P-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="P"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="P"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--Q-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="Q"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="Q"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--R-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="R"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="R"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--S-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="S"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="S"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--T-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="T"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="T"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--U-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="U"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="U"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--V-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="V"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="V"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--W-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="W"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="W"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--X-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="X"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="X"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--Y-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="Y"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="Y"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--Z-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="Z"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="Z"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                </Border.Triggers>
+                                            </Border>
+                                            <Label x:Name="label"  Text="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
-
+                            
+                            <!--Favorite Words-->
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -277,7 +598,8 @@
                                     </CollectionView>
                                 </Border>
                             </Grid>
-
+                            
+                            <!--Refresh-->
                             <Image Grid.Column="2"
                                        Source="reset.png"
                                        HeightRequest="50"
@@ -300,6 +622,8 @@
                                     <TapGestureRecognizer Command="{Binding RefreshCommand}" />
                                 </Image.GestureRecognizers>
                             </Image>
+                            
+                            <!--Delete-->
                             <Border Grid.Column="2" 
                                     HorizontalOptions="Center"
                                     Stroke="White"
