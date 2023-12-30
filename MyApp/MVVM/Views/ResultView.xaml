@@ -413,26 +413,6 @@
                                             </CollectionView>
                                         </VerticalStackLayout>
                                     </Border>
-
-                                    <!--<Label Text="Synonyms:" FontSize="Large" FontAttributes="Bold"/>
-
-                                    --><!--<CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}">
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Label Text="{Binding .}" FontSize="Medium"/>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
-
-                                    <Label Text="Antonyms:" FontSize="Large" FontAttributes="Bold"/>
-
-                                    <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}">
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Label Text="{Binding .}" FontSize="Medium"/>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>-->
                                 </Grid>
                             </VerticalStackLayout>
                         </ScrollView>
