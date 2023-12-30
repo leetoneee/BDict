@@ -14,6 +14,20 @@ namespace MyApp.MVVM.ViewModels
             _connection.CreateTableAsync<FavoriteWord>();
         }
 
+        public async Task<int> GetRowCountAsync()
+        {
+            return await _connection.Table<FavoriteWord>().CountAsync();
+        }
+
+        public async Task<List<FavoriteWord>> GetWordsStartingWithAsync(string startingLetter)
+        {
+            startingLetter = startingLetter.ToUpper();
+
+            return await _connection.Table<FavoriteWord>()
+                                    .Where(x => x.Word.StartsWith(startingLetter))
+                                    .OrderByDescending(x => x.Word)
+                                    .ToListAsync();
+        }
         public async Task<List<FavoriteWord>> GetFavoriteWords()
         {
             return await _connection.Table<FavoriteWord>().ToListAsync();

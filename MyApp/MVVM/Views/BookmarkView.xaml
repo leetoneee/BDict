@@ -2,93 +2,95 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:helper="clr-namespace:MyApp.Helper"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui" 
              x:Class="MyApp.MVVM.Views.BookmarkView" 
              xmlns:viewmodel="clr-namespace:MyApp.MVVM.ViewModels"
+             xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
              Title="BookmarkView">
-    <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                 Command="{Binding RefreshCommand}">
-        <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height=".130*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height=".1*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".3*"/>
-                <ColumnDefinition Width=".1*"/>
-                <ColumnDefinition Width=".1*"/>
-            </Grid.ColumnDefinitions>
 
-            <!--Heading-->
-            <Grid Grid.Row="0"
+    <OnPlatform x:TypeArguments="RefreshView">
+        <On Platform="Android">
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">
+                <Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".130*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height=".1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".1*"/>
+                        <ColumnDefinition Width=".1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Heading-->
+                    <Grid Grid.Row="0"
                   Grid.ColumnSpan="3"
-                  BackgroundColor="#588157">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".4*"/>
-                    <ColumnDefinition Width=".1*"/>
-                </Grid.ColumnDefinitions>
-                <Label 
-                    Grid.Column="0"
+                  BackgroundColor="#588157"
+                  />
+                    <Label  Grid.Row="0"
+                    Grid.ColumnSpan="3"
                     Text="Favorites" 
                     FontFamily="OpenSansRegular"
-                    HorizontalOptions="FillAndExpand"
+                    HorizontalOptions="CenterAndExpand"
                     VerticalOptions="FillAndExpand"
                     HorizontalTextAlignment="End"
                     VerticalTextAlignment="Center"
                     FontSize="30"
                     FontAttributes="Bold"
                     TextColor="White"
-                    Padding="0, 0, 40, 0"
+                    
                     />
-                
-                <ImageButton Grid.Column="1"
+                    <ImageButton Grid.Row="0"
+                             Grid.ColumnSpan="3"
                              Source="{Binding SourceSorting}"
                              Command="{Binding SortingCommand}"
                              HeightRequest="50"
+                             WidthRequest="50"
                              HorizontalOptions="End"
                              Margin="0, 0, 10, 0">
 
-                </ImageButton>
-            </Grid>
-            
+                    </ImageButton>
 
-            <CollectionView 
+
+                    <CollectionView 
             SelectionMode="None"
             Grid.Row="1" 
             Grid.ColumnSpan="3" 
             ItemsSource="{Binding FavoriteWords}" 
             Margin="0,40,0,20">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems>
-                                    <SwipeItemView>
-                                        <Frame BackgroundColor="Red">
-                                            <ImageButton 
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems>
+                                            <SwipeItemView>
+                                                <Frame BackgroundColor="Red">
+                                                    <ImageButton 
                                            Source="trash.svg"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=DeleteCommand}"
                                            CommandParameter="{Binding .}"/>
-                                        </Frame>
-                                    </SwipeItemView>
-                                </SwipeItems>
-                            </SwipeView.LeftItems>
-                            <Frame 
+                                                </Frame>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+                                    <Frame 
                             Background="#ecebe6"
                             CornerRadius="10" 
                             HasShadow="True" 
                             Margin="20,0,20,20">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=SearchCommand}"
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=SearchCommand}"
                                                       CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                    <Label 
+                                            <Label 
                                     Grid.Column="0" 
                                     Text="{Binding Word}" 
                                     FontSize="18" 
@@ -97,27 +99,569 @@
                                     Opacity="100"
                                     FontFamily="OpenSansRegular" 
                                     HorizontalOptions="Start" />
-                                    <Image 
+                                            <Image 
                                     Grid.Column="1" 
                                     Source="forward.svg" 
                                     Margin="0, 0, 15, 0" 
                                     VerticalOptions="Center"
                                     HorizontalOptions="End"/>
-                                </Grid>
-                            </Frame>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                        </Grid>
+                                    </Frame>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-            <ImageButton 
-            Source="addicon.sg" 
-            Grid.Column="2" 
-            Grid.Row="2" 
-            HorizontalOptions="Center"
-            Command="{Binding AddCommand}"/>
+                    <ImageButton 
+                            Source="addicon.sg" 
+                            Grid.Column="2" 
+                            Grid.Row="2" 
+                            HorizontalOptions="Center"
+                            Command="{Binding AddCommand}"/>
+                </Grid>
+            </RefreshView>
 
-        </Grid>
+        </On>
+        <On Platform="WinUI">
+            <RefreshView windows:RefreshView.RefreshPullDirection="LeftToRight"
+                         IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshCommand}">
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="#A6D2A5"
+                                               Offset="0.0"/>
+                            <GradientStop Color="White"
+                                              Offset="0.5"/>
+                            <GradientStop Color="#B7CBAE"
+                                              Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
 
-    </RefreshView>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Image 
+                                Grid.Row="0" 
+                                Source="logo.png"
+                                HeightRequest="100"
+                                HorizontalOptions="Center"
+                                Margin="0,10,0,10"/>
+
+                        <Grid Grid.Row="1"
+                              Margin="0,0,0,30"
+                              windows:Page.ToolbarPlacement="Default">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".15*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width=".15*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Sort by Alphabet-->
+                            <CollectionView Grid.Column="0" 
+                                            x:Name="collectionView"
+                                            ItemsSource="{Binding Alphabet}"
+                                            SelectedItem="{Binding SelectedSortByWord}"
+                                            SelectionChangedCommand="{Binding SortByWordCommand}"
+                                            SelectionMode="Single"
+                                            VerticalScrollBarVisibility="Never"
+                                            Margin="10, 0, 10, 0">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical"
+                                                         Span="4"
+                                                         VerticalItemSpacing="0"
+                                                         HorizontalItemSpacing="0"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid  HorizontalOptions="Center"
+                                               VerticalOptions="Center">
+                                            <Border x:Name="border" 
+                                                Stroke="Black"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                StrokeShape="RoundRectangle 80,80,80,80">
+                                                <Border.Triggers>
+                                                    <!--#-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="#"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="#"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--A-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="A"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="A"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--B-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="B"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="B"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--C-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="C"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="C"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--D-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="D"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="D"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--E-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="E"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="E"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--F-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="F"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="F"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--G-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="G"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="G"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--H-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="H"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="H"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--I-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="I"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="I"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--J-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="J"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="J"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--K-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="K"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="K"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--L-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="L"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="L"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--M-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="M"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="M"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--N-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="N"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="N"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--O-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="O"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="O"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--P-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="P"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="P"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--Q-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="Q"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="Q"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--R-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="R"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="R"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--S-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="S"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="S"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--T-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="T"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="T"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--U-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="U"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="U"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--V-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="V"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="V"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--W-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="W"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="W"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--X-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="X"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="X"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--Y-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="Y"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="Y"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                    <!--Z-->
+                                                    <MultiTrigger TargetType="Border">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Path=SelectedItem, Source={x:Reference collectionView}}"
+                                                                              Value="Z"/>
+                                                            <BindingCondition Binding="{Binding Path=Text, Source={x:Reference label}}"
+                                                                              Value="Z"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="#A3B18A"/>
+                                                    </MultiTrigger>
+                                                </Border.Triggers>
+                                            </Border>
+                                            <Label x:Name="label"  Text="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            
+                            <!--Favorite Words-->
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0"                                 
+                                    StrokeThickness="1"
+                                    Stroke="Black"
+                                    BackgroundColor="#ffffff"
+                                    HorizontalOptions="Fill">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="5,5,5,5" />
+                                    </Border.StrokeShape>
+                                    <CollectionView SelectionMode="None"
+                                                    ItemsSource="{Binding FavoriteWords}"
+                                                    VerticalScrollBarVisibility="Always">
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout Orientation="Vertical"
+                                                         Span="4"
+                                                         VerticalItemSpacing="20"
+                                                         HorizontalItemSpacing="30"/>
+                                        </CollectionView.ItemsLayout>                                        
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Stroke="#A3B18A"
+                                                    StrokeThickness="4"
+                                                    Background="#588157"
+                                                    HorizontalOptions="Center"
+                                                    ToolTipProperties.Text="Click for more infomation">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="0,40,40,0" />
+                                                    </Border.StrokeShape>
+                                                    
+                                                    <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=SearchCommand}"
+                                                                              CommandParameter="{Binding .}"
+                                                                              Buttons="Primary"/>
+
+                                                        <DragGestureRecognizer CanDrag="True"
+                                                                               DragStartingCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=DragStartedCommand}"
+                                                                               DragStartingCommandParameter="{Binding .}"
+                                                                               DropCompletedCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BookmarkViewModel}}, Path=DragCompletedCommand}"/>
+                                                    </Border.GestureRecognizers>
+                                                    
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border Grid.Column="0"
+                                                                HorizontalOptions="Start"
+                                                                VerticalOptions="Start"
+                                                                Stroke="White"
+                                                                Background="White"  
+                                                                StrokeShape="RoundRectangle 90,90,90,90"
+                                                                HeightRequest="12"
+                                                                WidthRequest="12"
+                                                                Margin="8,5"/>
+                                                        <Label Grid.Column="1"
+                                                           Text="{Binding Word}"
+                                                           TextColor="White"
+                                                           FontSize="18"
+                                                           FontAttributes="Bold" 
+                                                           Margin="8,8"/>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                        <CollectionView.EmptyView>
+                                            <ContentView>
+                                                <StackLayout HorizontalOptions="CenterAndExpand"
+                                                             VerticalOptions="CenterAndExpand">
+                                                    <Label Text="No results matched your filter."
+                                                           Margin="10,25,10,10"
+                                                           FontAttributes="Bold"
+                                                           FontSize="18"
+                                                           HorizontalOptions="Fill"
+                                                           HorizontalTextAlignment="Center" >
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label" 
+                                                                         Binding="{Binding RowCount}"
+                                                                         Value="0">
+                                                                <Setter Property="Text" Value="There is nothing in your Bookmark"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                    <Label Text="Try a broader filter?"
+                                                           FontAttributes="Italic"
+                                                           FontSize="12"
+                                                           HorizontalOptions="Fill"
+                                                           HorizontalTextAlignment="Center">
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label" 
+                                                                         Binding="{Binding RowCount}"
+                                                                         Value="0">
+                                                                <Setter Property="Text" Value="Add a new word?"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                </StackLayout>
+                                            </ContentView>
+                                        </CollectionView.EmptyView>
+                                    </CollectionView>
+                                </Border>
+                            </Grid>
+                            
+                            <!--Refresh-->
+                            <Image Grid.Column="2"
+                                       Source="reset.png"
+                                       HeightRequest="50"
+                                       HorizontalOptions="Center"
+                                       Margin="0,10,0,10"
+                                       ToolTipProperties.Text="Click to refresh">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image"
+                                                 Binding="{Binding IsDragged}"
+                                                 Value="true">
+                                        <Setter Property="IsVisible" Value="false"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image"
+                                                 Binding="{Binding IsDragged}"
+                                                 Value="false">
+                                        <Setter Property="Source" Value="reset.png"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RefreshCommand}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            
+                            <!--Delete-->
+                            <Border Grid.Column="2" 
+                                    HorizontalOptions="Center"
+                                    Stroke="White"
+                                    Background="Red"  
+                                    StrokeShape="RoundRectangle 90,90,90,90"
+                                    HeightRequest="100"
+                                    WidthRequest="100"
+                                    IsVisible="{Binding IsDragged}"
+                                    Opacity="0.5"
+                                    ToolTipProperties.Text="Drop to delete">
+                                <Border.GestureRecognizers>
+                                    <DropGestureRecognizer AllowDrop="True"
+                                                           DropCommand="{Binding TaskDroppedCommand}"/>
+                                </Border.GestureRecognizers>
+                            </Border>
+                            <Image Grid.Column="2"
+                                       Source="watse.png"
+                                       HeightRequest="50"
+                                       HorizontalOptions="Center"
+                                       Margin="0,10,0,10"
+                                       IsVisible="{Binding IsDragged}"
+                                       ToolTipProperties.Text="Drop to delete">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image"
+                                                 Binding="{Binding IsDragged}"
+                                                 Value="true">
+                                        <Setter Property="Source" Value="waste.png"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                                <Image.GestureRecognizers>
+                                    <DropGestureRecognizer AllowDrop="True"
+                                                           DropCommand="{Binding TaskDroppedCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </RefreshView>
+        </On>
+    </OnPlatform>
 </ContentPage>

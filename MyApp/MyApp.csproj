@@ -24,7 +24,7 @@
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">22.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
@@ -34,9 +34,9 @@
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	</PropertyGroup>
 
-	<PropertyGroup>
+	<!--<PropertyGroup>
 		<AndroidLinkMode>None</AndroidLinkMode>
-	</PropertyGroup>
+	</PropertyGroup>-->
 
 	<ItemGroup>
 		<!-- App Icon -->
@@ -62,6 +62,7 @@
 	  <None Remove="Resources\Fonts\Free-Solid-900.otf" />
 	  <None Remove="Resources\Fonts\OpenSans-Bold.ttf" />
 	  <None Remove="Resources\Fonts\OpenSans-ExtraBold.ttf" />
+	  <None Remove="Resources\Fonts\Ovo-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Black.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-BlackItalic.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Bold.ttf" />
@@ -74,35 +75,47 @@
 	  <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
+	  <None Remove="Resources\Images\arrow_back.png" />
 	  <None Remove="Resources\Images\arrow_back.svg" />
 	  <None Remove="Resources\Images\bdict.svg" />
+	  <None Remove="Resources\Images\bookmark.png" />
 	  <None Remove="Resources\Images\Bookmark.svg" />
+	  <None Remove="Resources\Images\clearicon.png" />
+	  <None Remove="Resources\Images\converticon.png" />
 	  <None Remove="Resources\Images\copy_outline_black.svg" />
-	  <None Remove="Resources\Images\clearicon.svg" />
-	  <None Remove="Resources\Images\converticon.svg" />
 	  <None Remove="Resources\Images\Forward.svg" />
+	  <None Remove="Resources\Images\heart_fill.png" />
 	  <None Remove="Resources\Images\heart_fill.svg" />
+	  <None Remove="Resources\Images\heart_unfill.png" />
 	  <None Remove="Resources\Images\heart_unfill.svg" />
+	  <None Remove="Resources\Images\info.png" />
 	  <None Remove="Resources\Images\Info.svg" />
+	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\logoloading.svg" />
+	  <None Remove="Resources\Images\look_up.png" />
 	  <None Remove="Resources\Images\look_up.svg" />
 	  <None Remove="Resources\Images\play_sound.svg" />
 	  <None Remove="Resources\Images\polygon_bottom.svg" />
+	  <None Remove="Resources\Images\refresh.png" />
 	  <None Remove="Resources\Images\Refresh.svg" />
+	  <None Remove="Resources\Images\reset.png" />
+	  <None Remove="Resources\Images\search.png" />
 	  <None Remove="Resources\Images\sort.svg" />
 	  <None Remove="Resources\Images\sortA2Z.svg" />
 	  <None Remove="Resources\Images\sortz2a.svg" />
+	  <None Remove="Resources\Images\translator.png" />
 	  <None Remove="Resources\Images\translator.svg" />
 	  <None Remove="Resources\Images\copy_icon.svg" />
 	  <None Remove="Resources\Images\Trash.svg" />
-	  <None Remove="Resources\Raw\10000words.txt" />
+	  <None Remove="Resources\Images\waste.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="2.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="MimeKit" Version="4.3.0" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="2.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
@@ -111,6 +124,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="MVVM\Views\BookmarkView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\FlyoutMenuPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\FlyoutView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\InfoView.xaml">

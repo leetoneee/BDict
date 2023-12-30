@@ -8,7 +8,10 @@ namespace MyApp
         {
             InitializeComponent();
 
-            MainPage = new LoadingView();
+            if (DeviceInfo.Platform == DevicePlatform.Android)
+                MainPage = new LoadingView();
+            if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                MainPage = new FlyoutView();
         }
     }
 }

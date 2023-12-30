@@ -98,8 +98,8 @@ namespace MyApp.MVVM.ViewModels
 
         public TranslatorViewModel()
         {
-            LangFirst = "English";
-            LangSecond = "Vietnamese";
+            LangFirst = "ENGLISH";
+            LangSecond = "VIETNAMESE";
             ConvertCommand = new Command(twoArrowBtn_Clicked);
             CopyCommand1 = new Command(copyBtn1_Clicked);
             CopyCommand2 = new Command(copyBtn2_Clicked);

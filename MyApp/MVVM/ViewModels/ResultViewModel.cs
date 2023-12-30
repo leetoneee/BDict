@@ -2,6 +2,7 @@
 using MyApp.MVVM.Models;
 using MyApp.MVVM.Views;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Text.Json;
 using System.Windows.Input;
 
@@ -169,20 +170,20 @@ namespace MyApp.MVVM.ViewModels
         {
             FavoriteWord = await _dbService.GetByWord(inputWord); 
             IsFavorite = FavoriteWord != null;
-            SourceFavorite = IsFavorite ? "heart_fill.svg" : "heart_unfill.svg";
+            SourceFavorite = IsFavorite ? "heart_fill.png" : "heart_unfill.png";
         }
 
         public async void favoriteCommand()
         {
             if (IsFavorite)
             {
-                SourceFavorite = "heart_unfill.svg";
+                SourceFavorite = "heart_unfill.png";
                 IsFavorite = false;
                 await _dbService.DeleteByWordAsync(inputWord);
             }
             else
             {
-                SourceFavorite = "heart_fill.svg";
+                SourceFavorite = "heart_fill.png";
                 IsFavorite = true;
                 await _dbService.Create(new FavoriteWord
                 {
@@ -215,6 +216,7 @@ namespace MyApp.MVVM.ViewModels
             string temp = SelectedWord;
             if (temp != null)
             {
+                temp = NormalizeWord(temp);
                 // Tạo view model và trang chi tiết
                 var resultViewModel = new ResultViewModel(temp);
                 var resultView = new ResultView();
@@ -226,6 +228,16 @@ namespace MyApp.MVVM.ViewModels
                 // Đặt lại chọn để tránh xử lý lặp
                 SelectedWord = null;
             }
+        }
+
+        static string NormalizeWord(string inputWord)
+        {
+            string trimmedWord = inputWord.Trim();
+
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            string normalizedWord = textInfo.ToTitleCase(trimmedWord.ToLower());
+
+            return normalizedWord;
         }
     }
 }

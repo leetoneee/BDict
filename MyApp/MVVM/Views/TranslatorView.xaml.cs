@@ -8,5 +8,6 @@ public partial class TranslatorView : ContentPage
     {
         InitializeComponent();
         BindingContext = new TranslatorViewModel();
+        NavigationPage.SetHasNavigationBar(this, false);
     }
 }
