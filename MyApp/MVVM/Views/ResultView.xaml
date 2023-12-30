@@ -20,7 +20,7 @@
                             <ColumnDefinition Width=".7*"/>
                             <ColumnDefinition Width=".4*"/>
                         </Grid.ColumnDefinitions>
-
+                        
                         <!--BackButton-->
                         <ImageButton x:Name="backIcon"
                                      Source="arrow_back.svg"
@@ -90,6 +90,29 @@
                                        HeightRequest="600" VerticalOptions="Center" HorizontalOptions="Center"/>
 
                     <!--<WordDefinition>-->
+                    <Border IsVisible="{Binding IsVisibleElement}" Margin="10" HorizontalOptions="Center"
+                            HeightRequest="300" WidthRequest="300">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5,5,5,5" />
+                        </Border.StrokeShape>
+                        <CarouselView ItemsSource="{Binding ListImg}" HorizontalOptions="CenterAndExpand" IndicatorView="indicatorView">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding .}"
+                                           Aspect="Fill"
+                                           HeightRequest="300"
+                                           WidthRequest="300"/>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                    </Border>
+
+                    <IndicatorView x:Name="indicatorView" 
+                                   Margin="5" HorizontalOptions="Center" 
+                                   IsVisible="{Binding IsVisibleElement}"
+                                   IndicatorColor="#A3B18A"
+                                   SelectedIndicatorColor="#588157"/>
+
                     <Frame Margin="10" BorderColor="Black" IsVisible="{Binding IsVisibleElement}">
                         <CollectionView ItemsSource="{Binding Definitions}" HorizontalOptions="CenterAndExpand">
                             <CollectionView.ItemTemplate>
@@ -246,135 +269,135 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width=".15*"/>
                                     </Grid.ColumnDefinitions>
-                                <Border BackgroundColor="White" Padding="20" Margin="0,10,0,10" Grid.Column="1" Grid.Row="0">
+                                    <Border BackgroundColor="White" Padding="20" Margin="0,10,0,10" Grid.Column="1" Grid.Row="0">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="5,5,5,5" />
                                         </Border.StrokeShape>
                                         <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Row="0" Grid.Column="0"
+                                            <Label Grid.Row="0" Grid.Column="0"
                                             Text="{Binding Word}"
                                                FontSize="Large"
                                                TextColor="#0E5B0C"
                                                FontAttributes="Bold"/>
-                                        <!--<Label Grid.Row="0" 
+                                            <!--<Label Grid.Row="0" 
                                             Grid.Column="1"
                                             Text="Heart" HorizontalOptions="End"/>-->
 
-                                        <ImageButton Grid.Row="0" Grid.Column="1"
+                                            <ImageButton Grid.Row="0" Grid.Column="1"
                                              HeightRequest="20"
                                              HorizontalOptions="End"
                                              IsVisible="{Binding IsVisibleElement}"
                                              Source="{Binding SourceFavorite}"
                                              Command="{Binding FavoriteCommand}">
-                                        </ImageButton>
+                                            </ImageButton>
 
                                             <Label Grid.Row="1" Grid.Column="0"
                                             Text="{Binding Phonetic}"
                                                FontSize="Medium"/>
 
-                                        <toolkit:MediaElement Grid.Row="2" 
+                                            <toolkit:MediaElement Grid.Row="2" 
                                                             Grid.ColumnSpan="2" 
                                                             HorizontalOptions="Center"
                                                             Source="{Binding Audio}"/>
 
-                                    </Grid>
-                                </Border>
+                                        </Grid>
+                                    </Border>
 
                                     <Border BackgroundColor="White" Padding="20" Margin="0,10,0,10" Grid.Column="1" Grid.Row="1">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="5,5,5,5" />
                                         </Border.StrokeShape>
                                         <CollectionView ItemsSource="{Binding Definitions}" HorizontalOptions="Start">
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Label x:Name="label" FontSize="Medium" Text="{Binding .}" Padding="10">
-                                                    <Label.Triggers>
-                                                        <DataTrigger TargetType="Label"
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label x:Name="label" FontSize="Medium" Text="{Binding .}" Padding="10">
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label"
                                                                     Binding="{Binding Source={x:Reference label},
                                                                     Path=Text}"
                                                                     Value="NOUN:">
-                                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                                            <Setter Property="FontSize" Value="Large"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger TargetType="Label"
+                                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                                <Setter Property="FontSize" Value="Large"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
                                                                     Binding="{Binding Source={x:Reference label},
                                                                     Path=Text}"
                                                                     Value="VERB:">
-                                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                                            <Setter Property="FontSize" Value="Large"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger TargetType="Label"
+                                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                                <Setter Property="FontSize" Value="Large"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
                                                                     Binding="{Binding Source={x:Reference label},
                                                                     Path=Text}"
                                                                     Value="INTERJECTION:">
-                                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                                            <Setter Property="FontSize" Value="Large"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger TargetType="Label"
+                                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                                <Setter Property="FontSize" Value="Large"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
                                                                     Binding="{Binding Source={x:Reference label},
                                                                     Path=Text}"
                                                                     Value="ADJECTIVE:">
-                                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                                            <Setter Property="FontSize" Value="Large"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger TargetType="Label"
+                                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                                <Setter Property="FontSize" Value="Large"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
                                                                     Binding="{Binding Source={x:Reference label},
                                                                     Path=Text}"
                                                                     Value="ADVERB:">
-                                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                                            <Setter Property="FontSize" Value="Large"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger TargetType="Label"
+                                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                                <Setter Property="FontSize" Value="Large"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
                                                                     Binding="{Binding Source={x:Reference label},
                                                                     Path=Text}"
                                                                     Value="PREPOSITION:">
-                                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                                            <Setter Property="FontSize" Value="Large"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger TargetType="Label"
+                                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                                <Setter Property="FontSize" Value="Large"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
                                                                     Binding="{Binding Source={x:Reference label},
                                                                     Path=Text}"
                                                                     Value="CONJUNCTION:">
-                                                            <Setter Property="FontAttributes" Value="Bold"/>
-                                                            <Setter Property="FontSize" Value="Large"/>
-                                                        </DataTrigger>
-                                                    </Label.Triggers>
-                                                </Label>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
-                                </Border>
+                                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                                <Setter Property="FontSize" Value="Large"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </Border>
 
                                     <Border BackgroundColor="White" Padding="20" Margin="0,10,0,50" Grid.Column="1" Grid.Row="2">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="5,5,5,5" />
                                         </Border.StrokeShape>
                                         <VerticalStackLayout Spacing="10">
-                                    <Label Text="Synonyms:" FontSize="Large" FontAttributes="Bold"/>
-                                    <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}"
+                                            <Label Text="Synonyms:" FontSize="Large" FontAttributes="Bold"/>
+                                            <CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}"
                                                     HorizontalScrollBarVisibility="Default"
                                                     Margin="10,0,10,10">
-                                            <CollectionView.ItemsLayout>
-                                                <LinearItemsLayout Orientation="Horizontal"
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout Orientation="Horizontal"
                                                                     ItemSpacing="20"/>
-                                            </CollectionView.ItemsLayout>
+                                                </CollectionView.ItemsLayout>
                                                 <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Label Text="{Binding .}" FontSize="Medium"/>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
-                                    <Label Text="Antonyms:" FontSize="Large" FontAttributes="Bold"/>
+                                                    <DataTemplate>
+                                                        <Label Text="{Binding .}" FontSize="Medium"/>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                            <Label Text="Antonyms:" FontSize="Large" FontAttributes="Bold"/>
                                             <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}" 
                                                             HorizontalScrollBarVisibility="Default" 
                                                             Margin="10,0,10,10">
@@ -383,19 +406,37 @@
                                                                        ItemSpacing="20"/>
                                                 </CollectionView.ItemsLayout>
                                                 <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Label Text="{Binding .}" FontSize="Medium"/>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </VerticalStackLayout>
+                                    </Border>
+
+                                    <!--<Label Text="Synonyms:" FontSize="Large" FontAttributes="Bold"/>
+
+                                    --><!--<CollectionView ItemsSource="{Binding Synonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}">
+                                        <CollectionView.ItemTemplate>
                                             <DataTemplate>
                                                 <Label Text="{Binding .}" FontSize="Medium"/>
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
                                     </CollectionView>
-                                </VerticalStackLayout>
-                            </Border>
-                                </Grid>
 
+                                    <Label Text="Antonyms:" FontSize="Large" FontAttributes="Bold"/>
+
+                                    <CollectionView ItemsSource="{Binding Antonyms}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectedItem="{Binding SelectedWord}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Text="{Binding .}" FontSize="Medium"/>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>-->
+                                </Grid>
                             </VerticalStackLayout>
                         </ScrollView>
                     </Grid>
-                    
                 </VerticalStackLayout>
             </ScrollView>
         </On>

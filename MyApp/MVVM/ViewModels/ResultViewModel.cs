@@ -3,8 +3,11 @@ using MyApp.MVVM.Models;
 using MyApp.MVVM.Views;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Text.Json;
 using System.Windows.Input;
+using Image = MyApp.MVVM.Models.Image;
 
 namespace MyApp.MVVM.ViewModels
 {
@@ -34,6 +37,9 @@ namespace MyApp.MVVM.ViewModels
         public ObservableCollection<String> antonyms;
 
         [ObservableProperty]
+        public ObservableCollection<String> listImg;
+
+        [ObservableProperty]
         public bool isProcessing;
 
         [ObservableProperty]
@@ -47,6 +53,9 @@ namespace MyApp.MVVM.ViewModels
 
         [ObservableProperty]
         public FavoriteWord favoriteWord;
+
+        [ObservableProperty]
+        public string imgUrl;
 
         private readonly BookmarkDbServices _dbService;
 
@@ -136,6 +145,42 @@ namespace MyApp.MVVM.ViewModels
             }
         }
 
+        public async Task FetchImgAPI()
+        {
+            //var client = new HttpClient();
+            //var request = new HttpRequestMessage(HttpMethod.Get, "https://api.pexels.com/v1/search?query=Nature");
+            //request.Headers.Add("Authorization", "93p2dGp3NcvGaZTj193oCDUPTVOaEy6gtOxtUHr3BryYk2tGyWv58IB8");
+            //request.Headers.Add("Cookie", "__cf_bm=arcTQShw0wLWYYLU_hY4RD8XYUjJvcZg5JMxfUWe.q8-1703817698-1-AT602yeqjvvJ4tryRqiFbM3W+U5m/2z5XoLdnk/3C3o0vDOFhz5FUfrVOU7iXgK/Ci7Yy2BMa8Y03ivS1w2B9iM=");
+            //var response = await client.SendAsync(request);
+            //response.EnsureSuccessStatusCode();
+
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://api.pexels.com/v1/search?query=" + inputWord);
+
+            request.Headers.Add("Authorization", "93p2dGp3NcvGaZTj193oCDUPTVOaEy6gtOxtUHr3BryYk2tGyWv58IB8");
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+            var jsonImg = await response.Content.ReadAsStringAsync();
+
+            Image img = JsonSerializer.Deserialize<Image>(jsonImg);
+            await Console.Out.WriteLineAsync(img.photos[0].src.original);
+            ImgUrl = img.photos[0].src.original;
+
+            await Console.Out.WriteLineAsync("---ListBegin");
+            Console.WriteLine(img.photos.Count);
+            for (int i = 0; i < img.photos.Count; i++)
+            {
+                ListImg.Add(img.photos[i].src.original);
+                Console.WriteLine(img.photos[i].src.original + "\n");
+            }
+            await Console.Out.WriteLineAsync("---ListEnd");
+
+            //for (int i = 0; i < ListImg.Count; i++)
+            //    await Console.Out.WriteLineAsync(ListImg[i]);
+        }
+
         //Constructor mặc định
         public ResultViewModel()
         {
@@ -151,11 +196,13 @@ namespace MyApp.MVVM.ViewModels
             Definitions = new ObservableCollection<string>();
             Synonyms = new ObservableCollection<string>();
             Antonyms = new ObservableCollection<string>();
+            ListImg = new ObservableCollection<string>();
 
             // Fetch API data
             IsProcessing = true;
             IsVisibleElement = false;
             _ = FetchAPI();
+            _ = FetchImgAPI();
 
             // Check if the word is a favorite
             _ = CheckIfFavoriteAsync();
