@@ -1,4 +1,5 @@
-﻿using MyApp.MVVM.Views;
+﻿using MetroLog.Maui;
+using MyApp.MVVM.Views;
 
 namespace MyApp
 {
@@ -12,6 +13,10 @@ namespace MyApp
                 MainPage = new LoadingView();
             if (DeviceInfo.Platform == DevicePlatform.WinUI)
                 MainPage = new FlyoutView();
+
+            LogController.InitializeNavigation(
+                page => MainPage!.Navigation.PushModalAsync(page),
+                () =>  MainPage!.Navigation.PopModalAsync());
         }
     }
 }

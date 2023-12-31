@@ -56,7 +56,8 @@
                     HeightRequest="34"
                     FontSize="15" 
                     FontFamily="RobotoRegular"
-                    SearchCommand="{Binding SearchCommand}" />
+                    SearchButtonPressed="searchBar_SearchButtonPressed"
+                    SearchCommand="{Binding SearchCommand}"/>
 
                     </Border>
                 </Grid>
@@ -91,7 +92,7 @@
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <Label 
                                         Grid.Column="0" 
@@ -129,7 +130,8 @@
                     <Border 
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 10,10,10,10"
-                HeightRequest="200"
+                MinimumHeightRequest="170"
+                MaximumHeightRequest="180"
                 BackgroundColor="#b7cbae">
                         <Grid>
                             <Grid.GestureRecognizers>
@@ -179,7 +181,7 @@
                         FontSize="22"
                         TextColor="#036D19" 
                         FontFamily="RobotoBold" 
-                        Margin="30, 10, 20, 10" 
+                        Margin="30, 20, 20, 10" 
                         VerticalOptions="End"/>
 
                         </Grid>

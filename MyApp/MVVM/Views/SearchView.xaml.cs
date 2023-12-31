@@ -11,8 +11,9 @@ public partial class SearchView : ContentPage
         NavigationPage.SetHasNavigationBar(this, false);
     }
 
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+
+    private void searchBar_SearchButtonPressed(object sender, EventArgs e)
     {
-        
+        searchBar.Unfocus();
     }
 }

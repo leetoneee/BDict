@@ -66,6 +66,7 @@
                 <Label 
                         Grid.Row="1" 
                         Grid.Column="0"
+                        Grid.ColumnSpan="2"
                         Text="{Binding LangFirst}" 
                         FontSize="18"
                         Margin="30,10,0,0" 
@@ -145,6 +146,7 @@
                 <Label 
                         Grid.Row="4" 
                         Grid.Column="0"
+                        Grid.ColumnSpan="2"
                         Text="{Binding LangSecond}" 
                         FontSize="18"
                         Margin="30,10,0,0" 

@@ -5,6 +5,7 @@ using MyApp.MVVM.ViewModels;
 using MyApp.MVVM.Views;
 
 using Plugin.Maui.Audio;
+using MetroLog.MicrosoftExtensions;
 
 namespace MyApp
 {
@@ -42,6 +43,10 @@ namespace MyApp
             builder.Services.AddSingleton(AudioManager.Current);
             builder.Services.AddTransient<ResultView>();
             builder.Services.AddTransient<ResultViewModel>();
+            builder.Logging.AddTraceLogger(_ => {  });
+            builder.Logging.AddInMemoryLogger(_ => { });
+            builder.Logging.AddStreamingFileLogger(_ => { });
+            builder.Services.AddTransient<InfoView>();
 #if WINDOWS
         builder.ConfigureLifecycleEvents(events =>
         {

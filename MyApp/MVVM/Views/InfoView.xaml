@@ -25,58 +25,170 @@
                         TextColor="White"
                         BackgroundColor="#588157"
                         Padding="20"/>
+                    <Switch IsToggled="{Binding IsShakeEnabled}"/>
 
-                    <StackLayout 
+                    <VerticalStackLayout
                         Grid.Row="1"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
                         Spacing="5">
-                        <Label 
-                            Text="Scan QR code" 
-                            FontAttributes="Bold" 
-                            FontSize="30" 
-                            HorizontalOptions="Center"/>
 
-                        <Label 
-                            Text="The app will request access to" 
-                            FontSize="20" 
-                            HorizontalOptions="Center"/>
+                        <Image Source="logo.svg"
+                               HeightRequest="100"
+                               HorizontalOptions="Center"/>
+                        
+                        <Grid HorizontalOptions="Fill">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".7*"/>
+                                <ColumnDefinition Width=".3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                    StrokeThickness="0"
+                                    HeightRequest="5"
+                                    BackgroundColor="Green"
+                                    StrokeShape="RoundRectangle 5,5,5,5"
+                                    Margin="10, 5, 10, 5"/>
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Text="App"
+                                   FontSize="Large"
+                                   FontAttributes="Bold"
+                                   Margin="10,5,10,5"/>
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="BDict Dictionary"
+                                   FontSize="Body" 
+                                   Margin="10,5,10,5"/>
+                            <Button Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                                    Text="Homepage"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    Margin="10,5,10,5"
+                                    Padding="5"
+                                    BackgroundColor="#588157"
+                                    Clicked="onHomepageButton_Clicked"/>
+                        </Grid>
 
-                        <Label 
-                            Text="the camera for code scanning" 
-                            FontSize="20" 
-                            HorizontalOptions="Center"/>
+                        <Grid HorizontalOptions="Fill">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".7*"/>
+                                <ColumnDefinition Width=".3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                    StrokeThickness="0"
+                                    HeightRequest="5"
+                                    BackgroundColor="Green"
+                                    StrokeShape="RoundRectangle 5,5,5,5"
+                                    Margin="10, 5, 10, 5"/>
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Text="Version"
+                                   FontSize="Large"
+                                   FontAttributes="Bold"
+                                   Margin="10,5,10,5"/>
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="V1.0.1"
+                                   FontSize="Body" 
+                                   Margin="10,5,10,5"/>
+                            <Button Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                                    Text="Update"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    Margin="10,5,10,5"
+                                    Padding="5"
+                                    BackgroundColor="#588157"
+                                    Clicked="updateBtn_Clicked"/>
+                        </Grid>
 
+                        <Grid HorizontalOptions="Fill">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".7*"/>
+                                <ColumnDefinition Width=".3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                    StrokeThickness="0"
+                                    HeightRequest="5"
+                                    BackgroundColor="Green"
+                                    StrokeShape="RoundRectangle 5,5,5,5"
+                                    Margin="10, 5, 10, 5"/>
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Text="Feedback"
+                                   FontSize="Large"
+                                   FontAttributes="Bold"
+                                   Margin="10,5,10,5"/>
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="Thank you for providing your feedback!"
+                                   FontSize="Body" 
+                                   Margin="10,5,10,5"/>
+                            <Button Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                                    Text="Send"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    Margin="10,5,10,5"
+                                    Padding="5"
+                                    BackgroundColor="#588157"
+                                    Clicked="OnSendButtonClicked"/>
+                        </Grid>
 
-                        <Image 
-                Source="logo.png" />
-                        <StackLayout  
-            Orientation="Horizontal" 
-            HorizontalOptions="Center">
-                            <Label 
-                Text="or visit our" 
-                FontSize="20" 
-                HorizontalOptions="Center"/>
-                            <Label 
-                Text=" Homepage" 
-                TextColor="Blue" 
-                FontSize="20" 
-                HorizontalOptions="Center">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding HomepageCommand}"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>
+                        <Grid HorizontalOptions="Fill"
+                              Margin="10,0,10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".1*" />
+                                <ColumnDefinition Width=".9*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Button x:Name="updateBtn"
-                    Text="Check For Update"
-                    FontSize="Large"
-                    Margin="10"
-                    Padding="10"
-                    BackgroundColor="#588157"
-                    Command="{Binding UpdateCommand}"/>
-                    </StackLayout>
+                            <Image Grid.Row="0" Grid.Column="0"
+                                   Source="email.svg"/>
+                            <Entry Grid.Row="0" Grid.Column="1"
+                                   Placeholder="youremail@gmail.com"
+                                   HorizontalOptions="FillAndExpand"
+                                   ClearButtonVisibility="WhileEditing"/>
+                        </Grid>
 
+                        <Grid HorizontalOptions="Fill"
+                              Margin="10,0,10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".1*" />
+                                <ColumnDefinition Width=".9*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="0" Grid.Column="0"
+                                   Source="title.svg"/>
+                            <Entry Grid.Row="0" Grid.Column="1"
+                                   Placeholder="Title of mail"
+                                   HorizontalOptions="FillAndExpand"
+                                   ClearButtonVisibility="WhileEditing"/>
+                        </Grid>
+                        
+                        <Grid HorizontalOptions="Fill"
+                              VerticalOptions="FillAndExpand"
+                              MinimumHeightRequest="120"
+                              MaximumHeightRequest="130"
+                              Margin="10,0,10,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".1*" />
+                                <ColumnDefinition Width=".9*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="0" Grid.Column="0"
+                                   Source="content.svg"/>
+                            <Editor Grid.Row="0" Grid.Column="1"
+                                    x:Name="feedbackEditorA"
+                                    Placeholder="Enter your feedback"
+                                    HorizontalOptions="FillAndExpand"/>
+                        </Grid>
+
+                    </VerticalStackLayout>
                 </Grid>
             </VerticalStackLayout>
         </On>
@@ -152,13 +264,14 @@
                                 FontSize="Small"
                                 BackgroundColor="#588157"
                                 CornerRadius="10"
-                                Command="{Binding HomepageCommand}"/>
+                                Clicked="onHomepageButton_Clicked"/>
                             <Button 
                                 Text="Check for update"
                                 FontSize="Small"
                                 BackgroundColor="#588157"
                                 CornerRadius="10"
-                                Command="{Binding UpdateCommand}"/>
+                                Clicked="updateBtn_Clicked"/>
+
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
 
@@ -213,7 +326,7 @@
                                 FontFamily="OpenSans" 
                                 Margin="20,0,20,10"/>
                             <Editor 
-                                x:Name="feedbackEditor"
+                                x:Name="feedbackEditorW"
                                 Placeholder="Enter your feedback" 
                                 BackgroundColor="White" 
                                 Margin="20,0,20,10"

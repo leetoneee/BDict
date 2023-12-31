@@ -38,7 +38,7 @@
                                FontFamily="OpenSansBold"
                                VerticalTextAlignment="Start"
                                Padding="10, 0, 0, 0"
-                               Text="{Binding Word}" TextColor="White" FontSize="48"
+                               Text="{Binding Word}" TextColor="White" FontSize="40"
                                />
 
                         <!--Phonetic-->
