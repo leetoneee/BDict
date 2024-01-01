@@ -16,6 +16,7 @@ public partial class InfoView : ContentPage
         InitializeComponent();
         BindingContext = new LogController();
         NavigationPage.SetHasNavigationBar(this, false);
+        verNow.Text = AppInfo.VersionString;
     }
     private async void OnSendButtonClicked(object sender, EventArgs e)
     {
