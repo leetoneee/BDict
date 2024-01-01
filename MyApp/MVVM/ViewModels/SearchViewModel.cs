@@ -24,7 +24,7 @@ namespace MyApp.MVVM.ViewModels
         private string randomWord;
 
         [ObservableProperty]
-        private ObservableCollection<string> randomWords;
+        public ObservableCollection<string> randomWords;
 
         private readonly RecentDbServices _recentWordService;
         private int _editWordId;

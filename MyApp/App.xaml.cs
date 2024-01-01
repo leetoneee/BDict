@@ -7,6 +7,7 @@ namespace MyApp
     {
         public App()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzAwNzQ1OEAzMjM0MmUzMDJlMzBuYjQ5U2ZtWmx4V2VWdUszck04L0lyemNOa3JzbEhaTW5iQzhzK01KZXZVPQ==");
             InitializeComponent();
 
             if (DeviceInfo.Platform == DevicePlatform.Android)

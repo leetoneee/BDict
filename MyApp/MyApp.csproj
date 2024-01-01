@@ -124,6 +124,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.7" />
+		<PackageReference Include="Syncfusion.Maui.Inputs" Version="24.1.43" />
 	</ItemGroup>
 
 	<ItemGroup>
