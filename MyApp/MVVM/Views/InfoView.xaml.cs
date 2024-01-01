@@ -107,4 +107,12 @@ public partial class InfoView : ContentPage
     {
         Launcher.OpenAsync(new Uri("https://lehuudouit.github.io/WebBDict/"));
     }
+
+    private void switch_log_Toggled(object sender, ToggledEventArgs e)
+    {
+        if (switch_log.IsToggled == true)
+        {
+            DisplayAlert("Reminder", "Shake your phone to open LogPage", "OK");
+        }
+    }
 }
