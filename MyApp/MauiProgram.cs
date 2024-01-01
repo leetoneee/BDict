@@ -3,7 +3,7 @@ using Microsoft.Maui.LifecycleEvents;
 using Microsoft.Extensions.Logging;
 using MyApp.MVVM.ViewModels;
 using MyApp.MVVM.Views;
-
+using Syncfusion.Maui.Core.Hosting;
 using Plugin.Maui.Audio;
 using MetroLog.MicrosoftExtensions;
 
@@ -14,6 +14,7 @@ namespace MyApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+            builder.ConfigureSyncfusionCore();
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkitMediaElement()

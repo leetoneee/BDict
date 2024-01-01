@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyApp.MVVM.Views.SearchView"
+             xmlns:control="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              Title="SearchView">
     <OnPlatform x:TypeArguments="VerticalStackLayout">
         <On Platform="Android">
@@ -34,32 +35,52 @@
                 HorizontalOptions="End"
                 Margin="0,0,15,0"/>
 
-                    <Border 
-                Grid.Row="1" 
-                Grid.ColumnSpan="2"
-                VerticalOptions="End"
+                    <Grid Grid.Row="1" 
+                          Grid.ColumnSpan="2"
+                          VerticalOptions="End">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 90,90,90,90"
-                WidthRequest="350"
+                HorizontalOptions="Fill"
                 HeightRequest="50"
-                Padding="2,8"
-                HorizontalOptions="Center">
+                        Margin="15,0,15,0">
 
-                        <SearchBar 
+                            <control:SfAutocomplete 
                     x:Name="searchBar"
+                    ItemsSource="{Binding RandomWords}"
                     Placeholder="Search BDICT's Dictionary"
                     Text="{Binding InputWord.Word, Mode=TwoWay}"
                     TextColor="#1D1D1D" 
                     BackgroundColor="White" 
-                    Keyboard="Default" 
-                    WidthRequest="350" 
-                    HeightRequest="34"
                     FontSize="15" 
                     FontFamily="RobotoRegular"
-                    SearchButtonPressed="searchBar_SearchButtonPressed"
-                    SearchCommand="{Binding SearchCommand}"/>
+                            MaxDropDownHeight="330"
+                    />
 
-                    </Border>
+                        </Border>
+                        <Button Grid.Column="1"
+                                ImageSource="look_up.svg"
+                                CornerRadius="50"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="White"
+                                Margin="0,0,15,0"
+                                Clicked="searchBar_SearchButtonPressed"
+                                Command="{Binding SearchCommand}">
+                            <Button.Shadow>
+                                <Shadow 
+                                        Brush="Black" 
+                                        Opacity="0.7" 
+                                        Offset="0, 15" Radius="25"/>
+                            </Button.Shadow>
+                        </Button>
+                    </Grid>
                 </Grid>
 
                 <Label 
@@ -246,11 +267,17 @@
                                     <Border Grid.Column="0"
                                             Stroke="Black"
                                             StrokeThickness="1"
-                                            StrokeShape="RoundRectangle 10,10,10,10">
-                                        <Entry Text="{Binding InputWord.Word, Mode=TwoWay}"
-                                               Placeholder="Search BDICT's Dictionary"
-                                               ToolTipProperties.Text="Enter your word" 
-                                               FontSize="20"/>
+                                            StrokeShape="RoundRectangle 5,5,5,5">
+                                        <control:SfAutocomplete ItemsSource="{Binding RandomWords}"
+                                                                Placeholder="Search BDICT's Dictionary"
+                                                                Text="{Binding InputWord.Word, Mode=TwoWay}"
+                                                                TextColor="#1D1D1D" 
+                                                                BackgroundColor="White" 
+                                                                FontSize="20" 
+                                                                FontFamily="RobotoRegular"
+                                                                MaxDropDownHeight="330"
+                                                                ToolTipProperties.Text="Enter your word"/>
+                                        
                                     </Border>
                                     <Border Grid.Column="1"
                                             Stroke="Black"
