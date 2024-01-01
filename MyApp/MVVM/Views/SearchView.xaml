@@ -59,6 +59,7 @@
                     FontSize="15" 
                     FontFamily="RobotoRegular"
                             MaxDropDownHeight="330"
+                                Margin="7,0,0,-7"
                     />
 
                         </Border>
@@ -153,7 +154,8 @@
                 StrokeShape="RoundRectangle 10,10,10,10"
                 MinimumHeightRequest="170"
                 MaximumHeightRequest="180"
-                BackgroundColor="#b7cbae">
+                BackgroundColor="#b7cbae"
+                        Padding="0,0,0,5">
                         <Grid>
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding SearchRandomWordCommand}"/>

@@ -25,7 +25,9 @@
                         TextColor="White"
                         BackgroundColor="#588157"
                         Padding="20"/>
-                    <Switch IsToggled="{Binding IsShakeEnabled}"/>
+                    <Switch x:Name="switch_log"
+                            IsToggled="{Binding IsShakeEnabled}"
+                            Toggled="switch_log_Toggled"/>
 
                     <VerticalStackLayout
                         Grid.Row="1"
